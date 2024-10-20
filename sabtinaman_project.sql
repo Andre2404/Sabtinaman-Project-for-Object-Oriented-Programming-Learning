@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Okt 2024 pada 19.35
+-- Waktu pembuatan: 20 Okt 2024 pada 20.18
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -93,13 +93,6 @@ CREATE TABLE `pengguna` (
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `pengguna`
---
-
-INSERT INTO `pengguna` (`id_pengguna`, `nama`, `alamat`, `email`, `nomor_kontak`, `saldo_pengguna`, `password`) VALUES
-(1, 'wa', 'aaw', 'awa@', 569877, 0, '');
-
 -- --------------------------------------------------------
 
 --
@@ -112,7 +105,8 @@ CREATE TABLE `perusahaan` (
   `alamat` varchar(255) DEFAULT NULL,
   `email` varchar(20) DEFAULT NULL,
   `nomor_kontak` int(20) DEFAULT NULL,
-  `saldo_perusahaan` int(200) NOT NULL
+  `saldo_perusahaan` int(200) NOT NULL,
+  `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -267,7 +261,7 @@ ALTER TABLE `keluhan`
 -- AUTO_INCREMENT untuk tabel `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id_pengguna` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pengguna` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `perusahaan`
