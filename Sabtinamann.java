@@ -1,14 +1,29 @@
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
+import dao.PenggunaDAO;
+import dao.PerusahaanDAO;
 import model.Pengguna;
 import model.Perusahaan;
+import DAO.DatabaseConnection;
 
 public class Sabtinamann {
     static Scanner scanner = new Scanner(System.in);
     static String currentUserType;  // "User" or "Company"
     static int currentUserId;       // Store user or company ID after login
-    
+
+    // DAO instances
+    static PenggunaDAO penggunaDAO;
+    static PerusahaanDAO perusahaanDAO;
+
     public static void main(String[] args) {
-        showInitialPage();
+        try (Connection connection = DatabaseConnection.getCon()) {
+            penggunaDAO = new PenggunaDAO(connection);
+            perusahaanDAO = new PerusahaanDAO(connection);
+            showInitialPage();
+        } catch (SQLException e) {
+            System.out.println("Error connecting to the database: " + e.getMessage());
+        }
     }
 
     // Halaman awal sebelum masuk ke homepage (choose account)
@@ -73,18 +88,24 @@ public class Sabtinamann {
         String password = scanner.next();
         
         if (userType.equals("User")) {
-            // Check credentials in the database (Pengguna table)
-            Pengguna pengguna = Pengguna.login(email, password);
-            if (pengguna != null) {
-                System.out.println("Login berhasil! Selamat datang, " + pengguna.getNama());
-                return pengguna.getIdPengguna();
+            try {
+                Pengguna pengguna = penggunaDAO.login(email, password);
+                if (pengguna != null) {
+                    System.out.println("Login berhasil! Selamat datang, " + pengguna.getNama());
+                    return pengguna.getIdPengguna();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error during login: " + e.getMessage());
             }
         } else if (userType.equals("Company")) {
-            // Check credentials in the database (Perusahaan table)
-            Perusahaan perusahaan = Perusahaan.login(email, password);
-            if (perusahaan != null) {
-                System.out.println("Login berhasil! Selamat datang, " + perusahaan.getNama());
-                return perusahaan.getIdPerusahaan();
+            try {
+                Perusahaan perusahaan = perusahaanDAO.login(email, password);
+                if (perusahaan != null) {
+                    System.out.println("Login berhasil! Selamat datang, " + perusahaan.getNama());
+                    return perusahaan.getIdPerusahaan();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error during login: " + e.getMessage());
             }
         }
         System.out.println("Login gagal, coba lagi.");
@@ -104,16 +125,20 @@ public class Sabtinamann {
         System.out.println("Masukkan password: ");
         String password = scanner.next();
         
-        if (userType.equals("User")) {
-            Pengguna pengguna = new Pengguna(0, nama, alamat, email, nomorKontak, 0);
-            pengguna.saveToDatabase();
-            System.out.println("Registrasi berhasil!");
-            showInitialPage();
-        } else if (userType.equals("Company")) {
-            Perusahaan perusahaan = new Perusahaan(0, nama, alamat, email, nomorKontak, 0);
-            perusahaan.saveToDatabase();
-            System.out.println("Registrasi berhasil!");
-            showInitialPage();
+        try {
+            if (userType.equals("User")) {
+                Pengguna pengguna = new Pengguna(0, nama, alamat, email, nomorKontak, 0, password);
+                penggunaDAO.addPengguna(pengguna);
+                System.out.println("Registrasi berhasil!");
+                showInitialPage();
+            } else if (userType.equals("Company")) {
+                Perusahaan perusahaan = new Perusahaan(0, nama, alamat, email, nomorKontak, 0, password);
+                perusahaanDAO.addPerusahaan(perusahaan);
+                System.out.println("Registrasi berhasil!");
+                showInitialPage();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error during registration: " + e.getMessage());
         }
     }
 
