@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2024 at 02:39 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Waktu pembuatan: 20 Okt 2024 pada 19.35
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sabtinaman_project`
+-- Database: `sabtinamann`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `alat_pertanian`
+-- Struktur dari tabel `alat_pertanian`
 --
 
 CREATE TABLE `alat_pertanian` (
@@ -40,7 +40,7 @@ CREATE TABLE `alat_pertanian` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategori_alat_pertanian`
+-- Struktur dari tabel `kategori_alat_pertanian`
 --
 
 CREATE TABLE `kategori_alat_pertanian` (
@@ -53,7 +53,7 @@ CREATE TABLE `kategori_alat_pertanian` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategori_pupuk`
+-- Struktur dari tabel `kategori_pupuk`
 --
 
 CREATE TABLE `kategori_pupuk` (
@@ -66,90 +66,114 @@ CREATE TABLE `kategori_pupuk` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `keluhan`
+-- Struktur dari tabel `keluhan`
 --
 
 CREATE TABLE `keluhan` (
-  `Id Keluhan` int(100) NOT NULL,
-  `Id pengguna` int(100) NOT NULL,
-  `Id alat` int(100) NOT NULL,
-  `Deskripsi masalah` text NOT NULL,
-  `Tanggal laporan` varchar(20) NOT NULL,
-  `Status` varchar(200) NOT NULL
+  `Id_keluhan` int(100) NOT NULL,
+  `id_transaksi_sewa` int(100) NOT NULL,
+  `deskripsi_masalah` text NOT NULL,
+  `tanggal_laporan` varchar(20) NOT NULL,
+  `status` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengguna`
+-- Struktur dari tabel `pengguna`
 --
 
 CREATE TABLE `pengguna` (
-  `Id pengguna` int(255) NOT NULL,
-  `Nama` text NOT NULL,
-  `Alamat` varchar(255) DEFAULT NULL,
-  `Email` varchar(20) DEFAULT NULL,
-  `Nomor kontak` int(20) DEFAULT NULL,
-  `Saldo pengguna` int(200) NOT NULL
+  `id_pengguna` int(255) NOT NULL,
+  `nama` text NOT NULL,
+  `alamat` varchar(255) DEFAULT NULL,
+  `email` varchar(20) DEFAULT NULL,
+  `nomor_kontak` int(20) DEFAULT NULL,
+  `saldo_pengguna` int(200) NOT NULL,
+  `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `pengguna`
+--
+
+INSERT INTO `pengguna` (`id_pengguna`, `nama`, `alamat`, `email`, `nomor_kontak`, `saldo_pengguna`, `password`) VALUES
+(1, 'wa', 'aaw', 'awa@', 569877, 0, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `perusahaan`
+-- Struktur dari tabel `perusahaan`
 --
 
 CREATE TABLE `perusahaan` (
-  `Id perusahaan` int(100) NOT NULL,
-  `Nama` text NOT NULL,
-  `Alamat` varchar(255) DEFAULT NULL,
-  `Email` varchar(20) DEFAULT NULL,
-  `Nomor kontak` int(20) DEFAULT NULL,
-  `Saldo perusahaan` int(200) NOT NULL
+  `id_perusahaan` int(100) NOT NULL,
+  `nama` text NOT NULL,
+  `alamat` varchar(255) DEFAULT NULL,
+  `email` varchar(20) DEFAULT NULL,
+  `nomor_kontak` int(20) DEFAULT NULL,
+  `saldo_perusahaan` int(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pupuk`
+-- Struktur dari tabel `pupuk`
 --
 
 CREATE TABLE `pupuk` (
-  `Id Pupuk` int(255) NOT NULL,
-  `Nama pupuk` text NOT NULL,
-  `Kategori` varchar(100) NOT NULL,
-  `Harga` int(20) NOT NULL,
-  `Stok` int(100) NOT NULL
+  `id_pupuk` int(255) NOT NULL,
+  `nama_pupuk` text NOT NULL,
+  `kategori` varchar(100) NOT NULL,
+  `harga` int(20) NOT NULL,
+  `stok` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi_pupuk`
+-- Struktur dari tabel `transaksi pupuk`
 --
 
-CREATE TABLE `transaksi_pupuk` (
-  `Id Transaksi` int(100) NOT NULL,
-  `Id Pengguna` int(100) NOT NULL,
-  `Id Pupuk` int(100) NOT NULL,
-  `Tanggal mulai sewa` int(20) NOT NULL,
-  `Tanggal akhir sewa` int(20) NOT NULL,
-  `Status pembayaran` varchar(200) NOT NULL
+CREATE TABLE `transaksi pupuk` (
+  `id_transaksi` int(100) NOT NULL,
+  `id_pengguna` int(100) NOT NULL,
+  `id_pupuk` int(100) NOT NULL,
+  `tanggal_pembelian` int(20) NOT NULL,
+  `jumlah` int(20) NOT NULL,
+  `total_pembayaran` int(100) NOT NULL,
+  `total_harga` int(100) NOT NULL,
+  `status_pembayaran` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi_sewa`
+-- Struktur dari tabel `transaksi sewa`
 --
 
-CREATE TABLE `transaksi_sewa` (
-  `Id Transaksi` int(100) NOT NULL,
-  `Id Pengguna` int(100) NOT NULL,
-  `Id alat` int(100) NOT NULL,
-  `Tanggal mulai sewa` int(20) NOT NULL,
-  `Tanggal akhir sewa` int(20) DEFAULT NULL,
-  `Status pembayaran` varchar(200) NOT NULL
+CREATE TABLE `transaksi sewa` (
+  `id_transaksi` int(100) NOT NULL,
+  `id_pengguna` int(100) NOT NULL,
+  `id_alat` int(100) NOT NULL,
+  `tanggal_mulai_sewa` int(20) NOT NULL,
+  `tanggal_akhir_sewa` int(20) DEFAULT NULL,
+  `status_pembayaran` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaksi_pengguna_saldo`
+--
+
+CREATE TABLE `transaksi_pengguna_saldo` (
+  `id_transaksi_saldo` int(100) NOT NULL,
+  `id_pengguna` int(100) NOT NULL,
+  `tanggal_transaksi` int(100) NOT NULL,
+  `jenis_transaksi` varchar(200) NOT NULL,
+  `jumlah` int(200) NOT NULL,
+  `saldo` int(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -157,111 +181,159 @@ CREATE TABLE `transaksi_sewa` (
 --
 
 --
--- Indexes for table `keluhan`
+-- Indeks untuk tabel `kategori_alat_pertanian`
 --
-ALTER TABLE `keluhan`
-  ADD PRIMARY KEY (`Id Keluhan`),
-  ADD KEY `keluhan_ibfk_1` (`Id pengguna`),
-  ADD KEY `keluhan_ibfk_2` (`Id alat`);
+ALTER TABLE `kategori_alat_pertanian`
+  ADD PRIMARY KEY (`id_kategori_alat`),
+  ADD KEY `id_alat_pertanian` (`id_alat_pertanian`);
 
 --
--- Indexes for table `pengguna`
+-- Indeks untuk tabel `kategori_pupuk`
+--
+ALTER TABLE `kategori_pupuk`
+  ADD PRIMARY KEY (`id_kategori_pupuk`),
+  ADD KEY `id_pupuk` (`id_pupuk`);
+
+--
+-- Indeks untuk tabel `keluhan`
+--
+ALTER TABLE `keluhan`
+  ADD PRIMARY KEY (`Id_keluhan`),
+  ADD KEY `id_transaksi_sewa` (`id_transaksi_sewa`);
+
+--
+-- Indeks untuk tabel `pengguna`
 --
 ALTER TABLE `pengguna`
-  ADD PRIMARY KEY (`Id pengguna`);
+  ADD PRIMARY KEY (`id_pengguna`);
 
 --
--- Indexes for table `perusahaan`
+-- Indeks untuk tabel `perusahaan`
 --
 ALTER TABLE `perusahaan`
-  ADD PRIMARY KEY (`Id perusahaan`);
+  ADD PRIMARY KEY (`id_perusahaan`);
 
 --
--- Indexes for table `pupuk`
+-- Indeks untuk tabel `pupuk`
 --
 ALTER TABLE `pupuk`
-  ADD PRIMARY KEY (`Id Pupuk`);
+  ADD PRIMARY KEY (`id_pupuk`);
 
 --
--- Indexes for table `transaksi_pupuk`
+-- Indeks untuk tabel `transaksi pupuk`
 --
-ALTER TABLE `transaksi_pupuk`
-  ADD PRIMARY KEY (`Id Transaksi`),
-  ADD KEY `transaksi pupuk_ibfk_1` (`Id Pengguna`),
-  ADD KEY `transaksi pupuk_ibfk_2` (`Id Pupuk`);
+ALTER TABLE `transaksi pupuk`
+  ADD PRIMARY KEY (`id_transaksi`),
+  ADD KEY `transaksi pupuk_ibfk_1` (`id_pengguna`),
+  ADD KEY `transaksi pupuk_ibfk_2` (`id_pupuk`);
 
 --
--- Indexes for table `transaksi_sewa`
+-- Indeks untuk tabel `transaksi sewa`
 --
-ALTER TABLE `transaksi_sewa`
-  ADD PRIMARY KEY (`Id Transaksi`),
-  ADD KEY `transaksi sewa_ibfk_1` (`Id Pengguna`),
-  ADD KEY `transaksi sewa_ibfk_2` (`Id alat`);
+ALTER TABLE `transaksi sewa`
+  ADD PRIMARY KEY (`id_transaksi`),
+  ADD KEY `transaksi sewa_ibfk_1` (`id_pengguna`),
+  ADD KEY `transaksi sewa_ibfk_2` (`id_alat`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indeks untuk tabel `transaksi_pengguna_saldo`
+--
+ALTER TABLE `transaksi_pengguna_saldo`
+  ADD PRIMARY KEY (`id_transaksi_saldo`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `keluhan`
+-- AUTO_INCREMENT untuk tabel `kategori_alat_pertanian`
+--
+ALTER TABLE `kategori_alat_pertanian`
+  MODIFY `id_kategori_alat` int(100) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `kategori_pupuk`
+--
+ALTER TABLE `kategori_pupuk`
+  MODIFY `id_kategori_pupuk` int(100) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `keluhan`
 --
 ALTER TABLE `keluhan`
-  MODIFY `Id Keluhan` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_keluhan` int(100) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `pengguna`
+-- AUTO_INCREMENT untuk tabel `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `Id pengguna` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pengguna` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `perusahaan`
+-- AUTO_INCREMENT untuk tabel `perusahaan`
 --
 ALTER TABLE `perusahaan`
-  MODIFY `Id perusahaan` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_perusahaan` int(100) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `pupuk`
+-- AUTO_INCREMENT untuk tabel `pupuk`
 --
 ALTER TABLE `pupuk`
-  MODIFY `Id Pupuk` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pupuk` int(255) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `transaksi_pupuk`
+-- AUTO_INCREMENT untuk tabel `transaksi pupuk`
 --
-ALTER TABLE `transaksi_pupuk`
-  MODIFY `Id Transaksi` int(100) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `transaksi pupuk`
+  MODIFY `id_transaksi` int(100) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `transaksi_sewa`
+-- AUTO_INCREMENT untuk tabel `transaksi sewa`
 --
-ALTER TABLE `transaksi_sewa`
-  MODIFY `Id Transaksi` int(100) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `transaksi sewa`
+  MODIFY `id_transaksi` int(100) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT untuk tabel `transaksi_pengguna_saldo`
+--
+ALTER TABLE `transaksi_pengguna_saldo`
+  MODIFY `id_transaksi_saldo` int(100) NOT NULL AUTO_INCREMENT;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `keluhan`
+-- Ketidakleluasaan untuk tabel `kategori_alat_pertanian`
+--
+ALTER TABLE `kategori_alat_pertanian`
+  ADD CONSTRAINT `kategori_alat_pertanian_ibfk_1` FOREIGN KEY (`id_alat_pertanian`) REFERENCES `alat pertanian` (`id_alat`);
+
+--
+-- Ketidakleluasaan untuk tabel `kategori_pupuk`
+--
+ALTER TABLE `kategori_pupuk`
+  ADD CONSTRAINT `kategori_pupuk_ibfk_1` FOREIGN KEY (`id_pupuk`) REFERENCES `pupuk` (`id_pupuk`);
+
+--
+-- Ketidakleluasaan untuk tabel `keluhan`
 --
 ALTER TABLE `keluhan`
-  ADD CONSTRAINT `keluhan_ibfk_1` FOREIGN KEY (`Id pengguna`) REFERENCES `pengguna` (`Id pengguna`),
-  ADD CONSTRAINT `keluhan_ibfk_2` FOREIGN KEY (`Id alat`) REFERENCES `alat pertanian` (`Id alat`);
+  ADD CONSTRAINT `keluhan_ibfk_1` FOREIGN KEY (`id_transaksi_sewa`) REFERENCES `transaksi sewa` (`id_transaksi`);
 
 --
--- Constraints for table `transaksi_pupuk`
+-- Ketidakleluasaan untuk tabel `transaksi pupuk`
 --
-ALTER TABLE `transaksi_pupuk`
-  ADD CONSTRAINT `transaksi_pupuk_ibfk_1` FOREIGN KEY (`Id Pengguna`) REFERENCES `pengguna` (`Id pengguna`),
-  ADD CONSTRAINT `transaksi_pupuk_ibfk_2` FOREIGN KEY (`Id Pupuk`) REFERENCES `pupuk` (`Id Pupuk`);
+ALTER TABLE `transaksi pupuk`
+  ADD CONSTRAINT `transaksi pupuk_ibfk_1` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`),
+  ADD CONSTRAINT `transaksi pupuk_ibfk_2` FOREIGN KEY (`id_pupuk`) REFERENCES `pupuk` (`id_pupuk`);
 
 --
--- Constraints for table `transaksi_sewa`
+-- Ketidakleluasaan untuk tabel `transaksi sewa`
 --
-ALTER TABLE `transaksi_sewa`
-  ADD CONSTRAINT `transaksi_sewa_ibfk_1` FOREIGN KEY (`Id Pengguna`) REFERENCES `pengguna` (`Id pengguna`),
-  ADD CONSTRAINT `transaksi_sewa_ibfk_2` FOREIGN KEY (`Id alat`) REFERENCES `alat pertanian` (`Id alat`);
+ALTER TABLE `transaksi sewa`
+  ADD CONSTRAINT `transaksi sewa_ibfk_1` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`),
+  ADD CONSTRAINT `transaksi sewa_ibfk_2` FOREIGN KEY (`id_alat`) REFERENCES `alat pertanian` (`id_alat`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
