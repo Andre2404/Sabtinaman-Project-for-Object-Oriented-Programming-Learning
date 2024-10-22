@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Okt 2024 pada 20.18
+-- Waktu pembuatan: 13 Okt 2024 pada 08.34
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -18,16 +18,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sabtinamann`
+-- Database: `sabtinaman project`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `alat_pertanian`
+-- Struktur dari tabel `alat pertanian`
 --
 
-CREATE TABLE `alat_pertanian` (
+CREATE TABLE `alat pertanian` (
   `id_alat` int(255) NOT NULL,
   `nama_alat` text NOT NULL,
   `kategori` varchar(100) NOT NULL,
@@ -89,8 +89,7 @@ CREATE TABLE `pengguna` (
   `alamat` varchar(255) DEFAULT NULL,
   `email` varchar(20) DEFAULT NULL,
   `nomor_kontak` int(20) DEFAULT NULL,
-  `saldo_pengguna` int(200) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `saldo_pengguna` int(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -105,8 +104,7 @@ CREATE TABLE `perusahaan` (
   `alamat` varchar(255) DEFAULT NULL,
   `email` varchar(20) DEFAULT NULL,
   `nomor_kontak` int(20) DEFAULT NULL,
-  `saldo_perusahaan` int(200) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `saldo_perusahaan` int(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -175,6 +173,12 @@ CREATE TABLE `transaksi_pengguna_saldo` (
 --
 
 --
+-- Indeks untuk tabel `alat pertanian`
+--
+ALTER TABLE `alat pertanian`
+  ADD PRIMARY KEY (`id_alat`);
+
+--
 -- Indeks untuk tabel `kategori_alat_pertanian`
 --
 ALTER TABLE `kategori_alat_pertanian`
@@ -240,6 +244,12 @@ ALTER TABLE `transaksi_pengguna_saldo`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `alat pertanian`
+--
+ALTER TABLE `alat pertanian`
+  MODIFY `id_alat` int(255) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT untuk tabel `kategori_alat_pertanian`
 --
 ALTER TABLE `kategori_alat_pertanian`
@@ -261,7 +271,7 @@ ALTER TABLE `keluhan`
 -- AUTO_INCREMENT untuk tabel `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id_pengguna` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pengguna` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `perusahaan`
