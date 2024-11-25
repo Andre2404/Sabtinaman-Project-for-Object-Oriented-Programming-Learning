@@ -9,28 +9,30 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author Andhi
  */
-public class signInUserController implements Initializable {
+public class homePageUserController implements Initializable {
 
     @FXML
-    private Button signInCompany_btn;
+    private Button profileUser_page;
     @FXML
-    private Button register;
+    private Button rentsUser_page;
     @FXML
-    private Button signin_btn;
+    private Button merchUser_page;
     @FXML
-    private PasswordField password;
+    private Button inventoryUser_page;
     @FXML
-    private TextField username;
+    private Button historyUser_page;
     @FXML
-    private Button close_btn;
+    private Button logOutUser_page;
+    @FXML
+    private Button homeUser_page;
+    @FXML
+    private Button balanceUser_page;
 
     /**
      * Initializes the controller class.

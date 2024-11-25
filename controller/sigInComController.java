@@ -17,10 +17,10 @@ import javafx.scene.control.TextField;
  *
  * @author Andhi
  */
-public class signInUserController implements Initializable {
+public class sigInComController implements Initializable {
 
     @FXML
-    private Button signInCompany_btn;
+    private Button signInUser_btn;
     @FXML
     private Button register;
     @FXML
