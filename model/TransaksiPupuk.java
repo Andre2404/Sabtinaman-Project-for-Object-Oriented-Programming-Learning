@@ -1,75 +1,73 @@
 package model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class TransaksiPupuk {
     private int idTransaksi;
-    private int idPengguna;
-    private int idPupuk;
+    private Pengguna user;
+    private Pupuk pupuk;
     private int jumlahKg;
     private double totalHarga;
-    private Date tanggalBeli;
+    private LocalDate tanggalBeli;
 
     // Constructor
-    public TransaksiPupuk(int idTransaksi, int idPengguna, int idPupuk, int jumlahKg, double totalHarga, Date tanggalBeli) {
+    public TransaksiPupuk(int idTransaksi, Pengguna user, Pupuk pupuk, int jumlahKg, double totalHarga, LocalDate tanggalBeli) {
         this.idTransaksi = idTransaksi;
-        this.idPengguna = idPengguna;
-        this.idPupuk = idPupuk;
+        this.user = user;
+        this.pupuk = pupuk;
         this.jumlahKg = jumlahKg;
         this.totalHarga = totalHarga;
         this.tanggalBeli = tanggalBeli;
     }
-
-    public TransaksiPupuk(int i, int currentUserId, int idPupuk, int jumlahKg, double totalHarga) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    // Getter dan Setter
+    
     public int getIdTransaksi() {
         return idTransaksi;
-    }
-
-    public int getIdPengguna() {
-        return idPengguna;
-    }
-
-    public int getIdPupuk() {
-        return idPupuk;
-    }
-
-    public int getJumlahKg() {
-        return jumlahKg;
-    }
-
-    public double getTotalHarga() {
-        return totalHarga;
-    }
-
-    public Date getTanggalBeli() {
-        return tanggalBeli;
     }
 
     public void setIdTransaksi(int idTransaksi) {
         this.idTransaksi = idTransaksi;
     }
 
-    public void setIdPengguna(int idPengguna) {
-        this.idPengguna = idPengguna;
+    public Pengguna getUser() {
+        return user;
     }
 
-    public void setIdPupuk(int idPupuk) {
-        this.idPupuk = idPupuk;
+    public void setUser(Pengguna user) {
+        this.user = user;
+    }
+
+    public Pupuk getPupuk() {
+        return pupuk;
+    }
+
+    public void setPupuk(Pupuk pupuk) {
+        this.pupuk = pupuk;
+    }
+
+    public int getJumlahKg() {
+        return jumlahKg;
     }
 
     public void setJumlahKg(int jumlahKg) {
         this.jumlahKg = jumlahKg;
     }
 
+    public double getTotalHarga() {
+        return totalHarga;
+    }
+
     public void setTotalHarga(double totalHarga) {
         this.totalHarga = totalHarga;
     }
 
-    public void setTanggalBeli(Date tanggalBeli) {
+    public LocalDate getTanggalBeli() {
+        return tanggalBeli;
+    }
+
+    public void setTanggalBeli(LocalDate tanggalBeli) {
         this.tanggalBeli = tanggalBeli;
     }
+
+   
 }

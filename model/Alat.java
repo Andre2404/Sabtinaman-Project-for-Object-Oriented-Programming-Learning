@@ -4,18 +4,17 @@ public class Alat {
     private int idAlat;
     private String namaAlat;
     private String spesifikasi;
-    private double hargaSewa;
-    private int idPerusahaan;  // Alat disewakan oleh perusahaan
+    private int hargaSewa;
+    private Perusahaan company;  // Alat disewakan oleh perusahaan
 
-    public Alat(int idAlat, String namaAlat, int idPerusahaan, double hargaSewa) {
+    public Alat(int idAlat, String namaAlat, String spesifikasi, Perusahaan company, int hargaSewa) {
         this.idAlat = idAlat;
         this.namaAlat = namaAlat;
         this.spesifikasi = spesifikasi;
         this.hargaSewa = hargaSewa;
-        this.idPerusahaan = idPerusahaan;
+        this.company = company;
+  
     }
-
-    // Getters and Setters
     public int getIdAlat() {
         return idAlat;
     }
@@ -40,19 +39,22 @@ public class Alat {
         this.spesifikasi = spesifikasi;
     }
 
-    public double getHargaSewa() {
+    public int getHargaSewa() {
         return hargaSewa;
     }
 
-    public void setHargaSewa(double hargaSewa) {
+    public void setHargaSewa(int hargaSewa) {
         this.hargaSewa = hargaSewa;
     }
 
-    public int getIdPerusahaan() {
-        return idPerusahaan;
+    public Perusahaan getCompany() {
+        return company;
     }
 
-    public void setIdPerusahaan(int idPerusahaan) {
-        this.idPerusahaan = idPerusahaan;
+    public void setCompany(Perusahaan company) {
+        this.company = company;
     }
+
+    
 }
+    

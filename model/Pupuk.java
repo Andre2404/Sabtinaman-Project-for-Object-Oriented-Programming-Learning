@@ -1,49 +1,54 @@
+
+
 package model;
+import java.util.UUID;
 
 public class Pupuk {
     private int idPupuk;
     private String namaPupuk;
     private double hargaPerKg;
-    private int idPerusahaan;
+    private Perusahaan company;
 
     // Constructor
-    public Pupuk(int idPupuk, String namaPupuk, double hargaPerKg, int idPerusahaan) {
+    public Pupuk(int idPupuk, String namaPupuk, double hargaPerKg, Perusahaan company) {
         this.idPupuk = idPupuk;
         this.namaPupuk = namaPupuk;
         this.hargaPerKg = hargaPerKg;
-        this.idPerusahaan = idPerusahaan;
+        this.company = company;
     }
-
+    
     // Getter dan Setter
+
     public int getIdPupuk() {
         return idPupuk;
-    }
-
-    public String getNamaPupuk() {
-        return namaPupuk;
-    }
-
-    public double getHargaPerKg() {
-        return hargaPerKg;
-    }
-
-    public int getIdPerusahaan() {
-        return idPerusahaan;
     }
 
     public void setIdPupuk(int idPupuk) {
         this.idPupuk = idPupuk;
     }
 
+    public String getNamaPupuk() {
+        return namaPupuk;
+    }
+
     public void setNamaPupuk(String namaPupuk) {
         this.namaPupuk = namaPupuk;
+    }
+
+    public double getHargaPerKg() {
+        return hargaPerKg;
     }
 
     public void setHargaPerKg(double hargaPerKg) {
         this.hargaPerKg = hargaPerKg;
     }
 
-    public void setIdPerusahaan(int idPerusahaan) {
-        this.idPerusahaan = idPerusahaan;
+    public Perusahaan getCompany() {
+        return company;
     }
+
+    public void setCompany(Perusahaan company) {
+        this.company = company;
+    }
+   
 }

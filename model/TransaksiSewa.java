@@ -3,19 +3,20 @@ import java.sql.Timestamp;
 
 public class TransaksiSewa {
     private int idTransaksi;
-    private int idPengguna;
-    private int idAlat;
+    private Pengguna user;
+    private Alat alat;
     private Timestamp tanggalSewa;
 
     // Constructor
-    public TransaksiSewa(int idTransaksi, int idPengguna, int idAlat, Timestamp tanggalSewa) {
+    public TransaksiSewa(int idTransaksi, Pengguna user, Alat alat, Timestamp tanggalSewa) {
         this.idTransaksi = idTransaksi;
-        this.idPengguna = idPengguna;
-        this.idAlat = idAlat;
+        this.user = user;
+        this.alat = alat;
         this.tanggalSewa = tanggalSewa;
     }
-
+    
     // Getters and Setters
+
     public int getIdTransaksi() {
         return idTransaksi;
     }
@@ -24,20 +25,20 @@ public class TransaksiSewa {
         this.idTransaksi = idTransaksi;
     }
 
-    public int getIdPengguna() {
-        return idPengguna;
+    public Pengguna getUser() {
+        return user;
     }
 
-    public void setIdPengguna(int idPengguna) {
-        this.idPengguna = idPengguna;
+    public void setUser(Pengguna user) {
+        this.user = user;
     }
 
-    public int getIdAlat() {
-        return idAlat;
+    public Alat getAlat() {
+        return alat;
     }
 
-    public void setIdAlat(int idAlat) {
-        this.idAlat = idAlat;
+    public void setAlat(Alat alat) {
+        this.alat = alat;
     }
 
     public Timestamp getTanggalSewa() {
@@ -47,4 +48,5 @@ public class TransaksiSewa {
     public void setTanggalSewa(Timestamp tanggalSewa) {
         this.tanggalSewa = tanggalSewa;
     }
+    
 }

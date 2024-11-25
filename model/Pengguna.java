@@ -1,5 +1,4 @@
 package model;
-
 /**
  *
  * @author rizar
@@ -22,7 +21,6 @@ public class Pengguna {
         this.saldo = saldo;
         this.password = password; // Simpan password langsung
     }
-
     // Getter dan Setter untuk password
     public String getPassword() {
         return password;

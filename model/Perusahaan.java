@@ -1,5 +1,5 @@
 package model;
-
+import java.util.UUID;
 /**
  *
  * @author rizar
@@ -13,7 +13,7 @@ public class Perusahaan {
     private int saldoPerusahaan;
     private String password; // Tambahkan atribut password
 
-    public Perusahaan(int idPerusahaan, String nama, String alamat, String email, int nomorKontak, int saldoPerusahaan, String password) {
+     public Perusahaan(int idPerusahaan, String nama, String alamat, String email, int nomorKontak, int saldoPerusahaan, String password) {
         this.idPerusahaan = idPerusahaan;
         this.nama = nama;
         this.alamat = alamat;
@@ -22,15 +22,16 @@ public class Perusahaan {
         this.saldoPerusahaan = saldoPerusahaan;
         this.password = password; // Simpan password langsung
     }
-
+     
+     public Perusahaan(int idPerusahaan, String nama, String alamat, String email, int nomorKontak, int saldoPerusahaan) {
+        this.idPerusahaan = idPerusahaan;
+        this.nama = nama;
+        this.alamat = alamat;
+        this.email = email;
+        this.nomorKontak = nomorKontak;
+        this.saldoPerusahaan = saldoPerusahaan;
+     }
     // Getter dan Setter untuk password
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public int getIdPerusahaan() {
         return idPerusahaan;
@@ -79,4 +80,13 @@ public class Perusahaan {
     public void setSaldoPerusahaan(int saldoPerusahaan) {
         this.saldoPerusahaan = saldoPerusahaan;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+   
 }
