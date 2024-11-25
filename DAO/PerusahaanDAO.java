@@ -4,6 +4,7 @@ import model.Perusahaan;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class PerusahaanDAO {
 
@@ -15,7 +16,7 @@ public class PerusahaanDAO {
 
     // Menambahkan perusahaan baru ke database
     public void addPerusahaan(Perusahaan perusahaan) throws SQLException {
-        String query = "INSERT INTO perusahaan (nama, alamat, email, nomor_kontak, saldo_perusahaan, password) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO perusahaan (nama, alamat_perusahaan, email, nomor_kontak, saldo_perusahaan, password) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, perusahaan.getNama());
             statement.setString(2, perusahaan.getAlamat());
@@ -37,7 +38,7 @@ public class PerusahaanDAO {
                 return new Perusahaan(
                     resultSet.getInt("id_perusahaan"),
                     resultSet.getString("nama"),
-                    resultSet.getString("alamat"),
+                    resultSet.getString("alamat_perusahaan"),
                     resultSet.getString("email"),
                     resultSet.getInt("nomor_kontak"),
                     resultSet.getInt("saldo_perusahaan"),
@@ -58,7 +59,7 @@ public class PerusahaanDAO {
                 return new Perusahaan(
                     resultSet.getInt("id_perusahaan"),
                     resultSet.getString("nama"),
-                    resultSet.getString("alamat"),
+                    resultSet.getString("alamat_perusahaan"),
                     resultSet.getString("email"),
                     resultSet.getInt("nomor_kontak"),
                     resultSet.getInt("saldo_perusahaan"),
@@ -79,7 +80,7 @@ public class PerusahaanDAO {
                 Perusahaan perusahaan = new Perusahaan(
                     resultSet.getInt("id_perusahaan"),
                     resultSet.getString("nama"),
-                    resultSet.getString("alamat"),
+                    resultSet.getString("alamat_perusahaan"),
                     resultSet.getString("email"),
                     resultSet.getInt("nomor_kontak"),
                     resultSet.getInt("saldo_perusahaan"),
@@ -93,14 +94,15 @@ public class PerusahaanDAO {
 
     // Mengupdate data perusahaan
     public void updatePerusahaan(Perusahaan perusahaan) throws SQLException {
-        String query = "UPDATE perusahaan SET nama = ?, alamat = ?, email = ?, nomor_kontak = ?, saldo_perusahaan = ? WHERE id_perusahaan = ?";
+        String query = "UPDATE perusahaan SET nama = ?, alamat_perusahaan = ?, email = ?, nomor_kontak = ?, saldo_perusahaan = ?, password = ? WHERE id_perusahaan = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, perusahaan.getNama());
             statement.setString(2, perusahaan.getAlamat());
             statement.setString(3, perusahaan.getEmail());
             statement.setInt(4, perusahaan.getNomorKontak());
             statement.setInt(5, perusahaan.getSaldoPerusahaan());
-            statement.setInt(6, perusahaan.getIdPerusahaan());
+            statement.setString(6, perusahaan.getPassword());
+            statement.setInt(7, perusahaan.getIdPerusahaan());
             statement.executeUpdate();
         }
     }
@@ -109,11 +111,20 @@ public class PerusahaanDAO {
     public void deletePerusahaan(int idPerusahaan) throws SQLException {
         String query = "DELETE FROM perusahaan WHERE id_perusahaan = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, idPerusahaan);
+            statement.setObject(1, idPerusahaan);
             statement.executeUpdate();
         }
     }
 
+    public void updateSaldoPerusahaan(Perusahaan perusahaan) throws SQLException {
+        String query = "UPDATE pengguna SET saldo = ? WHERE id_perusahaan = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, perusahaan.getSaldoPerusahaan());
+            statement.setInt(2, perusahaan.getIdPerusahaan());
+            statement.executeUpdate();
+        }
+    }
+    
     // Metode untuk login
     public Perusahaan login(String email, String password) throws SQLException {
         Perusahaan perusahaan = getPerusahaanByEmail(email);

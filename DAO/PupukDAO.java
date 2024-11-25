@@ -4,12 +4,20 @@ import model.Pupuk;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import model.Perusahaan;
 
 public class PupukDAO {
     private Connection connection;
-
-    public PupukDAO(Connection connection) {
+    private PerusahaanDAO perusahaanDAO;
+    
+    public PupukDAO(Connection connection){
         this.connection = connection;
+    }
+            
+    public PupukDAO(Connection connection, PerusahaanDAO perusahaanDAO) {
+        this.connection = connection;
+        this.perusahaanDAO = perusahaanDAO;
     }
 
     // Menambahkan pupuk baru ke database
@@ -18,7 +26,7 @@ public class PupukDAO {
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, pupuk.getNamaPupuk());
             statement.setDouble(2, pupuk.getHargaPerKg());
-            statement.setInt(3, pupuk.getIdPerusahaan());
+            statement.setObject(3, pupuk.getCompany().getIdPerusahaan());
             statement.executeUpdate();
         }
     }
@@ -30,11 +38,12 @@ public class PupukDAO {
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
             while (resultSet.next()) {
+                Perusahaan perusahaan = perusahaanDAO.getPerusahaanById(resultSet.getInt("id_perusahaan"));
                 Pupuk pupuk = new Pupuk(
                     resultSet.getInt("id_pupuk"),
                     resultSet.getString("nama_pupuk"),
                     resultSet.getDouble("harga_per_kg"),
-                    resultSet.getInt("id_perusahaan")
+                    perusahaan
                 );
                 pupukList.add(pupuk);
             }
@@ -49,11 +58,12 @@ public class PupukDAO {
             statement.setInt(1, idPupuk);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
+                Perusahaan perusahaan = perusahaanDAO.getPerusahaanById(resultSet.getInt("id_perusahaan"));
                 return new Pupuk(
                     resultSet.getInt("id_pupuk"),
                     resultSet.getString("nama_pupuk"),
                     resultSet.getDouble("harga_per_kg"),
-                    resultSet.getInt("id_perusahaan")
+                    perusahaan
                 );
             }
         }
