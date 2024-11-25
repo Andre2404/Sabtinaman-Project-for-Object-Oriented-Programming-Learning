@@ -17,18 +17,24 @@ import model.TransaksiPupuk;
 import model.Keluhan;
 import DAO.DatabaseConnection;
 import dao.SaldoDAO;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Sabtinamann {
     static Scanner scanner = new Scanner(System.in);
-    static String currentUserType;  
-    static int currentUserId;      
+    static String currentUserType;
+    static int currentUserId;
     static PenggunaDAO penggunaDAO;
     static PerusahaanDAO perusahaanDAO;
     static AlatDAO alatDAO;
     static PupukDAO pupukDAO;
+    static SaldoDAO saldoDAO;
     static TransaksiSewaDAO transaksiSewaDAO;
     static TransaksiPupukDAO transaksiPupukDAO;
     static KeluhanDAO keluhanDAO;
@@ -37,17 +43,17 @@ public class Sabtinamann {
     try (Connection connection = DatabaseConnection.getCon()) {
         penggunaDAO = new PenggunaDAO(connection);
         perusahaanDAO = new PerusahaanDAO(connection);
-        alatDAO = new AlatDAO(connection);
-        pupukDAO = new PupukDAO(connection);
-        transaksiSewaDAO = new TransaksiSewaDAO(connection);
+        alatDAO = new AlatDAO(connection, perusahaanDAO);
+        pupukDAO = new PupukDAO(connection, perusahaanDAO);
+        transaksiSewaDAO = new TransaksiSewaDAO(connection, saldoDAO, penggunaDAO, alatDAO, perusahaanDAO);
 
         // Membuat instance SaldoDAO terlebih dahulu
-        SaldoDAO saldoDAO = new SaldoDAO(connection);
+        saldoDAO = new SaldoDAO(connection);
 
         // Membuat instance TransaksiPupukDAO dengan SaldoDAO
-        transaksiPupukDAO = new TransaksiPupukDAO(connection, saldoDAO);
+        transaksiPupukDAO = new TransaksiPupukDAO(connection, saldoDAO, penggunaDAO, pupukDAO, perusahaanDAO);
         
-        keluhanDAO = new KeluhanDAO(connection);
+        keluhanDAO = new KeluhanDAO(connection, penggunaDAO, alatDAO, transaksiSewaDAO);
         showInitialPage();
     } catch (SQLException e) {
         System.out.println("Error connecting to the database: " + e.getMessage());
@@ -84,7 +90,7 @@ public class Sabtinamann {
             currentUserId = login("User");
             if (currentUserId > 0) showUserHomePage();
         } else if (choice == 2) {
-            register("User");
+            register("User");        
         } else {
             System.out.println("Pilihan tidak valid, coba lagi.");
             userLoginOrRegister();
@@ -119,6 +125,7 @@ public class Sabtinamann {
             try {
                 Pengguna pengguna = penggunaDAO.login(email, password);
                 if (pengguna != null) {
+                    currentUserId = pengguna.getIdPengguna();
                     System.out.println("Login berhasil! Selamat datang, " + pengguna.getNama());
                     return pengguna.getIdPengguna();
                 }
@@ -129,6 +136,7 @@ public class Sabtinamann {
             try {
                 Perusahaan perusahaan = perusahaanDAO.login(email, password);
                 if (perusahaan != null) {
+                    currentUserId = perusahaan.getIdPerusahaan();
                     System.out.println("Login berhasil! Selamat datang, " + perusahaan.getNama());
                     return perusahaan.getIdPerusahaan();
                 }
@@ -325,7 +333,8 @@ public class Sabtinamann {
         System.out.println("Masukkan harga per kg: ");
         double hargaPerKg = scanner.nextDouble();
         try {
-            Pupuk pupuk = new Pupuk(0, namaPupuk, hargaPerKg, currentUserId);
+            Perusahaan perusahaan = perusahaanDAO.getPerusahaanById(currentUserId); // Ambil perusahaan terkait
+            Pupuk pupuk = new Pupuk(0,namaPupuk, hargaPerKg, perusahaan);
             pupukDAO.addPupuk(pupuk);
             System.out.println("Harga pupuk berhasil ditentukan.");
         } catch (SQLException e) {
@@ -336,46 +345,60 @@ public class Sabtinamann {
 
     // Halaman sewa alat untuk pengguna
 public static void showRentToolUserPage() {
-    System.out.println("----- Sewa Alat (Pengguna) -----");
-    System.out.println("Cari alat berdasarkan kategori:");
-    // Lakukan pencarian alat dan proses sewa (interaksi dengan database AlatPertanian)
     try {
-        // Simulasi daftar alat yang tersedia
-        for (Alat alat : alatDAO.getAllAlat()) {
-            System.out.println("Nama Alat: " + alat.getNamaAlat());
-            System.out.println("Spesifikasi: " + alat.getSpesifikasi());
-            System.out.println("Harga Sewa: " + alat.getHargaSewa() + " per bulan");
-            System.out.println("-------------");
+        // Menampilkan daftar alat yang tersedia
+        List<Alat> alatList = alatDAO.getAllAlat();
+        if (alatList.isEmpty()) {
+            System.out.println("Tidak ada alat yang tersedia untuk disewa.");
+            return;
         }
 
-        System.out.println("Masukkan nama alat yang ingin disewa:");
-        String namaAlat = scanner.next();
-
-        Alat selectedAlat = alatDAO.getAlatByName(namaAlat);
-        if (selectedAlat != null) {
-            // Mendapatkan saldo pengguna saat ini
-            int saldoPengguna = penggunaDAO.getSaldoPengguna(currentUserId);
-
-            // Memeriksa apakah saldo cukup untuk menyewa alat
-            if (saldoPengguna >= selectedAlat.getHargaSewa()) {
-                // Mengurangi saldo pengguna
-                int newSaldo = (int) (saldoPengguna - selectedAlat.getHargaSewa());
-                penggunaDAO.updateSaldoPengguna(currentUserId, newSaldo);
-
-                // Melakukan transaksi sewa alat
-                transaksiSewaDAO.sewaAlat(currentUserId, selectedAlat.getIdAlat());
-                System.out.println("Alat berhasil disewa! Saldo baru Anda: " + newSaldo);
-            } else {
-                System.out.println("Saldo Anda tidak cukup untuk menyewa alat ini.");
-            }
-        } else {
-            System.out.println("Alat tidak ditemukan.");
+        System.out.println("Daftar alat yang tersedia:");
+        for (Alat alat : alatList) {
+            System.out.printf("ID: %d | Nama: %s | Harga Sewa per Bulan: %d | ID Perusahaan: %d\n",
+                alat.getIdAlat(), alat.getNamaAlat(), alat.getHargaSewa(), alat.getCompany().getIdPerusahaan());
         }
+
+        // Meminta pengguna memilih alat yang ingin disewa
+        System.out.println("Masukkan ID alat yang ingin disewa:");
+        int idAlat = scanner.nextInt();
+        scanner.nextLine(); // Bersihkan buffer
+
+        Alat alat = alatDAO.getAlatById(idAlat);
+        if (alat == null) {
+            System.out.println("Alat dengan ID tersebut tidak ditemukan.");
+            return;
+        }
+
+        // Memeriksa saldo pengguna
+        int saldoPengguna = (int) penggunaDAO.getSaldoPengguna(currentUserId);
+        if (saldoPengguna < alat.getHargaSewa()) {
+            System.out.println("Saldo Anda tidak mencukupi untuk menyewa alat ini. Silakan top-up saldo terlebih dahulu.");
+            return;
+        }
+
+        // Proses penyewaan
+        int newSaldoPengguna = saldoPengguna - alat.getHargaSewa();
+        penggunaDAO.updateSaldoPengguna(currentUserId, newSaldoPengguna);
+        penggunaDAO.addSaldoPerusahaan(alat.getCompany().getIdPerusahaan(), alat.getHargaSewa());
+
+        // Catat transaksi
+        Timestamp tanggalSewa = new Timestamp(System.currentTimeMillis());
+        Pengguna pengguna = penggunaDAO.getPenggunaById(currentUserId);
+        Alat alatObj = alatDAO.getAlatById(alat.getIdAlat());
+        TransaksiSewa transaksi = new TransaksiSewa(0, pengguna, alatObj, tanggalSewa);
+        transaksiSewaDAO.addTransaksi(transaksi);
+
+        System.out.println("Alat berhasil disewa! Saldo baru Anda: " + newSaldoPengguna);
+
     } catch (SQLException e) {
-        System.out.println("Error during renting tool: " + e.getMessage());
+        System.out.println("Terjadi kesalahan saat memproses penyewaan alat: " + e.getMessage());
+    } catch (InputMismatchException e) {
+        System.out.println("Masukkan input yang valid. Harap gunakan angka untuk ID alat.");
+        scanner.nextLine(); // Bersihkan buffer input
     }
-    showUserHomePage();
 }
+
 
     // Halaman inventory untuk pengguna
     public static void showInventoryPage() {
@@ -383,7 +406,7 @@ public static void showRentToolUserPage() {
         try {
             // Simulasi melihat alat yang disewa
             for (TransaksiSewa transaksi : transaksiSewaDAO.getTransaksiByUserId(currentUserId)) {
-                Alat alat = alatDAO.getAlatById(transaksi.getIdAlat());
+            Alat alat = alatDAO.getAlatById(transaksi.getAlat().getIdAlat());
                 System.out.println("Nama Alat: " + alat.getNamaAlat());
                 System.out.println("Tanggal Sewa: " + transaksi.getTanggalSewa());
                 System.out.println("-------------");
@@ -399,9 +422,10 @@ public static void showRentToolUserPage() {
         System.out.println("----- Keluhan (Complaint) -----");
         try {
             for (Keluhan keluhan : keluhanDAO.getKeluhanByCompanyId(currentUserId)) {
-                System.out.println("Keluhan dari Pengguna ID: " + keluhan.getIdPengguna());
+                System.out.println("Keluhan dari Pengguna ID: " + keluhan.getUser().getIdPengguna());
                 System.out.println("Deskripsi: " + keluhan.getDeskripsi());
                 System.out.println("Tanggal Pengajuan: " + keluhan.getTanggal());
+    
                 System.out.println("-------------");
             }
         } catch (SQLException ex) {
@@ -415,13 +439,13 @@ public static void showRentToolUserPage() {
         System.out.println("----- History Transaksi (Pengguna) -----");
         try {
             for (TransaksiSewa transaksi : transaksiSewaDAO.getTransaksiByUserId(currentUserId)) {
-                Alat alat = alatDAO.getAlatById(transaksi.getIdAlat());
+                Alat alat = alatDAO.getAlatById(transaksi.getAlat().getIdAlat());
                 System.out.println("Nama Alat: " + alat.getNamaAlat());
                 System.out.println("Tanggal Sewa: " + transaksi.getTanggalSewa());
                 System.out.println("-------------");
             }
             for (TransaksiPupuk transaksi : transaksiPupukDAO.getTransaksiByUserId(currentUserId)) {
-                Pupuk pupuk = pupukDAO.getPupukById(transaksi.getIdPupuk());
+                Pupuk pupuk = pupukDAO.getPupukById(transaksi.getPupuk().getIdPupuk());
                 System.out.println("Nama Pupuk: " + pupuk.getNamaPupuk());
                 System.out.println("Tanggal Pembelian: " + transaksi.getTanggalBeli());
                 System.out.println("-------------");
@@ -437,13 +461,13 @@ public static void showRentToolUserPage() {
         System.out.println("----- History Transaksi (Perusahaan) -----");
         try {
             for (TransaksiSewa transaksi : transaksiSewaDAO.getTransaksiByCompanyId(currentUserId)) {
-                Alat alat = alatDAO.getAlatById(transaksi.getIdAlat());
+                Alat alat = alatDAO.getAlatById(transaksi.getAlat().getIdAlat());
                 System.out.println("Nama Alat: " + alat.getNamaAlat());
                 System.out.println("Tanggal Sewa: " + transaksi.getTanggalSewa());
                 System.out.println("-------------");
             }
             for (TransaksiPupuk transaksi : transaksiPupukDAO.getTransaksiByCompanyId(currentUserId)) {
-                Pupuk pupuk = pupukDAO.getPupukById(transaksi.getIdPupuk());
+                Pupuk pupuk = pupukDAO.getPupukById(transaksi.getPupuk().getIdPupuk());
                 System.out.println("Nama Pupuk: " + pupuk.getNamaPupuk());
                 System.out.println("Tanggal Penjualan: " + transaksi.getTanggalBeli());
                 System.out.println("-------------");
@@ -466,64 +490,102 @@ public static void showRentToolUserPage() {
         System.out.println("Daftar pupuk yang tersedia:");
         for (Pupuk pupuk : pupukList) {
             System.out.printf("ID: %d | Nama: %s | Harga per kg: %.2f | ID Perusahaan: %d\n",
-                pupuk.getIdPupuk(), pupuk.getNamaPupuk(), pupuk.getHargaPerKg(), pupuk.getIdPerusahaan());
+                pupuk.getIdPupuk(), pupuk.getNamaPupuk(), pupuk.getHargaPerKg(), pupuk.getCompany().getIdPerusahaan());
         }
 
         // Meminta pengguna memilih pupuk dan memasukkan jumlah pembelian
         System.out.println("Masukkan ID pupuk yang ingin dibeli:");
-        int idPupuk = scanner.nextInt();
-        Pupuk pupuk = pupukDAO.getPupukById(idPupuk);
+        int idPupuk = scanner.nextInt(); // Bersihkan spasi dan newline
+        scanner.nextLine();
+        
 
-        if (pupuk == null) {
-            System.out.println("Pupuk dengan ID tersebut tidak ditemukan.");
-            return;
+        try {// Parsing input
+            Pupuk pupuk = pupukDAO.getPupukById(idPupuk);
+
+            if (pupuk == null) {
+                System.out.println("Pupuk dengan ID tersebut tidak ditemukan.");
+                return;
+            }
+
+            // Lanjutkan ke logika pembelian
+            System.out.println("Masukkan jumlah (kg) pupuk yang ingin dibeli:");
+            if (scanner.hasNextInt()) {
+                int jumlahKg = scanner.nextInt();
+                double totalHarga = jumlahKg * pupuk.getHargaPerKg();
+
+                // Memeriksa saldo pengguna
+                int saldoPengguna = (int) penggunaDAO.getSaldoPengguna(currentUserId);
+                if (saldoPengguna < totalHarga) {
+                    System.out.println("Saldo tidak mencukupi. Silakan top-up saldo terlebih dahulu.");
+                    return;
+                }
+
+                // Proses pembelian
+                penggunaDAO.updateSaldoPengguna(currentUserId, saldoPengguna - totalHarga);
+                penggunaDAO.addSaldoPerusahaan(pupuk.getCompany().getIdPerusahaan(), totalHarga);
+
+                // Catat transaksi
+                LocalDate tanggalBeli = LocalDate.now();
+                Pengguna pengguna = penggunaDAO.getPenggunaById(currentUserId);
+                Pupuk pupukObj = pupukDAO.getPupukById(pupuk.getIdPupuk());
+                TransaksiPupuk transaksi = new TransaksiPupuk(0, pengguna, pupukObj, jumlahKg, totalHarga, tanggalBeli);
+                transaksiPupukDAO.addTransaksi(transaksi);
+
+                System.out.println("Pembelian pupuk berhasil. Total harga: " + totalHarga);
+            } else {
+                System.out.println("Masukkan jumlah dalam angka.");
+            }
+            scanner.nextLine(); // Bersihkan buffer
+
+        } catch (NumberFormatException e) {
+            System.out.println("Input ID pupuk tidak valid. Harap masukkan angka.");
         }
 
-        System.out.println("Masukkan jumlah (kg) pupuk yang ingin dibeli:");
-        int jumlahKg = scanner.nextInt();
-        double totalHarga = jumlahKg * pupuk.getHargaPerKg();
-
-        // Memeriksa saldo pengguna
-        int saldoPengguna = penggunaDAO.getSaldoPengguna(currentUserId);
-        if (saldoPengguna < totalHarga) {
-            System.out.println("Saldo tidak mencukupi. Silakan top-up saldo terlebih dahulu.");
-            return;
-        }
-
-        // Melakukan pembelian dan memperbarui saldo pengguna serta perusahaan
-        penggunaDAO.updateSaldoPengguna(currentUserId, saldoPengguna - totalHarga);
-        penggunaDAO.addSaldoPerusahaan(pupuk.getIdPerusahaan(), totalHarga);
-
-        // Mencatat transaksi pembelian
-        TransaksiPupuk transaksi = new TransaksiPupuk(0, currentUserId, pupuk.getIdPupuk(), jumlahKg, totalHarga);
-        transaksiPupukDAO.addTransaksi(transaksi);
-
-        System.out.println("Pembelian pupuk berhasil. Total harga: " + totalHarga);
-    } catch (SQLException e) {
-    System.out.println("Terjadi kesalahan saat membeli pupuk: " + e.getMessage());
-    e.printStackTrace(); // Cetak stack trace untuk detail error
-
+    } catch (SQLException ex) {
+        Logger.getLogger(Sabtinamann.class.getName()).log(Level.SEVERE, null, ex);
+    }
 }
-}
+
     private static void showRentToolCompanyPage() {
     System.out.println("Masukkan nama alat: ");
     String namaAlat = scanner.next();
+    scanner.nextLine(); // Bersihkan buffer setelah next()
+
     System.out.println("Masukkan spesifikasi alat: ");
-    scanner.nextLine(); // Konsumsi new line
     String spesifikasi = scanner.nextLine();
+
     System.out.println("Masukkan harga sewa per bulan: ");
-    double hargaSewa = scanner.nextDouble();
+    int hargaSewa = scanner.nextInt();
+    scanner.nextLine(); // Bersihkan buffer setelah nextInt()
 
     try {
-        Alat alat = new Alat(0, namaAlat, currentUserId, hargaSewa);
+        System.out.println("Masukkan ID perusahaan: ");
+        int idPerusahaan = scanner.nextInt();
+        scanner.nextLine();
+
+        // Ambil perusahaan dari database
+        Perusahaan perusahaan = perusahaanDAO.getPerusahaanById(idPerusahaan);
+        if (perusahaan == null) {
+            System.out.println("ID perusahaan tidak ditemukan. Silakan periksa kembali.");
+            showCompanyHomePage();
+            return;
+        }
+
+        // Buat objek alat dan tambahkan ke database
+        Alat alat = new Alat(0, namaAlat, spesifikasi, perusahaan, hargaSewa);
         alatDAO.addAlat(alat);
+
         System.out.println("Alat berhasil ditambahkan.");
     } catch (SQLException e) {
         System.out.println("Error menambahkan alat: " + e.getMessage());
+    } catch (NumberFormatException e) {
+        System.out.println("ID perusahaan harus berupa angka. Silakan coba lagi.");
     }
 
     // Kembali ke halaman utama perusahaan
     showCompanyHomePage();
-    }
+}
+
+
 }
 
