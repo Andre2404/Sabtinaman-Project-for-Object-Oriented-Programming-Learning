@@ -24,7 +24,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Downloads/png-transparent-computer-icons-homepage-angle-logo-desktop-wallpaper-thumbnail-removebg-preview.png" />
+                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/Home.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="homeCom_page" mnemonicParsing="false" style="-fx-background-color: #D0F0C0;" text="Home" textFill="#483e3e">
@@ -38,7 +38,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Downloads/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_5247852-removebg-preview%20(1).png" />
+                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/Profile.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="profileCom_page" mnemonicParsing="false" style="-fx-background-color: #D0F0C0;" text="Profile" textFill="#483e3e">
@@ -52,7 +52,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/png-transparent-account-wallet-balance-ic-google-material-design-3-icon.png" />
+                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/Balance.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="balanceCom_page" mnemonicParsing="false" style="-fx-background-color: #D0F0C0;" text="Balance" textFill="#483e3e">
@@ -66,7 +66,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/8397118.png" />
+                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/Rent.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="rentItems_page" mnemonicParsing="false" style="-fx-background-color: #D0F0C0;" text="Rent Items" textFill="#483e3e">
@@ -80,7 +80,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Downloads/images-removebg-preview.png" />
+                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/Merch.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="listMerch_page" mnemonicParsing="false" style="-fx-background-color: #D0F0C0;" text="List merch" textFill="#483e3e">
@@ -94,7 +94,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/pngtree-checklist-line-icon-vector-png-image_6738765.png" />
+                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/Inventory.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="complaint_page" mnemonicParsing="false" style="-fx-background-color: #D0F0C0;" text="Complaint" textFill="#483e3e">
@@ -108,7 +108,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/32223.png" />
+                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/History.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="historyCom_page" mnemonicParsing="false" style="-fx-background-color: #D0F0C0;" text="History" textFill="#483e3e">
@@ -122,7 +122,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Downloads/png-transparent-computer-icons-logout-angle-text-black-thumbnail-removebg-preview.png" />
+                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/Log%20Out.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="logOutCom_page" mnemonicParsing="false" style="-fx-background-color: #D0F0C0;" text="Log Out" textFill="#483e3e">
@@ -170,7 +170,7 @@
                <children>
                   <ImageView fitHeight="75.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Downloads/png-transparent-computer-icons-homepage-angle-logo-desktop-wallpaper-thumbnail-removebg-preview.png" />
+                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/Home.png" />
                      </image>
                   </ImageView>
                   <Label text=" Home Page" textFill="#043927">

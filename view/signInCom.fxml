@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../Downloads/Desain_tanpa_judul-removebg-preview.png" />
+                  <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/Sabtinaman.png" />
                </image>
             </ImageView>
             <Label layoutX="105.0" layoutY="235.0" textFill="#eef2eb" />
