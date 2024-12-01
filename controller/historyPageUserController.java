@@ -8,25 +8,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author Andhi
  */
-public class balancePageUserController implements Initializable {
+public class historyPageUserController implements Initializable {
 
     @FXML
-    private TextField totalSaldoUser_fill;
-    @FXML
-    private Button topUpSaldoUser_fill;
-    @FXML
-    private TextArea pengeluaranUser_fill;
-    @FXML
-    private TextArea pemasukanUser_fill;
+    private TextArea historyPage_fill;
 
     /**
      * Initializes the controller class.

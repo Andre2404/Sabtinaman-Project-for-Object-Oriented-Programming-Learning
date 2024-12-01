@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 /**
@@ -17,16 +16,22 @@ import javafx.scene.control.TextField;
  *
  * @author Andhi
  */
-public class balancePageUserController implements Initializable {
+public class merchPageUserController implements Initializable {
 
     @FXML
-    private TextField totalSaldoUser_fill;
+    private TextField jumlahSaldoUser_merch;
     @FXML
-    private Button topUpSaldoUser_fill;
+    private TextField hargaPupuKdg_fill;
     @FXML
-    private TextArea pengeluaranUser_fill;
+    private Button pupukKdg_buy;
     @FXML
-    private TextArea pemasukanUser_fill;
+    private TextField hargaPupukUrea_fill;
+    @FXML
+    private Button pupukUrea_buy;
+    @FXML
+    private TextField hargaPupukKps_fill;
+    @FXML
+    private Button pupukKps_buy;
 
     /**
      * Initializes the controller class.
