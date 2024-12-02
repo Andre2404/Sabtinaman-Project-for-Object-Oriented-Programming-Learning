@@ -10,38 +10,69 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginPageController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.signInComController">
    <children>
-      <AnchorPane layoutX="-1.0" prefHeight="400.0" prefWidth="250.0" style="-fx-background-color: #043927;">
+      <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="408.0" prefWidth="261.0" style="-fx-background-color: #043927;">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logo" fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/Sabtinaman.png" />
+                  <Image url="@../../java/Pictures/Sabtinaman.png" />
                </image>
             </ImageView>
             <Label layoutX="105.0" layoutY="235.0" textFill="#eef2eb" />
-            <Text fill="WHITE" layoutX="79.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SABTINAMAN">
+            <Text fill="#d0f0c0" layoutX="78.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SABTINAMAN">
                <font>
-                  <Font name="Yu Gothic UI Semilight" size="15.0" />
+                  <Font name="Codec Pro Bold" size="15.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="28.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Smart Agricultural Bio-Technology Integrated Network for Advanced Management and Nurturing" textAlignment="CENTER" wrappingWidth="206.0" />
-            <Text fill="WHITE" layoutX="37.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you wanna sign up as a User. click this" textAlignment="CENTER" wrappingWidth="188.0" />
-            <Button fx:id="signInUser_btn" layoutX="91.0" layoutY="336.0" mnemonicParsing="false" style="-fx-background-color: #D0F0C0; -fx-background-color: ;" text="Sign In User" textFill="#1e610c" />
+            <Text fill="#d0f0c0" layoutX="28.0" layoutY="216.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Smart Agricultural Bio-Technology Integrated Network for Advanced Management and Nurturing" textAlignment="CENTER" wrappingWidth="206.0">
+               <font>
+                  <Font name="Codec Pro Bold" size="12.0" />
+               </font></Text>
+            <Text fill="#d0f0c0" layoutX="22.0" layoutY="321.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you wanna sign up as a User." textAlignment="CENTER" wrappingWidth="217.3333129882812">
+               <font>
+                  <Font name="Codec Pro ExtraBold" size="14.0" />
+               </font></Text>
+            <Button fx:id="signInUser" layoutX="94.0" layoutY="339.0" mnemonicParsing="false" onAction="#loadSignInUserScene" style="-fx-background-color: #D0F0C0; -fx-background-color: ;" text="Click This" textFill="#1e610c">
+               <font>
+                  <Font name="Codec Pro Regular" size="12.0" />
+               </font></Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="249.0" prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: #D0F0C0;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="260.0" layoutY="-1.0" prefHeight="408.0" prefWidth="350.0" style="-fx-background-color: #D0F0C0;">
          <children>
-            <Label layoutX="40.0" layoutY="25.0" prefHeight="82.0" prefWidth="277.0" text="Sign In as Company">
+            <Label layoutX="52.0" layoutY="36.0" prefHeight="37.0" prefWidth="261.0" text="Sign In as Company">
                <font>
-                  <Font name="System Bold" size="28.0" />
+                  <Font name="Codec Pro Bold" size="27.0" />
                </font>
             </Label>
-            <Button fx:id="register" layoutX="93.0" layoutY="319.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" style="-fx-background-color: #043927;" text="Register" textFill="#eee9e9" />
-            <Button fx:id="signin_btn" layoutX="149.0" layoutY="250.0" mnemonicParsing="false" style="-fx-background-color: #043927;" text="Sign In" textFill="#faf3f3" />
-            <PasswordField fx:id="password" layoutX="101.0" layoutY="179.0" promptText="Password" />
-            <TextField fx:id="username" layoutX="101.0" layoutY="120.0" promptText="Username" />
+            <Button fx:id="register" layoutX="92.0" layoutY="335.0" mnemonicParsing="false" onAction="#loadRegisterScene" prefHeight="25.0" prefWidth="166.0" style="-fx-background-color: #043927;" text="Register" textFill="#eee9e9">
+               <font>
+                  <Font name="Codec Pro Regular" size="14.0" />
+               </font></Button>
+            <PasswordField fx:id="password" layoutX="101.0" layoutY="191.0" promptText="Password" />
+            <TextField fx:id="username" layoutX="101.0" layoutY="127.0" promptText="Username" />
             <Button fx:id="close_btn" layoutX="284.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
+            <Text fill="#043927" layoutX="73.0" layoutY="306.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you dont have an account, sign up here" textAlignment="CENTER" wrappingWidth="205.99999999999994">
+               <font>
+                  <Font name="Codec Pro Italic" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="#043927" layoutX="101.0" layoutY="184.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password :" wrappingWidth="88.6666870117187">
+               <font>
+                  <Font name="Codec Pro Italic" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="#043927" layoutX="101.0" layoutY="121.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username :" wrappingWidth="88.6666870117187">
+               <font>
+                  <Font name="Codec Pro Italic" size="14.0" />
+               </font>
+            </Text>
+            <Button fx:id="sign" layoutX="135.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleSignIn" prefHeight="25.0" prefWidth="82.0" style="-fx-background-color: #043927;" text="Sign In" textFill="#eee9e9">
+               <font>
+                  <Font name="Codec Pro Bold" size="14.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>
