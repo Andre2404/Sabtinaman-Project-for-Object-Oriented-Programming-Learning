@@ -1,10 +1,9 @@
-package dao;
+package DAO;
 
 import model.Pupuk;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import model.Perusahaan;
 
 public class PupukDAO {

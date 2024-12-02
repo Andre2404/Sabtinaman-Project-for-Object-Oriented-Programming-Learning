@@ -1,10 +1,9 @@
-package dao;
+package DAO;
 
 import model.TransaksiSewa;
 import model.Pengguna;
 import model.Alat;
 import model.Perusahaan;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

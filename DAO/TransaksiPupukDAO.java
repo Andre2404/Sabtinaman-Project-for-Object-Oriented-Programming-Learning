@@ -1,11 +1,9 @@
-package dao;
+package DAO;
 
 import model.TransaksiPupuk;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import java.sql.Date;
 import java.time.LocalDate;
 import model.Pengguna;
 import model.Perusahaan;

@@ -1,18 +1,16 @@
-package dao;
+package DAO;
 
 import model.Pengguna;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public class PenggunaDAO {
 
     private Connection connection;
 
     public PenggunaDAO(Connection connection) {
-        this.connection = connection;
-    }
+    this.connection = connection;
+}
+
 
     // Menambahkan pengguna baru ke database
     public void addPengguna(Pengguna pengguna) throws SQLException {
@@ -49,12 +47,26 @@ public class PenggunaDAO {
     }
     
     public Pengguna login(String email, String password) throws SQLException {
-        Pengguna pengguna = getPenggunaByEmail(email);
-        if (pengguna != null && pengguna.getPassword().equals(password)) {
-            return pengguna;
+    String query = "SELECT * FROM pengguna WHERE email = ? AND password = ?";
+    try (PreparedStatement statement = connection.prepareStatement(query)) {
+        statement.setString(1, email);
+        statement.setString(2, password);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            return new Pengguna(
+                resultSet.getInt("id_pengguna"),
+                resultSet.getString("nama"),
+                resultSet.getString("alamat"),
+                resultSet.getString("email"),
+                resultSet.getInt("nomor_kontak"),
+                resultSet.getInt("saldo"),
+                resultSet.getString("password")
+            );
         }
-        return null;
     }
+    return null; // Jika email atau password tidak cocok
+}
+
     
     // Mengambil data pengguna berdasarkan ID
     public Pengguna getPenggunaById(int idPengguna) throws SQLException {
