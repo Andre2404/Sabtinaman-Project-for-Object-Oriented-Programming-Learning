@@ -1,43 +1,109 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
-package view;
+package Controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import DAO.DatabaseConnection;
+import DAO.PenggunaDAO;
+import DAO.PerusahaanDAO;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import model.Perusahaan;
 
-/**
- * FXML Controller class
- *
- * @author Andhi
- */
-public class signInComController implements Initializable {
+public class signInComController {
 
     @FXML
-    private Button signInUser_btn;
+    private TextField username; // Field untuk email perusahaan
     @FXML
-    private Button register;
+    private PasswordField password; // Field untuk password
     @FXML
-    private Button signin_btn;
+    private Button signInUser; // Button untuk login
     @FXML
-    private PasswordField password;
+    private Button register; // Button untuk register
     @FXML
-    private TextField username;
-    @FXML
-    private Button close_btn;
+    private Button sign; // Button untuk berpindah halaman
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+    private PerusahaanDAO perusahaanDAO;
+
+    public signInComController() {
+        try {
+            Connection connection = DatabaseConnection.getCon();
+    perusahaanDAO = new PerusahaanDAO(connection);// Inisialisasi DAO
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Gagal menginisialisasi DAO.");
+        }
+    }
+
+    @FXML
+    public void initialize() {
+        // Tidak ada inisialisasi khusus
+    }
+
+    @FXML
+    private void handleSignIn(ActionEvent event) {
+        String emailInput = username.getText().trim();
+        String passwordInput = password.getText().trim();
+
+        if (emailInput.isEmpty() || passwordInput.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Input Error", "Email dan Password tidak boleh kosong.");
+            return;
+        }
+
+        try {
+            // Validasi login menggunakan DAO
+            Perusahaan perusahaan = perusahaanDAO.login(emailInput, passwordInput);
+            if (perusahaan != null) {
+                showAlert(Alert.AlertType.INFORMATION, "Login Berhasil", "Selamat datang, " + perusahaan.getNama());
+                // Pindah ke halaman home perusahaan
+                loadScene("/View/homePageCom.fxml");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Login Gagal", "Email atau Password salah.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Terjadi kesalahan pada koneksi database.");
+        }
+    }
+
+    @FXML
+    private void loadRegisterScene(ActionEvent event) {
+        loadScene("/View/registerCom.fxml");
+    }
+
+    @FXML
+    private void loadSignInUserScene(ActionEvent event) {
+        loadScene("/View/signInUser.fxml");
+    }
+
+    private void loadScene(String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+
+            // Ambil stage dari tombol yang ditekan
+            Stage stage = (Stage) sign.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.WARNING, "Load Error", "Gagal memuat halaman: " + fxmlPath);
+        }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }
