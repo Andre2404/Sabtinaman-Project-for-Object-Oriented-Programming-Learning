@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.signInComController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.signInComController">
    <children>
       <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="408.0" prefWidth="261.0" style="-fx-background-color: #043927;">
          <children>
@@ -35,15 +35,15 @@
                </font></Text>
             <Button fx:id="signInUser" layoutX="94.0" layoutY="339.0" mnemonicParsing="false" onAction="#loadSignInUserScene" style="-fx-background-color: #D0F0C0; -fx-background-color: ;" text="Click This" textFill="#1e610c">
                <font>
-                  <Font name="Codec Pro Regular" size="12.0" />
+                  <Font name="System Bold" size="12.0" />
                </font></Button>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="260.0" layoutY="-1.0" prefHeight="408.0" prefWidth="350.0" style="-fx-background-color: #D0F0C0;">
          <children>
-            <Label layoutX="52.0" layoutY="36.0" prefHeight="37.0" prefWidth="261.0" text="Sign In as Company">
+            <Label layoutX="53.0" layoutY="41.0" prefHeight="37.0" prefWidth="261.0" text="Sign In as Company" textFill="#043927">
                <font>
-                  <Font name="Codec Pro Bold" size="27.0" />
+                  <Font name="System Bold" size="27.0" />
                </font>
             </Label>
             <Button fx:id="register" layoutX="92.0" layoutY="335.0" mnemonicParsing="false" onAction="#loadRegisterScene" prefHeight="25.0" prefWidth="166.0" style="-fx-background-color: #043927;" text="Register" textFill="#eee9e9">

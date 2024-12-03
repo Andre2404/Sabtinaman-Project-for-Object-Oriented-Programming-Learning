@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.signInUserController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.signInUserController">
    <children>
       <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="408.0" prefWidth="261.0" style="-fx-background-color: #043927;">
          <children>
@@ -35,15 +35,15 @@
                </font></Text>
             <Button fx:id="signInCom" layoutX="94.0" layoutY="339.0" mnemonicParsing="false" onAction="#loadSignInComScene" style="-fx-background-color: #D0F0C0; -fx-background-color: ;" text="Click This" textFill="#1e610c">
                <font>
-                  <Font name="Codec Pro Regular" size="12.0" />
+                  <Font name="System Bold" size="12.0" />
                </font></Button>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="260.0" layoutY="-1.0" prefHeight="408.0" prefWidth="350.0" style="-fx-background-color: #D0F0C0;">
          <children>
-            <Label layoutX="80.0" layoutY="26.0" prefHeight="62.0" prefWidth="206.0" text="Sign In as User">
+            <Label layoutX="80.0" layoutY="26.0" prefHeight="62.0" prefWidth="206.0" text="Sign In as User" textFill="#043927">
                <font>
-                  <Font name="Codec Pro Bold" size="29.0" />
+                  <Font name="System Bold" size="29.0" />
                </font>
             </Label>
             <Button fx:id="register" layoutX="92.0" layoutY="335.0" mnemonicParsing="false" onAction="#loadRegisterScene" prefHeight="25.0" prefWidth="166.0" style="-fx-background-color: #043927;" text="Register" textFill="WHITE">
@@ -51,7 +51,7 @@
                   <Font name="Codec Pro Regular" size="14.0" />
                </font></Button>
             <PasswordField fx:id="password" layoutX="101.0" layoutY="191.0" promptText="Password" />
-            <TextField fx:id="username" layoutX="101.0" layoutY="127.0" promptText="Username" />
+            <TextField fx:id="username" layoutX="101.0" layoutY="127.0" promptText="Username" style="-fx-border-radius: 30px;" />
             <Button fx:id="close_btn" layoutX="284.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
             <Text fill="#043927" layoutX="73.0" layoutY="306.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you dont have an account, sign up here!" textAlignment="CENTER" wrappingWidth="205.99999999999994">
                <font>
