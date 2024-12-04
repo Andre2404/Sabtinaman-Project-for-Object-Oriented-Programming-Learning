@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1220.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MerchPageUserController">
    <top>
@@ -55,11 +56,15 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/Merch.png" />
-                     </image>
-                  </ImageView>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #043927; -fx-background-radius: 10;">
+                     <children>
+                        <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../../Downloads/Pictures/Pictures/pupuk.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
                   <Label text="Merch" textFill="#483e3e">
                      <font>
                         <Font name="System Bold" size="25.0" />
@@ -90,7 +95,7 @@
                   </HBox>
                </children>
             </VBox>
-            <Label style="-fx-background-color: #043927;" text=" pupuk yang tersedia " textFill="#f8f4f4">
+            <Label style="-fx-background-color: #043927; -fx-background-radius: 5;" text=" pupuk yang tersedia " textFill="#f8f4f4">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -107,7 +112,7 @@
                         <TextField fx:id="hargaPupuKdg_fill" promptText="Harga/Kg" />
                      </children>
                   </VBox>
-                  <Button fx:id="pupukKdg_buy" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #043927;" text="Buy" textFill="#f8f4f4">
+                  <Button fx:id="pupukKdg_buy" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #043927; -fx-background-radius: 5;" text="Buy" textFill="#f8f4f4">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -115,6 +120,14 @@
                         <Insets bottom="20.0" left="20.0" />
                      </HBox.margin>
                   </Button>
+                  <Text fill="#043927" strokeType="OUTSIDE" strokeWidth="0.0" text="Nikmati kemudahan membeli pupuk berkualitas langsung dari aplikasi SABTINAMAN. Cari jenis pupuk yang Anda butuhkan, baca detail produk, dan lakukan pembelian dengan beberapa klik. Pastikan hasil panen optimal dengan pupuk terbaik hanya di SABTINAMAN!" textAlignment="CENTER" wrappingWidth="628.09375">
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </Text>
                </children>
                <VBox.margin>
                   <Insets top="20.0" />
@@ -132,7 +145,7 @@
                         <TextField fx:id="hargaPupukUrea_fill" promptText="Harga/Kg" />
                      </children>
                   </VBox>
-                  <Button fx:id="pupukUrea_buy" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #043927;" text="Buy" textFill="#f8f4f4">
+                  <Button fx:id="pupukUrea_buy" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #043927; -fx-background-radius: 5;" text="Buy" textFill="#f8f4f4">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -140,6 +153,18 @@
                         <Insets bottom="20.0" left="20.0" />
                      </HBox.margin>
                   </Button>
+                  <Pane prefHeight="100.0" prefWidth="94.0" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../Downloads/Pictures/Pictures/Mascot4.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </ImageView>
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
@@ -154,7 +179,7 @@
                         <TextField fx:id="hargaPupukKps_fill" promptText="Harga/Kg" />
                      </children>
                   </VBox>
-                  <Button fx:id="pupukKps_buy" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #043927;" text="Buy" textFill="#f8f4f4">
+                  <Button fx:id="pupukKps_buy" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #043927; -fx-background-radius: 5;" text="Buy" textFill="#f8f4f4">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

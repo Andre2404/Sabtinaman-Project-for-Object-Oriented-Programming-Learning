@@ -8,8 +8,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1220.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RentToolsUserController">
    <top>
@@ -29,8 +31,22 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="200.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
                <children>
+                  <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/side%20pic2.png" />
+                     </image>
+                  </ImageView>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/Mascot1.png" />
+                     </image>
+                  </ImageView>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <Pane prefHeight="100.0" prefWidth="242.0" />
                   <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/side%20pic.png" />
@@ -40,15 +56,22 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/Rent.png" />
-                     </image>
-                  </ImageView>
+                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #043927; -fx-background-radius: 10;">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../../Downloads/Pictures/Pictures/Tools.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
                   <Label text="Rent Tools Page" textFill="#483e3e">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
                   </Label>
                </children>
                <VBox.margin>
@@ -83,7 +106,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <Label style="-fx-background-color: #043927;" text="Alat yang tersedia : " textFill="#f8f4f4">
+                  <Label prefHeight="30.0" prefWidth="220.0" style="-fx-background-color: #043927; -fx-background-radius: 5;" text=" Alat yang tersedia : " textAlignment="CENTER" textFill="#f8f4f4">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -93,7 +116,7 @@
                   </Label>
                </children>
             </VBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="300.0">
                <children>
                   <VBox prefHeight="200.0" prefWidth="200.0">
                      <HBox.margin>
@@ -105,14 +128,14 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="cangkulRtpUser_fill" prefHeight="25.0" prefWidth="123.0" promptText="Harga/Day">
+                        <TextField fx:id="cangkulRtpUser_fill" prefHeight="25.0" prefWidth="200.0" promptText="Harga/Day">
                            <VBox.margin>
                               <Insets top="7.0" />
                            </VBox.margin>
                         </TextField>
                      </children>
                   </VBox>
-                  <Button fx:id="cangkulRentUser_button" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #043927;" text="Rent" textFill="#f8f4f4">
+                  <Button fx:id="cangkulRentUser_button" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #043927; -fx-background-radius: 5;" text="Rent" textFill="#f8f4f4">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
@@ -120,6 +143,14 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
+                  <Text fill="#043927" strokeType="OUTSIDE" strokeWidth="0.0" text="SABTINAMAN menghadirkan solusi lengkap untuk kebutuhan alat pertanian Anda. Cari alat yang tersedia, cek detail spesifikasi, pilih durasi sewa, dan lakukan pemesanan langsung melalui aplikasi. Dengan fitur notifikasi pengingat, Anda tidak perlu khawatir tentang pengembalian tepat waktu. Pantau status peminjaman secara real-time dan nikmati efisiensi bertani tanpa repot!" textAlignment="CENTER" wrappingWidth="599.0078125">
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </Text>
                </children>
                <VBox.margin>
                   <Insets top="20.0" />
@@ -144,7 +175,7 @@
                         </TextField>
                      </children>
                   </VBox>
-                  <Button fx:id="traktorRentUser_button" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #043927;" text="Rent" textFill="#f8f4f4">
+                  <Button fx:id="traktorRentUser_button" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #043927; -fx-background-radius: 5;" text="Rent" textFill="#f8f4f4">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
@@ -152,6 +183,18 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
+                  <Pane prefHeight="97.0" prefWidth="100.0" />
+                  <Pane prefHeight="100.0" prefWidth="200.0" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <Pane prefHeight="97.0" prefWidth="170.0" />
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../Downloads/Pictures/Pictures/Mascot2.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </ImageView>
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
@@ -173,7 +216,7 @@
                         </TextField>
                      </children>
                   </VBox>
-                  <Button fx:id="sekopRentUser_button" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #043927;" text="Rent" textFill="#f8f4f4">
+                  <Button fx:id="sekopRentUser_button" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #043927; -fx-background-radius: 5;" text="Rent" textFill="#f8f4f4">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
@@ -185,7 +228,7 @@
             </HBox>
          </children>
          <BorderPane.margin>
-            <Insets left="10.0" />
+            <Insets left="20.0" />
          </BorderPane.margin>
       </VBox>
    </center>
