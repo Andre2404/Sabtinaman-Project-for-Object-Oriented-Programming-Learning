@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 
 public class registerUserController {
 
@@ -33,21 +34,20 @@ public class registerUserController {
     private TextField nomorKontak_register;
 
     @FXML
-    private TextField password_register;
+    private PasswordField password_register;
     
     @FXML
     private Button back;
-
     
     private PenggunaDAO penggunaDAO;
 
     @FXML
 public void initialize() {
     Connection connection = DatabaseConnection.getCon();
-    penggunaDAO = new PenggunaDAO(connection); // Pastikan PenggunaDAO menerima Connection
+    penggunaDAO = new PenggunaDAO(connection); 
 }
     @FXML
-    public void handleRegisterButton(ActionEvent event) {
+    public void handleRegisterButton (ActionEvent event) {
         String nama = username_register.getText();
         String alamat = address_register.getText();
         String email = email_register.getText();

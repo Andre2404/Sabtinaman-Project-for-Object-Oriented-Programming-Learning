@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import utils.SessionManager;
 import model.Pengguna;
 
 public class signInUserController {
@@ -31,7 +32,6 @@ public class signInUserController {
     private javafx.scene.control.Button register;
     @FXML
     private javafx.scene.control.Button sign;
-
     private PenggunaDAO penggunaDAO;
     @FXML
     private Button close_btn;
@@ -61,9 +61,9 @@ public void initialize() {
         }
 
         try {
-            Connection connection = DatabaseConnection.getCon();
-            Pengguna pengguna = penggunaDAO.login(emailInput, passwordInput);
+            pengguna = penggunaDAO.login(emailInput, passwordInput);
             if (pengguna != null) {
+                SessionManager.setCurrentUserId(pengguna.getIdPengguna());
                 showAlert(Alert.AlertType.INFORMATION, "Login Berhasil", "Selamat datang, " + pengguna.getNama());
                 // Navigasi ke halaman berikutnya
                 loadScene("/View/homePageUser.fxml");
@@ -90,7 +90,7 @@ public void initialize() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
-
+            loader.setController(this); 
             Stage stage = (Stage) sign.getScene().getWindow(); // Ambil stage dari salah satu tombol
             stage.setScene(new Scene(root));
             stage.show();

@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.DatabaseConnection;
 import DAO.PerusahaanDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,8 +14,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 
 public class registerComController {
 
@@ -31,13 +34,18 @@ public class registerComController {
     private TextField nomorKontak_register;
 
     @FXML
-    private TextField password_register;
+    private PasswordField password_register;
 
     @FXML
     private Button back;
 
     private PerusahaanDAO perusahaanDAO;
-
+    
+@FXML
+public void initialize() {
+    Connection connection = DatabaseConnection.getCon();
+    perusahaanDAO = new PerusahaanDAO(connection); 
+}
     @FXML
     public void handleRegisterButton(ActionEvent event) throws SQLException {
         System.out.println("Memulai registrasi...");
@@ -53,9 +61,9 @@ public class registerComController {
         }
 
         try {
-            long nomorKontak = Long.parseLong(nomorKontakStr);
+            int nomorKontak = Integer.parseInt(nomorKontakStr);
 
-            Perusahaan perusahaan = new Perusahaan(0, nama, alamat, email, (int) nomorKontak, 0, password);
+            Perusahaan perusahaan = new Perusahaan(0, nama, alamat, email, nomorKontak, 0, password);
             perusahaanDAO.addPerusahaan(perusahaan);
 
             showAlert(Alert.AlertType.INFORMATION, "Sukses", "Registrasi berhasil!");

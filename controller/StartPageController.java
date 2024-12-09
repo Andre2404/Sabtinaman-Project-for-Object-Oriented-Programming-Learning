@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,10 +20,22 @@ public class StartPageController {
     private Button user;
 
     @FXML
+    private ImageView imageView;
+
+    @FXML
     public void initialize() {
         // Attach event handlers
         com.setOnAction(event -> loadScene("/View/signInCom.fxml"));
         user.setOnAction(event -> loadScene("/View/signInUser.fxml"));
+
+        // Load image from resources folder
+        try {
+            Image img = new Image(getClass().getResource("file:C:\\Users\\User\\Documents\\NetBeansProjects\\Sabtinaman\\src\\main\\java\\Pictures\\Header.png").toExternalForm());
+            imageView.setImage(img);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Failed to load image.");
+        }
     }
 
     private void loadScene(String fxmlPath) {

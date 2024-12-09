@@ -1,7 +1,6 @@
 package Controller;
 
 import DAO.DatabaseConnection;
-import DAO.PenggunaDAO;
 import DAO.PerusahaanDAO;
 import java.io.IOException;
 import java.sql.Connection;
@@ -15,11 +14,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.Perusahaan;
+import utils.SessionManager;
 
 public class signInComController {
-
+    public static Perusahaan perusahaan;
     @FXML
     private TextField username; // Field untuk email perusahaan
     @FXML
@@ -33,19 +35,14 @@ public class signInComController {
 
     private PerusahaanDAO perusahaanDAO;
 
-    public signInComController() {
-        try {
-            Connection connection = DatabaseConnection.getCon();
-    perusahaanDAO = new PerusahaanDAO(connection);// Inisialisasi DAO
-        } catch (Exception e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "Gagal menginisialisasi DAO.");
-        }
-    }
-
     @FXML
+    private ImageView imageView;
+    
     public void initialize() {
-        // Tidak ada inisialisasi khusus
+       Connection connection = DatabaseConnection.getCon();
+       perusahaanDAO = new PerusahaanDAO(connection);
+       Image img = new Image("file:C:\\Users\\User\\Documents\\NetBeansProjects\\Sabtinaman\\src\\main\\java\\Pictures\\Sabtinaman.png");
+       imageView.setImage(img);
     }
 
     @FXML
@@ -60,8 +57,9 @@ public class signInComController {
 
         try {
             // Validasi login menggunakan DAO
-            Perusahaan perusahaan = perusahaanDAO.login(emailInput, passwordInput);
+            perusahaan = perusahaanDAO.login(emailInput, passwordInput);
             if (perusahaan != null) {
+                SessionManager.setCurrentUserId(perusahaan.getIdPerusahaan());
                 showAlert(Alert.AlertType.INFORMATION, "Login Berhasil", "Selamat datang, " + perusahaan.getNama());
                 // Pindah ke halaman home perusahaan
                 loadScene("/View/homePageCom.fxml");
