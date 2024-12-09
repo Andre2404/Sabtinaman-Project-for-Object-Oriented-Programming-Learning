@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RentToolUserController">
+   <children>
+      <ImageView fitHeight="202.0" fitWidth="277.0" layoutX="329.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../java/Pictures/Sider.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="92.0" layoutY="25.0" text="Rent Tool">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="25.0" layoutY="21.0" prefHeight="55.0" prefWidth="58.0" style="-fx-background-color: #043927; -fx-background-radius: 10;">
+         <children>
+            <ImageView fitHeight="36.0" fitWidth="58.0" layoutX="8.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/Pictures/Tools.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Label layoutX="28.0" layoutY="83.0" prefHeight="36.0" prefWidth="127.0" text="Saldo Anda :">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="27.0" layoutY="121.0" prefHeight="33.0" prefWidth="173.0" style="-fx-background-color: #043927;">
+         <children>
+            <Label layoutX="8.0" layoutY="-3.0" prefHeight="36.0" prefWidth="161.0" text="Alat yang tersedia :" textFill="#d0f0c0">
+               <font>
+                  <Font name="System Bold Italic" size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ScrollPane layoutX="27.0" layoutY="174.0" prefHeight="195.0" prefWidth="547.0">
+         <content>
+            <VBox prefHeight="200.0" prefWidth="601.0">
+               <children>
+                  <TableView fx:id="tableAlatTersedia" prefHeight="200.0" prefWidth="621.0">
+                    <columns>
+                        <TableColumn fx:id="colIdAlat" prefWidth="75.0" text="ID Alat" />
+                      <TableColumn fx:id="colNamaAlat" prefWidth="135.33334863185883" text="Nama Alat" />
+                      <TableColumn fx:id="colSpekAlat" prefWidth="120.66667175292969" text="Spesifikasi" />
+                        <TableColumn fx:id="colHargaSewa" minWidth="7.33331298828125" prefWidth="128.66668701171875" text="Harga" />
+                        <TableColumn fx:id="colStatus" minWidth="0.66668701171875" prefWidth="150.00003051757812" text="Status" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Button fx:id="back" layoutX="482.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="21.0" prefWidth="92.0" style="-fx-background-color: #043927;" text="Back" textFill="#d0f0c0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Label fx:id="saldoLabel" layoutX="155.0" layoutY="85.0" prefHeight="32.0" prefWidth="141.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <VBox layoutX="251.0" layoutY="17.0" prefHeight="200.0" prefWidth="100.0" />
+   </children>
+</AnchorPane>

@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="pilihan" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartPageController">
@@ -19,29 +20,28 @@
             <Font name="Codec Pro Regular" size="19.0" />
          </font>
       </Label>
-      <Button fx:id="com" layoutX="333.0" layoutY="273.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="102.0" style="-fx-background-color: #043927;" text="Company" textFill="#d0f0c0">
-         <font>
-            <Font name="Codec Pro Bold" size="16.0" />
-         </font>
-      </Button>
-      <Button fx:id="user" layoutX="162.0" layoutY="273.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="77.0" style="-fx-background-color: #043927;" text="User" textFill="#d0f0c0">
-         <font>
-            <Font name="Codec Pro Bold" size="16.0" />
-         </font>
-      </Button>
-      <Label layoutX="272.0" layoutY="276.0" prefHeight="31.0" prefWidth="32.0" text="OR" textAlignment="CENTER" textFill="#043927">
-         <font>
-            <Font name="Codec Pro Regular" size="19.0" />
-         </font>
-      </Label>
       <Label layoutX="182.0" layoutY="156.0" prefHeight="58.0" prefWidth="235.0" text="Smart Farming, Simplified." textAlignment="CENTER" textFill="#043927">
          <font>
             <Font name="Codec Pro Bold" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="600.0" layoutX="1.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="600.0" layoutX="1.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../java/Pictures/Header.png" />
          </image></ImageView>
+      <HBox layoutX="206.0" layoutY="274.0" prefHeight="38.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="user" mnemonicParsing="false" prefHeight="38.0" prefWidth="107.0" style="-fx-background-color: #043927; -fx-background-radius: 15 0 0 15;" text="User" textFill="#d0f0c0">
+               <font>
+                  <Font name="Codec Pro Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="com" mnemonicParsing="false" prefHeight="38.0" prefWidth="103.0" style="-fx-background-color: #8cc342; -fx-background-radius: 0 15 15 0;" text="Company" textFill="#043927">
+               <font>
+                  <Font name="Codec Pro Bold" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

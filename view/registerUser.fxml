@@ -20,7 +20,8 @@
       <TextField fx:id="address_register" layoutX="117.0" layoutY="197.0" promptText="Address" />
       <TextField fx:id="email_register" layoutX="117.0" layoutY="246.0" promptText="E-Mail" />
       <TextField fx:id="nomorKontak_register" layoutX="118.0" layoutY="295.0" promptText="Nomor Kontak" />
-      <Button fx:id="buttonUser_register" layoutX="113.0" layoutY="395.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #043927;" text="Register" textFill="WHITE">
+      <PasswordField fx:id="password_register" layoutX="117.0" layoutY="339.0" promptText="Password" />
+      <Button fx:id="buttonUser_register" layoutX="113.0" layoutY="395.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #043927;" text="Register" textFill="WHITE">
          <font>
             <Font name="Codec Pro Bold" size="12.0" />
          </font></Button>
@@ -39,6 +40,5 @@
             <Font name="Codec Pro Bold" size="12.0" />
          </font>
       </Button>
-      <PasswordField layoutX="117.0" layoutY="339.0" />
    </children>
 </AnchorPane>
