@@ -21,13 +21,13 @@
       <TextField fx:id="email_register" layoutX="117.0" layoutY="246.0" promptText="E-Mail" />
       <TextField fx:id="nomorKontak_register" layoutX="118.0" layoutY="295.0" promptText="Nomor Kontak" />
       <PasswordField fx:id="password_register" layoutX="117.0" layoutY="339.0" promptText="Password" />
-      <Button fx:id="buttonUser_register" layoutX="113.0" layoutY="395.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #043927;" text="Register" textFill="WHITE">
+      <Button fx:id="buttonUser_register" layoutX="113.0" layoutY="395.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Register" textFill="WHITE">
          <font>
             <Font name="Codec Pro Bold" size="12.0" />
          </font></Button>
       <ImageView fitHeight="92.0" fitWidth="383.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../java/Pictures/Header.png" />
+            <Image url="@../Pictures/Header.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="91.0" fitWidth="178.0" layoutX="137.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
@@ -35,9 +35,9 @@
             <Image url="@../../java/Pictures/Sabtinaman.png" />
          </image>
       </ImageView>
-      <Button fx:id="back" layoutX="307.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #043927;" text="Back" textFill="WHITE">
+      <Button fx:id="back" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="329.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="13.0" prefWidth="41.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="x" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Codec Pro Bold" size="12.0" />
+            <Font name="Codec Pro Bold" size="22.0" />
          </font>
       </Button>
    </children>

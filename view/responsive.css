@@ -1,0 +1,98 @@
+/* 1. Background Responsif */
+.root-pane {
+    -fx-background-color: linear-gradient(to bottom, #D0F0C0, #8cc342); /* Gradien latar belakang */
+    -fx-padding: 20;
+    -fx-spacing: 15;
+    -fx-alignment: center;
+    -fx-font-family: "Arial, sans-serif";
+}
+
+/* 2. Desain Responsif untuk Tombol */
+.button {
+    -fx-background-color: #8cc342; /* Warna dasar */
+    -fx-text-fill: #ffffff; /* Teks putih */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 5);
+    -fx-transition: all 0.3s ease-in-out;
+    -fx-cursor: hand;
+}
+
+/* Tombol Hover */
+.button:hover {
+    -fx-background-color: #043927; /* Hijau gelap */
+    -fx-text-fill: #D0F0C0; /* Teks lebih terang */
+    -fx-transform: scale(1.1); /* Membesar saat hover */
+    -fx-effect: dropshadow(gaussian, #8cc342, 15, 0.5, 0, 0);
+}
+
+/* Tombol Ditekan */
+.button:pressed {
+    -fx-background-color: #D0F0C0; /* Hijau pastel */
+    -fx-transform: scale(0.95); /* Mengecil saat ditekan */
+}
+
+/* 3. Desain Responsif untuk Label dan Teks */
+.label {
+    -fx-text-fill: #043927; /* Warna teks hijau gelap */
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-wrap-text: true; /* Teks otomatis melipat jika panjang */
+    -fx-alignment: center;
+}
+
+/* 4. Responsif Berdasarkan Ukuran Layar */
+
+/* Ukuran layar kecil (<600px) */
+@media screen and (max-width: 600px) {
+    .root-pane {
+        -fx-padding: 10;
+        -fx-spacing: 10;
+    }
+
+    .button {
+        -fx-font-size: 14px;
+        -fx-padding: 8px 16px;
+    }
+
+    .label {
+        -fx-font-size: 16px;
+    }
+}
+
+/* Ukuran layar sedang (600px-1200px) */
+@media screen and (min-width: 601px) and (max-width: 1200px) {
+    .root-pane {
+        -fx-padding: 15;
+        -fx-spacing: 12;
+    }
+
+    .button {
+        -fx-font-size: 16px;
+        -fx-padding: 10px 20px;
+    }
+
+    .label {
+        -fx-font-size: 18px;
+    }
+}
+
+/* Ukuran layar besar (>1200px) */
+@media screen and (min-width: 1201px) {
+    .root-pane {
+        -fx-padding: 20;
+        -fx-spacing: 15;
+    }
+
+    .button {
+        -fx-font-size: 18px;
+        -fx-padding: 12px 24px;
+    }
+
+    .label {
+        -fx-font-size: 20px;
+    }
+}

@@ -1,42 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="pilihan" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartPageController">
+<AnchorPane id="AnchorPane" fx:id="pilihan" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartPageController">
    <children>
-      <Label layoutX="106.0" layoutY="120.0" prefHeight="58.0" prefWidth="387.0" text="Welcome to SABTINAMAN" textAlignment="CENTER" textFill="#043927">
-         <font>
-            <Font name="Codec Pro Bold" size="31.0" />
-         </font>
-      </Label>
-      <Label layoutX="162.0" layoutY="223.0" prefHeight="31.0" prefWidth="287.0" text="choose your path, want to be..." textAlignment="CENTER" textFill="#043927">
-         <font>
-            <Font name="Codec Pro Regular" size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="182.0" layoutY="156.0" prefHeight="58.0" prefWidth="235.0" text="Smart Farming, Simplified." textAlignment="CENTER" textFill="#043927">
-         <font>
-            <Font name="Codec Pro Bold" size="18.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="600.0" layoutX="1.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="595.0" fitWidth="892.0" focusTraversable="true" layoutX="1.0" opacity="0.58" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../java/Pictures/Header.png" />
-         </image></ImageView>
-      <HBox layoutX="206.0" layoutY="274.0" prefHeight="38.0" prefWidth="200.0">
+            <Image url="@../Pictures/WhatsApp%20Image%202024-12-16%20at%2009.50.28_68539686.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageView" fitHeight="390.0" fitWidth="892.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Pictures/Header.png" />
+         </image>
+         <effect>
+            <Blend />
+         </effect></ImageView>
+      <Label layoutX="196.0" layoutY="184.0" prefHeight="58.0" prefWidth="477.0" text="Welcome to SABTINAMAN" textAlignment="CENTER" textFill="#093c00">
+         <font>
+            <Font name="Codec Pro Bold" size="38.0" />
+         </font>
+      </Label>
+      <Label layoutX="291.0" layoutY="332.0" prefHeight="31.0" prefWidth="287.0" text="choose your path, want to be..." textAlignment="CENTER">
+         <font>
+            <Font name="Codec Pro Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="310.0" layoutY="222.0" prefHeight="58.0" prefWidth="249.0" text="Smart Farming, Simplified." textAlignment="CENTER" textFill="#043927">
+         <font>
+            <Font name="Codec Pro Bold" size="19.0" />
+         </font>
+      </Label>
+      <HBox layoutX="329.0" layoutY="378.0" prefHeight="38.0" prefWidth="211.0">
          <children>
-            <Button fx:id="user" mnemonicParsing="false" prefHeight="38.0" prefWidth="107.0" style="-fx-background-color: #043927; -fx-background-radius: 15 0 0 15;" text="User" textFill="#d0f0c0">
+            <Button fx:id="user" mnemonicParsing="false" prefHeight="38.0" prefWidth="107.0" style="-fx-background-radius: 15 0 0 15; -fx-background-color: #043927;" stylesheets="@hover.css" text="User" textFill="#8cc342">
                <font>
                   <Font name="Codec Pro Bold" size="16.0" />
                </font>
+               <styleClass>
+                  <String fx:value="button-hover-1" />
+                  <String fx:value="button-hover-3" />
+               </styleClass>
             </Button>
-            <Button fx:id="com" mnemonicParsing="false" prefHeight="38.0" prefWidth="103.0" style="-fx-background-color: #8cc342; -fx-background-radius: 0 15 15 0;" text="Company" textFill="#043927">
+            <Button fx:id="com" mnemonicParsing="false" prefHeight="38.0" prefWidth="103.0" style="-fx-background-color: #8cc342; -fx-background-radius: 0 15 15 0;" styleClass="button-hover-1" stylesheets="@hover.css" text="Company" textFill="#043927">
                <font>
                   <Font name="Codec Pro Bold" size="16.0" />
                </font>

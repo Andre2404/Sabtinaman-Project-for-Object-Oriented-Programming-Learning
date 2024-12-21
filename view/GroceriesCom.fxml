@@ -5,16 +5,17 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GroceriesController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GroceriesComController">
    <children>
       <ImageView fitHeight="228.0" fitWidth="285.0" layoutX="315.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../java/Pictures/Sider.png" />
+            <Image url="@../Pictures/Sider.png" />
          </image>
       </ImageView>
       <Label layoutX="92.0" layoutY="25.0" text="Groceries">
@@ -31,27 +32,18 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Label layoutX="28.0" layoutY="80.0" prefHeight="36.0" prefWidth="127.0" text="Saldo Anda :">
+      <Label layoutX="28.0" layoutY="80.0" prefHeight="36.0" prefWidth="106.0" text="Nama Pupuk :">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="27.0" layoutY="121.0" prefHeight="33.0" prefWidth="173.0" style="-fx-background-color: #043927;">
-         <children>
-            <Label layoutX="8.0" layoutY="-3.0" prefHeight="36.0" prefWidth="181.0" text="Pupuk yang tersedia :" textFill="#d0f0c0">
-               <font>
-                  <Font name="System Bold Italic" size="17.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <ScrollPane layoutX="26.0" layoutY="172.0" prefHeight="253.0" prefWidth="547.0">
+      <ScrollPane layoutX="26.0" layoutY="222.0" prefHeight="253.0" prefWidth="547.0">
          <content>
-            <TableView fx:id="tableView" onMouseClicked="#handleTableClick" prefHeight="254.0" prefWidth="525.0">
+            <TableView fx:id="tableView" prefHeight="254.0" prefWidth="525.0">
               <columns>
                 <TableColumn fx:id="colNamaPupuk" prefWidth="163.33334863185883" text="Nama Pupuk" />
-                <TableColumn fx:id="colHargaperKg" prefWidth="199.99998474121094" text="Harga per Kg" />
-                  <TableColumn fx:id="ColDistributor" prefWidth="161.33334350585938" text="Distributor" />
+                <TableColumn fx:id="colHargaPupuk" prefWidth="199.99998474121094" text="Harga per Kg" />
+                  <TableColumn fx:id="colNamaPerusahaan" prefWidth="161.33334350585938" text="Distributor" />
               </columns>
             </TableView>
          </content>
@@ -61,14 +53,16 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Label fx:id="saldoLabel" layoutX="155.0" layoutY="82.0" prefHeight="32.0" prefWidth="141.0">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
-      <Button fx:id="beli" layoutX="261.0" layoutY="447.0" mnemonicParsing="false" onAction="#handleBeliPupuk" prefHeight="25.0" prefWidth="77.0" style="-fx-background-color: #043927;" text="Beli" textFill="#d0f0c0">
+      <Button fx:id="post" layoutX="251.0" layoutY="175.0" mnemonicParsing="false" onAction="#handlePostButton" prefHeight="25.0" prefWidth="77.0" style="-fx-background-color: #043927;" text="POST IT!" textFill="#d0f0c0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
+      <Label layoutX="28.0" layoutY="144.0" prefHeight="36.0" prefWidth="106.0" text="Harga per Kg :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="namaPupuk" layoutX="28.0" layoutY="114.0" prefHeight="25.0" prefWidth="189.0" />
+      <TextField fx:id="hargaPupuk" layoutX="28.0" layoutY="179.0" prefHeight="25.0" prefWidth="189.0" />
    </children>
 </AnchorPane>

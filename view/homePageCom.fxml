@@ -11,14 +11,14 @@
    <children>
       <AnchorPane layoutX="141.0" layoutY="-11.0" prefHeight="73.0" prefWidth="507.0" style="-fx-background-color: #8cc342;">
          <children>
-            <Button fx:id="logout" layoutX="422.0" layoutY="32.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #d0f0c0;" text="Log Out" textFill="#484a48">
+            <Button fx:id="logout" layoutX="422.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #d0f0c0;" text="Log Out" textFill="#484a48">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
             <ImageView fitHeight="55.0" fitWidth="69.0" layoutX="341.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../java/Pictures/Mascot1.png" />
+                  <Image url="@../Pictures/Mascot7.png" />
                </image>
             </ImageView>
             <Label layoutX="23.0" layoutY="23.0" prefHeight="43.0" prefWidth="317.0" text="Welcome to SABTINAMAN" textFill="#043927">
@@ -32,7 +32,7 @@
          <children>
             <ImageView fitHeight="65.0" fitWidth="75.0" layoutX="30.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../java/Pictures/Mascot3.png" />
+                  <Image url="@../Pictures/Mascot6.png" />
                </image>
             </ImageView>
             <AnchorPane layoutX="6.0" layoutY="111.0" prefHeight="63.0" prefWidth="127.0" style="-fx-background-color: #d0f0c0; -fx-background-radius: 5px;">
@@ -88,7 +88,7 @@
          <children>
             <ImageView fitHeight="43.0" fitWidth="48.0" layoutX="9.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../java/Pictures/History.png" />
+                  <Image url="@../Pictures/History.png" />
                </image>
             </ImageView>
             <Label ellipsisString="" graphicTextGap="1.0" layoutX="60.0" layoutY="4.0" lineSpacing="1.0" prefHeight="55.0" prefWidth="92.0" text="Transaction History" textFill="#d0f0c0" wrapText="true">
@@ -96,7 +96,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Button layoutX="9.0" layoutY="66.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="62.0" style="-fx-background-color: #d0f0c0;" text="See More" textFill="#043927">
+            <Button layoutX="9.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleTransaction" prefHeight="22.0" prefWidth="62.0" style="-fx-background-color: #d0f0c0;" text="See More" textFill="#043927">
                <font>
                   <Font name="System Bold" size="10.0" />
                </font>
@@ -106,7 +106,7 @@
          <children>
             <ImageView fitHeight="18.0" fitWidth="23.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../java/Pictures/Balance.png" />
+                  <Image url="@../Pictures/Balance.png" />
                </image>
             </ImageView>
             <Label layoutX="42.0" layoutY="1.0" prefHeight="43.0" prefWidth="64.0" text="Balance : " textFill="#d0f0c0">
@@ -114,14 +114,14 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="withdraw" layoutX="10.0" layoutY="74.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="76.0" style="-fx-background-color: #d0f0c0;" text="WITHDRAW" textFill="#043927">
+            <Button fx:id="withdraw" layoutX="10.0" layoutY="74.0" mnemonicParsing="false" onAction="#handleWithDraw" prefHeight="22.0" prefWidth="76.0" style="-fx-background-color: #d0f0c0;" text="WITHDRAW" textFill="#043927">
                <font>
                   <Font name="System Bold" size="10.0" />
                </font>
             </Button>
             <ImageView fitHeight="65.0" fitWidth="76.0" layoutX="163.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../java/Pictures/Mascot2.png" />
+                  <Image url="@../Pictures/Mascot8.png" />
                </image>
             </ImageView>
             <Label fx:id="saldoLabel" layoutX="17.0" layoutY="41.0" prefHeight="25.0" prefWidth="127.0" textFill="#d0f0c0" wrapText="true">
@@ -131,16 +131,23 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button fx:id="rent" layoutX="404.0" layoutY="146.0" mnemonicParsing="false" prefHeight="107.0" prefWidth="111.0" style="-fx-background-color: #043927; -fx-background-radius: 10;" text="Rent Tool" textFill="#d0f0c0" textOverrun="LEADING_WORD_ELLIPSIS">
+      <Button fx:id="rent" contentDisplay="TOP" layoutX="404.0" layoutY="146.0" mnemonicParsing="false" onAction="#handleRent" prefHeight="107.0" prefWidth="111.0" style="-fx-background-color: #043927; -fx-background-radius: 10;" text="Rent Tool" textFill="#d0f0c0" textOverrun="LEADING_WORD_ELLIPSIS">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="55.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Pictures/Tools.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
       <AnchorPane layoutX="405.0" layoutY="265.0" prefHeight="97.0" prefWidth="230.0" style="-fx-background-color: #043927; -fx-background-radius: 10px;">
          <children>
             <ImageView fitHeight="55.0" fitWidth="54.0" layoutX="15.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../java/Pictures/Complaint.png" />
+                  <Image url="@../Pictures/Complaint.png" />
                </image>
             </ImageView>
             <Label ellipsisString="" graphicTextGap="1.0" layoutX="79.0" layoutY="7.0" lineSpacing="1.0" prefHeight="55.0" prefWidth="127.0" text="Complaint" textFill="#d0f0c0" wrapText="true">
@@ -148,27 +155,24 @@
                   <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Button layoutX="9.0" layoutY="66.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="62.0" style="-fx-background-color: #d0f0c0;" text="See More" textFill="#043927">
+            <Button layoutX="9.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleComplaint" prefHeight="22.0" prefWidth="62.0" style="-fx-background-color: #d0f0c0;" text="See More" textFill="#043927">
                <font>
                   <Font name="System Bold" size="10.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <Button fx:id="groceries" layoutX="522.0" layoutY="147.0" mnemonicParsing="false" prefHeight="107.0" prefWidth="111.0" style="-fx-background-color: #043927; -fx-background-radius: 10;" text="Groceries" textFill="#d0f0c0" textOverrun="LEADING_WORD_ELLIPSIS">
+      <Button fx:id="groceries" contentDisplay="TOP" layoutX="522.0" layoutY="147.0" mnemonicParsing="false" onAction="#handleGroceries" prefHeight="107.0" prefWidth="111.0" style="-fx-background-color: #043927; -fx-background-radius: 10;" text="Groceries" textFill="#d0f0c0" textOverrun="LEADING_WORD_ELLIPSIS">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="55.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Pictures/pupuk.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
-      <Label layoutX="422.0" layoutY="195.0" prefHeight="43.0" prefWidth="76.0" text="(post some)" textAlignment="CENTER" textFill="#d0f0c0">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="542.0" layoutY="196.0" prefHeight="43.0" prefWidth="76.0" text="(post some)" textAlignment="CENTER" textFill="#d0f0c0">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

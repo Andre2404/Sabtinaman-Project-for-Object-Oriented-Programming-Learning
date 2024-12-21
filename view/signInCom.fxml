@@ -16,7 +16,7 @@
          <children>
             <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../java/Pictures/Sabtinaman.png" />
+                  <Image url="@../Pictures/Sabtinaman.png" />
                </image>
             </ImageView>
             <Label layoutX="105.0" layoutY="235.0" textFill="#eef2eb" />
@@ -29,11 +29,11 @@
                <font>
                   <Font name="Codec Pro Bold" size="12.0" />
                </font></Text>
-            <Text fill="#d0f0c0" layoutX="22.0" layoutY="328.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wanna sign up as a User." textAlignment="CENTER" wrappingWidth="217.3333129882812">
+            <Text fill="#d0f0c0" layoutX="22.0" layoutY="328.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wanna sign in as a User." textAlignment="CENTER" wrappingWidth="217.3333129882812">
                <font>
                   <Font name="Codec Pro ExtraBold" size="14.0" />
                </font></Text>
-            <Button fx:id="signInUser" layoutX="94.0" layoutY="339.0" mnemonicParsing="false" onAction="#loadSignInUserScene" style="-fx-background-color: #D0F0C0; -fx-background-color: ;" text="Click This" textFill="#1e610c">
+            <Button fx:id="signInUser" layoutX="94.0" layoutY="339.0" mnemonicParsing="false" onAction="#loadSignInUserScene" style="-fx-background-color: #D0F0C0; -fx-background-color: ;" styleClass="button-hover-1" stylesheets="@hover.css" text="Click This" textFill="#1e610c">
                <font>
                   <Font name="Codec Pro Regular" size="12.0" />
                </font></Button>
@@ -46,7 +46,7 @@
                   <Font name="Codec Pro Bold" size="27.0" />
                </font>
             </Label>
-            <Button fx:id="register" layoutX="92.0" layoutY="335.0" mnemonicParsing="false" onAction="#loadRegisterScene" prefHeight="25.0" prefWidth="166.0" style="-fx-background-color: #043927;" text="Register" textFill="#eee9e9">
+            <Button fx:id="register" layoutX="92.0" layoutY="335.0" mnemonicParsing="false" onAction="#loadRegisterScene" prefHeight="25.0" prefWidth="166.0" style="-fx-background-color: #043927;" styleClass="button-hover-1" stylesheets="@hover.css" text="Register" textFill="#eee9e9">
                <font>
                   <Font name="Codec Pro Regular" size="14.0" />
                </font></Button>
@@ -68,7 +68,7 @@
                   <Font name="Codec Pro Italic" size="14.0" />
                </font>
             </Text>
-            <Button fx:id="sign" layoutX="135.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleSignIn" prefHeight="25.0" prefWidth="82.0" style="-fx-background-color: #043927;" text="Sign In" textFill="#eee9e9">
+            <Button fx:id="sign" layoutX="135.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleSignIn" prefHeight="25.0" prefWidth="82.0" style="-fx-background-color: #043927;" styleClass="button-hover-1" stylesheets="@hover.css" text="Sign In" textFill="#eee9e9">
                <font>
                   <Font name="Codec Pro Bold" size="14.0" />
                </font>
