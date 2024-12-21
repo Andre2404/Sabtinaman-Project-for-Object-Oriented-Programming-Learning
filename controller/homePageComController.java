@@ -1,14 +1,12 @@
 package Controller;
 
 import DAO.DatabaseConnection;
+import DAO.PenggunaDAO;
 import DAO.PerusahaanDAO;
+import DAO.SaldoDAO;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -53,43 +51,39 @@ public class homePageComController {
     private Button rent;
     @FXML
     private Button groceries;
-    
-    private PerusahaanDAO perusahaanDAO;
+    private PenggunaDAO penggunaDAO;
     private Connection connection;
+    private PerusahaanDAO perusahaanDAO;
+    private SaldoDAO saldoDAO;
 
     public void initialize() {
         connection = DatabaseConnection.getCon();
-        perusahaanDAO = new PerusahaanDAO(connection);
+        penggunaDAO = new PenggunaDAO(connection);
+        perusahaanDAO = new PerusahaanDAO (connection);
+        saldoDAO = new SaldoDAO(connection, penggunaDAO, perusahaanDAO);
         int currentUserId = SessionManager.getCurrentUserId();
         tampilanPerusahaan(currentUserId);
     }
 
     @FXML
-    private void handleWithdraw(ActionEvent event) {
+    private void handleWithDraw(ActionEvent event) {
         TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Top-Up Saldo");
-        dialog.setHeaderText("Masukkan jumlah saldo yang ingin di-top up:");
+        dialog.setTitle("Tarik Saldo");
+        dialog.setHeaderText("Masukkan jumlah saldo yang ingin ditarik:");
         dialog.setContentText("Jumlah:");
 
         dialog.showAndWait().ifPresent(input -> {
-            
+            try {
+                int amount = Integer.parseInt(input);
+                int currentUserId = SessionManager.getCurrentUserId();
+                saldoDAO.withDraw(currentUserId, amount);
+                showAlert(Alert.AlertType.INFORMATION, "Sukses", "Saldo berhasil diambil! With draw sebesar: " + amount);
+                updateTampilanSaldo(currentUserId);
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Jumlah saldo harus berupa angka.");
+            }
         });
     }
-
-    private double getSaldoPengguna(int userId) throws SQLException {
-        String query = "SELECT saldo FROM perusahaan WHERE id_pengguna = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, userId);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getDouble("saldo");
-                } else {
-                    throw new SQLException("Pengguna dengan ID " + userId + " tidak ditemukan.");
-                }
-            }
-        }
-    }
-
     private void tampilanPerusahaan(int idPerusahaan){
        
         try {
@@ -110,26 +104,36 @@ public class homePageComController {
         
     }
     
+    private void updateTampilanSaldo (int idPengguna){
+        try {
+            int saldo = perusahaanDAO.getSaldoPerusahaan(idPengguna);
+            saldoLabel.setText(String.format("%s", "Rp. " + saldo));
+        } catch (SQLException ex) {
+            Logger.getLogger(homePageUserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     @FXML
     private void handleTransaction(ActionEvent event) throws IOException {
-        navigateTo(event, "/View/historyPageUser.fxml");
+        navigateTo(event, "/View/HistoryPageCompany.fxml");
     }
 
     @FXML
     private void handleRent(ActionEvent event) throws IOException {
-        navigateTo(event, "/View/rentToolUser.fxml");
+        navigateTo(event, "/View/rentToolCom.fxml");
     }
     
     @FXML
     private void handleGroceries(ActionEvent event) throws IOException {
-        navigateTo(event, "/View/Groceries.fxml");
+        navigateTo(event, "/View/GroceriesCom.fxml");
     }
 
     @FXML
-    private void handleInventory(ActionEvent event) throws IOException {
-        navigateTo(event, "/View/Inventory.fxml");
-    }
+    private void handleComplaint(ActionEvent event) throws IOException {
+        
+        navigateTo(event, "/View/inventoryComplaint.fxml");
+        }
+         
     
     @FXML
     public void handleBackButton(ActionEvent event) {

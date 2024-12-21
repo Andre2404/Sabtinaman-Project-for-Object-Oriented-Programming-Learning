@@ -1,7 +1,11 @@
+
+
 package Controller;
 
 import DAO.DatabaseConnection;
 import DAO.PenggunaDAO;
+import DAO.PerusahaanDAO;
+import DAO.SaldoDAO;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -56,10 +60,13 @@ public class homePageUserController {
     
     private PenggunaDAO penggunaDAO;
     private Connection connection;
+    private PerusahaanDAO perusahaanDAO;
+    private SaldoDAO saldoDAO;
 
     public void initialize() {
         connection = DatabaseConnection.getCon();
         penggunaDAO = new PenggunaDAO(connection);
+        saldoDAO = new SaldoDAO(connection, penggunaDAO, perusahaanDAO);
         int currentUserId = SessionManager.getCurrentUserId();
         tampilanPengguna(currentUserId);
     }
@@ -75,42 +82,15 @@ public class homePageUserController {
             try {
                 int amount = Integer.parseInt(input);
                 int currentUserId = SessionManager.getCurrentUserId();
-                topUpSaldo(currentUserId, amount);
+                saldoDAO.topUpSaldo(currentUserId, amount);
                 showAlert(Alert.AlertType.INFORMATION, "Sukses", "Top-up berhasil! Saldo bertambah sebesar: " + amount);
                 updateTampilanSaldo(currentUserId);
             } catch (NumberFormatException e) {
                 showAlert(Alert.AlertType.ERROR, "Error", "Jumlah saldo harus berupa angka.");
-            } catch (SQLException e) {
-                showAlert(Alert.AlertType.ERROR, "Error", "Terjadi kesalahan saat top-up: " + e.getMessage());
             }
         });
     }
 
-    private void topUpSaldo(int currentUserId, int amount) throws SQLException {
-        double existingSaldo = getSaldoPengguna(currentUserId);
-        double newSaldo = existingSaldo + amount;
-
-        String query = "UPDATE pengguna SET saldo = ? WHERE id_pengguna = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setDouble(1, newSaldo);
-            stmt.setInt(2, currentUserId);
-            stmt.executeUpdate();
-        }
-    }
-
-    private double getSaldoPengguna(int userId) throws SQLException {
-        String query = "SELECT saldo FROM pengguna WHERE id_pengguna = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, userId);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getDouble("saldo");
-                } else {
-                    throw new SQLException("Pengguna dengan ID " + userId + " tidak ditemukan.");
-                }
-            }
-        }
-    }
 
     private void tampilanPengguna(int idPengguna){
        
@@ -134,7 +114,7 @@ public class homePageUserController {
     private void updateTampilanSaldo (int idPengguna){
         try {
             int saldo = penggunaDAO.getSaldoPengguna(idPengguna);
-            saldoLabel.setText(String.format("%s", saldo));
+            saldoLabel.setText(String.format("%s", "Rp. " + saldo));
         } catch (SQLException ex) {
             Logger.getLogger(homePageUserController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -143,7 +123,7 @@ public class homePageUserController {
             
     @FXML
     private void handleTransaction(ActionEvent event) throws IOException {
-        navigateTo(event, "/View/historyPageUser.fxml");
+        navigateTo(event, "/View/HistoryPageUser.fxml");
     }
 
     @FXML
@@ -158,7 +138,7 @@ public class homePageUserController {
 
     @FXML
     private void handleInventory(ActionEvent event) throws IOException {
-        navigateTo(event, "/View/Inventory.fxml");
+        navigateTo(event, "/View/inventory.fxml");
     }
     
     @FXML

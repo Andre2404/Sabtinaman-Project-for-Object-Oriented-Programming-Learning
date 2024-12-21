@@ -34,11 +34,11 @@ import utils.SessionManager;
  *
  * @author User
  */
-public class HistoryPageUserController{
+public class HistoryPageCompanyController{
 
 
    @FXML
-private CheckBox checkBoxTopUp, checkBoxSewaAlat, checkBoxBeliPupuk;
+private CheckBox checkBoxWithDraw, checkBoxSewaAlat, checkBoxBeliPupuk;
 @FXML
 private TableView<HistoryTransaksi> tableView;
 @FXML
@@ -65,7 +65,7 @@ public void initialize() {
     loadAllData();
 
     // Tambahkan listener untuk checkbox
-    checkBoxTopUp.setOnAction(event -> filterData());
+    checkBoxWithDraw.setOnAction(event -> filterData());
     checkBoxSewaAlat.setOnAction(event -> filterData());
     checkBoxBeliPupuk.setOnAction(event -> filterData());
 }
@@ -83,8 +83,8 @@ private void configureTable() {
 private void loadAllData() {
     try {
         // Load data untuk ID pengguna yang sedang login saja
-        List<HistoryTransaksi> userData = historyTransaksiDAO.getAllData(currentUserId);
-        tableView.setItems(FXCollections.observableArrayList(userData));
+        List<HistoryTransaksi> companyData = historyTransaksiDAO.getAllCompanyData(currentUserId);
+        tableView.setItems(FXCollections.observableArrayList(companyData));
     } catch (SQLException e) {
         showAlert(Alert.AlertType.ERROR, "Error", "Gagal memuat data transaksi: " + e.getMessage());
     }
@@ -93,19 +93,19 @@ private void loadAllData() {
 @FXML
     public void handleBackButton(ActionEvent event) {
         try {
-            navigateTo(event, "/View/homePageUser.fxml");
+            navigateTo(event, "/View/homePageCom.fxml");
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Gagal kembali ke halaman awal: " + e.getMessage());
         }
     }
 private void filterData() {
     try {
-        boolean topUpChecked = checkBoxTopUp.isSelected();
+        boolean withDrawChecked = checkBoxWithDraw.isSelected();
         boolean sewaChecked = checkBoxSewaAlat.isSelected();
         boolean pupukChecked = checkBoxBeliPupuk.isSelected();
 
         // Ambil data berdasarkan filter
-        List<HistoryTransaksi> filteredData = historyTransaksiDAO.getFilteredData(currentUserId,topUpChecked, sewaChecked, pupukChecked);
+        List<HistoryTransaksi> filteredData = historyTransaksiDAO.getFilteredDataCom(currentUserId,withDrawChecked, sewaChecked, pupukChecked);
         tableView.setItems(FXCollections.observableArrayList(filteredData));
     } catch (SQLException e) {
     }
