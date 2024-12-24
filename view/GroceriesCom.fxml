@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -9,13 +10,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GroceriesComController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GroceriesComController">
    <children>
-      <ImageView fitHeight="228.0" fitWidth="285.0" layoutX="315.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="174.0" fitWidth="217.0" layoutX="383.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Pictures/Sider.png" />
+            <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/side%20pic.png" />
          </image>
       </ImageView>
       <Label layoutX="92.0" layoutY="25.0" text="Groceries">
@@ -27,7 +29,7 @@
          <children>
             <ImageView fitHeight="36.0" fitWidth="58.0" layoutX="11.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Pictures/pupuk.png" />
+                  <Image url="@../../../../../../../../Downloads/Pictures/Pictures/pupuk.png" />
                </image>
             </ImageView>
          </children>
@@ -37,13 +39,15 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="26.0" layoutY="222.0" prefHeight="253.0" prefWidth="547.0">
+      <ScrollPane layoutX="26.0" layoutY="282.0" prefHeight="207.0" prefWidth="547.0">
          <content>
             <TableView fx:id="tableView" prefHeight="254.0" prefWidth="525.0">
               <columns>
-                <TableColumn fx:id="colNamaPupuk" prefWidth="163.33334863185883" text="Nama Pupuk" />
-                <TableColumn fx:id="colHargaPupuk" prefWidth="199.99998474121094" text="Harga per Kg" />
-                  <TableColumn fx:id="colNamaPerusahaan" prefWidth="161.33334350585938" text="Distributor" />
+                <TableColumn fx:id="colNamaPupuk" prefWidth="100.0" text="Nama Pupuk" />
+                <TableColumn fx:id="colHargaPupuk" prefWidth="100.0" text="Harga per Kg" />
+                  <TableColumn fx:id="colNamaPerusahaan" prefWidth="120.0" text="Distributor" />
+                  <TableColumn prefWidth="100.0" text="Stok" />
+                  <TableColumn prefWidth="100.0" text="Jenis Pupuk" />
               </columns>
             </TableView>
          </content>
@@ -53,16 +57,41 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="post" layoutX="251.0" layoutY="175.0" mnemonicParsing="false" onAction="#handlePostButton" prefHeight="25.0" prefWidth="77.0" style="-fx-background-color: #043927;" text="POST IT!" textFill="#d0f0c0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font></Button>
-      <Label layoutX="28.0" layoutY="144.0" prefHeight="36.0" prefWidth="106.0" text="Harga per Kg :">
+      <Label layoutX="28.0" layoutY="144.0" prefHeight="36.0" prefWidth="106.0" text="Harga/Kg : ">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <TextField fx:id="namaPupuk" layoutX="28.0" layoutY="114.0" prefHeight="25.0" prefWidth="189.0" />
       <TextField fx:id="hargaPupuk" layoutX="28.0" layoutY="179.0" prefHeight="25.0" prefWidth="189.0" />
+      <VBox layoutX="383.0" layoutY="115.0" prefHeight="130.0" prefWidth="100.0">
+         <children>
+            <Button fx:id="post" mnemonicParsing="false" onAction="#handlePostButton" prefHeight="25.0" prefWidth="77.0" style="-fx-background-color: #043927;" text="UPDATE" textFill="#d0f0c0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="post1" mnemonicParsing="false" onAction="#handlePostButton" prefHeight="25.0" prefWidth="77.0" style="-fx-background-color: #043927;" text="DELETE" textFill="#d0f0c0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="post2" mnemonicParsing="false" onAction="#handlePostButton" prefHeight="25.0" prefWidth="77.0" style="-fx-background-color: #043927;" text="POST IT!" textFill="#d0f0c0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Label layoutX="28.0" layoutY="204.0" prefHeight="36.0" prefWidth="106.0" text="Jenis Pupuk : ">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="hargaPupuk1" layoutX="28.0" layoutY="238.0" prefHeight="25.0" prefWidth="189.0" />
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="250.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
