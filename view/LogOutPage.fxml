@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #043927;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="view.LogOutPageController">
+   <children>
+      <Button layoutX="64.0" layoutY="122.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #d0f0c0; -fx-background-radius: 50;" text="Cancel" textFill="#043927">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="246.0" layoutY="122.0" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #d0f0c0; -fx-background-radius: 50;" text="Log Out" textFill="#043927">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="175.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Downloads/Pictures/Pictures/Mascot5.png" />
+         </image>
+      </ImageView>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="400.0" style="-fx-background-color: #d0f0c0; -fx-background-radius: 0;">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../Pictures/Sabtinaman%20pictures/Sabtinaman.png" />
+               </image>
+            </ImageView>
+            <Label text="Log Out From Sabtinaman ? " textFill="#043927">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
+   </children>
+</AnchorPane>
