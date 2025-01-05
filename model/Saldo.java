@@ -1,22 +1,33 @@
 package model;
-import java.util.UUID;
 import java.sql.Timestamp;
 
 public class Saldo {
     private int idSaldo;
     private Pengguna user;
     private Perusahaan company;
-    private double jumlah;
+    private int jumlah;
     private String tipeSaldo;
     private Timestamp tanggalTransaksi;
-
-   public Saldo(int idSaldo, Pengguna user, Perusahaan company, double jumlah, String tipeSaldo, Timestamp tanggalTransaksi) {
+    private String jenisTransaksi;
+    public Saldo() {
+    }
+    
+   public Saldo(int idSaldo, Pengguna user, Perusahaan company, int jumlah, String tipeSaldo, Timestamp tanggalTransaksi, String jenisTransaksi) {
         this.idSaldo = idSaldo;
         this.user = user;
         this.company = company;
         this.jumlah = jumlah;
         this.tipeSaldo = tipeSaldo;
         this.tanggalTransaksi = tanggalTransaksi;
+        this.jenisTransaksi = jenisTransaksi;
+    }
+
+    public String getJenisTransaksi() {
+        return jenisTransaksi;
+    }
+
+    public void setJenisTransaksi(String jenisTransaksi) {
+        this.jenisTransaksi = jenisTransaksi;
     }
     
     public int getIdSaldo() {
@@ -43,11 +54,11 @@ public class Saldo {
         this.company = company;
     }
 
-    public double getJumlah() {
+    public int  getJumlah() {
         return jumlah;
     }
 
-    public void setJumlah(double jumlah) {
+    public void setJumlah(int jumlah) {
         this.jumlah = jumlah;
     }
 

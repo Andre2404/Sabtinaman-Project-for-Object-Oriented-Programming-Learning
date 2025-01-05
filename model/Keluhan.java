@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Timestamp;
-import java.util.UUID;
 
 public class Keluhan {
     private int idKeluhan;
@@ -12,15 +11,26 @@ public class Keluhan {
     private String deskripsi;
     private Timestamp tanggal;
     private String status;
+    private String tanggapan;
     
-   public Keluhan(int idKeluhan, Pengguna user, Alat alat, TransaksiSewa sewa, String deskripsi, Timestamp tanggal, String status) {
+   public Keluhan(int idKeluhan, Perusahaan company, Pengguna user, Alat alat, TransaksiSewa sewa, String deskripsi, Timestamp tanggal, String status, String tanggapan) {
         this.idKeluhan = idKeluhan;
+        this.company = company;
         this.user = user;
         this.alat = alat;
         this.sewa = sewa;
         this.deskripsi = deskripsi;
         this.tanggal = tanggal;
         this.status = status;
+        this.tanggapan = tanggapan;
+    }
+
+    public String getTanggapan() {
+        return tanggapan;
+    }
+
+    public void setTanggapan(String tanggapan) {
+        this.tanggapan = tanggapan;
     }
     
     public int getIdKeluhan() {
@@ -87,6 +97,7 @@ public class Keluhan {
         this.company = company;
     }
 
+ 
 
    
 }

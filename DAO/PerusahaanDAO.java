@@ -115,12 +115,26 @@ public class PerusahaanDAO {
         }
     }
 
-    public void updateSaldoPerusahaan(Perusahaan perusahaan) throws SQLException {
-        String query = "UPDATE pengguna SET saldo = ? WHERE id_perusahaan = ?";
+    public void updateSaldoPerusahaan(int idPerusahaan, int newSaldo) throws SQLException {
+        String query = "UPDATE perusahaan SET saldo_perusahaan = ? WHERE id_perusahaan = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, perusahaan.getSaldoPerusahaan());
-            statement.setInt(2, perusahaan.getIdPerusahaan());
+            statement.setInt(1, newSaldo);
+            statement.setInt(2, idPerusahaan);
             statement.executeUpdate();
+        }
+    }
+    
+    public int getSaldoPerusahaan(int idPerusahaan) throws SQLException {
+        String query = "SELECT saldo_perusahaan FROM perusahaan WHERE id_perusahaan = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, idPerusahaan);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("saldo_perusahaan");
+                } else {
+                    throw new SQLException("Perusahaan dengan ID " + idPerusahaan + " tidak ditemukan.");
+                }
+            }
         }
     }
     

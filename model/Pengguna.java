@@ -1,8 +1,5 @@
 package model;
-/**
- *
- * @author rizar
- */
+
 public class Pengguna {
     private int idPengguna;
     private String nama;
@@ -20,6 +17,10 @@ public class Pengguna {
         this.nomorKontak = nomorKontak;
         this.saldo = saldo;
         this.password = password; // Simpan password langsung
+    }
+    
+    public Pengguna(int idPengguna) {
+        this.idPengguna = idPengguna;
     }
     // Getter dan Setter untuk password
     public String getPassword() {
