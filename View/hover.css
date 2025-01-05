@@ -1,0 +1,33 @@
+.button-hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 5);
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5; 
+    -fx-background-radius: 5; 
+}
+
+.button-hover:hover {
+    -fx-effect: dropshadow(gaussian, #8cc342, 20, 0.5, 0, 0); 
+}
+
+.button-hover:pressed {
+    -fx-transform: scale(1.5);  Sedikit mengecil saat diklik 
+}
+
+.shadow:hover {
+    -fx-background-color: #043927; 
+    -fx-transform: scale(1.1); 
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 15, 0, 0, 7);
+}
+
+.shadow:pressed {
+    -fx-transform: scale(0.95); 
+}
+
+.root-pane:hover {
+    -fx-cursor: crosshair; 
+}
+
+.button-hover {
+    -fx-transition: background-color 0.3s ease, transform 0.3s ease; 
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="393.0" style="-fx-background-color: #D0F0C0; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.registerComController">
+   <children>
+      <ImageView fitHeight="130.0" fitWidth="401.0" layoutX="-1.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Pictures/Header.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="91.0" layoutY="91.0" text="Registration Company">
+         <font>
+            <Font name="Codec Pro ExtraBold" size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="-196.0" layoutY="175.0" prefHeight="151.0" prefWidth="0.0" />
+      <TextField fx:id="username_register" layoutX="125.0" layoutY="137.0" promptText="username " />
+      <TextField fx:id="address_register" layoutX="125.0" layoutY="187.0" promptText="Address" />
+      <TextField fx:id="email_register" layoutX="125.0" layoutY="238.0" promptText="E-Mail" />
+      <TextField fx:id="nomorKontak_register" layoutX="125.0" layoutY="288.0" promptText="Nomer Kontak" />
+      <PasswordField fx:id="password_register" layoutX="126.0" layoutY="337.0" promptText="Password" />
+      <Button fx:id="buttonCom_register" layoutX="125.0" layoutY="384.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Register" textFill="WHITE">
+         <font>
+            <Font name="Codec Pro Regular" size="12.0" />
+         </font></Button>
+      <Button fx:id="back" layoutX="354.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="25.0" prefWidth="31.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="x" textFill="WHITE">
+         <font>
+            <Font name="Codec Pro Bold" size="17.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

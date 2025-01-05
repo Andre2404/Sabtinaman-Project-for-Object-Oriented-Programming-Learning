@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GroceriesComController">
+   <children>
+      <ImageView fitHeight="174.0" fitWidth="217.0" layoutX="481.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Pictures/Sider.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="92.0" layoutY="25.0" text="Groceries">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="25.0" layoutY="21.0" prefHeight="55.0" prefWidth="53.0" style="-fx-background-color: #043927; -fx-background-radius: 10;">
+         <children>
+            <ImageView fitHeight="36.0" fitWidth="58.0" layoutX="11.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Pictures/pupuk.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Label layoutX="28.0" layoutY="80.0" prefHeight="36.0" prefWidth="106.0" text="Nama Pupuk :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="28.0" layoutY="338.0" prefHeight="207.0" prefWidth="547.0">
+         <content>
+            <TableView fx:id="tableView" prefHeight="254.0" prefWidth="525.0">
+              <columns>
+                <TableColumn fx:id="colNamaPupuk" prefWidth="100.0" text="Nama Pupuk" />
+                <TableColumn fx:id="colHargaPupuk" prefWidth="100.0" text="Harga/Kg" />
+                  <TableColumn fx:id="colNamaPerusahaan" prefWidth="120.0" text="Distributor" />
+                  <TableColumn fx:id="colStok" prefWidth="100.0" text="Stok" />
+                  <TableColumn fx:id="colJenis" prefWidth="100.0" text="Jenis Pupuk" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+      <Button fx:id="back" layoutX="481.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="21.0" prefWidth="92.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Back" textFill="#d0f0c0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="28.0" layoutY="138.0" prefHeight="36.0" prefWidth="106.0" text="Harga/Kg : ">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="namaPupuk" layoutX="28.0" layoutY="114.0" prefHeight="25.0" prefWidth="189.0" />
+      <TextField fx:id="hargaPupuk" layoutX="28.0" layoutY="171.0" prefHeight="25.0" prefWidth="189.0" />
+      <Label layoutX="28.0" layoutY="250.0" prefHeight="36.0" prefWidth="106.0" text="Jenis Pupuk : ">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="perbarui" layoutX="458.0" layoutY="156.0" mnemonicParsing="false" onAction="#handleUpdateButton" prefHeight="29.0" prefWidth="92.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Perbarui" textFill="#d0f0c0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="hapus" layoutX="458.0" layoutY="198.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="29.0" prefWidth="92.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Hapus" textFill="#d0f0c0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <VBox alignment="CENTER" layoutX="253.0" layoutY="63.0" prefHeight="191.0" prefWidth="165.0">
+         <children>
+            <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="173.0" style="-fx-background-color: #043927;" text="Preview" textFill="#d9ffb1">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="preview" fitHeight="150.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="post2" mnemonicParsing="false" onAction="#handleChooseImage" prefHeight="29.0" prefWidth="169.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Tambahkan Gambar" textFill="#d0f0c0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <ChoiceBox fx:id="jenisPupuk" layoutX="28.0" layoutY="280.0" prefHeight="25.0" prefWidth="189.0" style="-fx-background-color: #043927;" styleClass="button-hover" stylesheets="@hover.css" />
+      <Button fx:id="tambahkan" layoutX="451.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="29.0" prefWidth="106.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Tambahkan" textFill="#d0f0c0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="28.0" layoutY="195.0" prefHeight="36.0" prefWidth="106.0" text="Stok :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="hargaPupuk1" layoutX="28.0" layoutY="225.0" prefHeight="25.0" prefWidth="189.0" />
+   </children>
+</AnchorPane>

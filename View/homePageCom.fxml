@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="401.0" prefWidth="646.0" style="-fx-background-color: #d0f0c0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.homePageComController">
+   <children>
+      <AnchorPane layoutX="141.0" layoutY="-11.0" prefHeight="73.0" prefWidth="507.0" style="-fx-background-color: #8cc342;">
+         <children>
+            <Button fx:id="logout" layoutX="422.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #d0f0c0;" text="Log Out" textFill="#484a48">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="55.0" fitWidth="69.0" layoutX="341.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Pictures/Mascot7.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="23.0" layoutY="23.0" prefHeight="43.0" prefWidth="317.0" text="Welcome to SABTINAMAN" textFill="#043927">
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="-6.0" prefHeight="407.0" prefWidth="141.0" style="-fx-background-color: #043927;">
+         <children>
+            <ImageView fitHeight="65.0" fitWidth="75.0" layoutX="30.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Pictures/Mascot6.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="6.0" layoutY="111.0" prefHeight="63.0" prefWidth="127.0" style="-fx-background-color: #d0f0c0; -fx-background-radius: 5px;">
+               <children>
+                  <Label layoutX="6.0" prefHeight="25.0" prefWidth="54.0" text="Address :" textFill="#043927">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="addressLabel" layoutX="7.0" layoutY="22.0" prefHeight="34.0" prefWidth="111.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <AnchorPane layoutX="8.0" layoutY="181.0" prefHeight="43.0" prefWidth="127.0" style="-fx-background-color: #d0f0c0; -fx-background-radius: 5px;">
+               <children>
+                  <Label layoutX="6.0" prefHeight="25.0" prefWidth="54.0" text="E-Mail :" textFill="#043927">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="emailLabel" layoutX="5.0" layoutY="22.0" prefHeight="17.0" prefWidth="111.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="8.0" layoutY="232.0" prefHeight="43.0" prefWidth="127.0" style="-fx-background-color: #d0f0c0; -fx-background-radius: 5px;">
+               <children>
+                  <Label layoutX="6.0" prefHeight="25.0" prefWidth="92.0" text="Nomor Kontak :" textFill="#043927">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="kontakLabel" layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="111.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Label fx:id="namaLabel" contentDisplay="CENTER" layoutX="33.0" layoutY="83.0" prefHeight="20.0" prefWidth="76.0" textFill="#d0f0c0" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+      <Label layoutX="155.0" layoutY="60.0" prefHeight="83.0" prefWidth="480.0" text="SABTINAMAN adalah aplikasi yang dirancang untuk mengelola sistem inventaris alat pertanian secara komprehensif. Aplikasi ini menyediakan solusi terintegrasi untuk perusahaan penyewaan alat pertanian dan distributor pupuk, serta memfasilitasi petani dalam menyewa alat dan melakukan pembelian pupuk." textFill="#043927" wrapText="true">
+         <font>
+            <Font name="System Italic" size="11.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="149.0" layoutY="265.0" prefHeight="97.0" prefWidth="241.0" style="-fx-background-color: #043927; -fx-background-radius: 10px;">
+         <children>
+            <ImageView fitHeight="43.0" fitWidth="48.0" layoutX="9.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Pictures/History.png" />
+               </image>
+            </ImageView>
+            <Label ellipsisString="" graphicTextGap="1.0" layoutX="60.0" layoutY="4.0" lineSpacing="1.0" prefHeight="55.0" prefWidth="92.0" text="Transaction History" textFill="#d0f0c0" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Button layoutX="9.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleTransaction" prefHeight="22.0" prefWidth="62.0" style="-fx-background-color: #d0f0c0;" text="See More" textFill="#043927">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+      <AnchorPane layoutX="151.0" layoutY="146.0" prefHeight="107.0" prefWidth="241.0" style="-fx-background-color: #043927; -fx-background-radius: 10px;">
+         <children>
+            <ImageView fitHeight="18.0" fitWidth="23.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Pictures/Balance.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="42.0" layoutY="1.0" prefHeight="43.0" prefWidth="64.0" text="Balance : " textFill="#d0f0c0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="withdraw" layoutX="10.0" layoutY="74.0" mnemonicParsing="false" onAction="#handleWithDraw" prefHeight="22.0" prefWidth="76.0" style="-fx-background-color: #d0f0c0;" text="WITHDRAW" textFill="#043927">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="65.0" fitWidth="76.0" layoutX="163.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Pictures/Mascot8.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="saldoLabel" layoutX="17.0" layoutY="41.0" prefHeight="25.0" prefWidth="127.0" textFill="#d0f0c0" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Button fx:id="rent" contentDisplay="TOP" layoutX="404.0" layoutY="146.0" mnemonicParsing="false" onAction="#handleRent" prefHeight="107.0" prefWidth="111.0" style="-fx-background-color: #043927; -fx-background-radius: 10;" text="Rent Tool" textFill="#d0f0c0" textOverrun="LEADING_WORD_ELLIPSIS">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="55.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Pictures/Tools.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <AnchorPane layoutX="405.0" layoutY="265.0" prefHeight="97.0" prefWidth="230.0" style="-fx-background-color: #043927; -fx-background-radius: 10px;">
+         <children>
+            <ImageView fitHeight="55.0" fitWidth="54.0" layoutX="15.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Pictures/Complaint.png" />
+               </image>
+            </ImageView>
+            <Label ellipsisString="" graphicTextGap="1.0" layoutX="79.0" layoutY="7.0" lineSpacing="1.0" prefHeight="55.0" prefWidth="127.0" text="Complaint" textFill="#d0f0c0" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Button layoutX="9.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleComplaint" prefHeight="22.0" prefWidth="62.0" style="-fx-background-color: #d0f0c0;" text="See More" textFill="#043927">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Button fx:id="groceries" contentDisplay="TOP" layoutX="522.0" layoutY="147.0" mnemonicParsing="false" onAction="#handleGroceries" prefHeight="107.0" prefWidth="111.0" style="-fx-background-color: #043927; -fx-background-radius: 10;" text="Groceries" textFill="#d0f0c0" textOverrun="LEADING_WORD_ELLIPSIS">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="55.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Pictures/pupuk.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
