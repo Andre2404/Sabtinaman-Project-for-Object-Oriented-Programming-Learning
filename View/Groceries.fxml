@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GroceriesController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GroceriesController">
    <children>
-      <ImageView fitHeight="173.0" fitWidth="246.0" layoutX="368.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="173.0" fitWidth="246.0" layoutX="577.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Pictures/Sider.png" />
          </image>
@@ -53,7 +53,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button fx:id="back" layoutX="481.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="21.0" prefWidth="92.0" style="-fx-background-color: #043927;" text="Back" textFill="#d0f0c0">
+      <Button fx:id="back" layoutX="703.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="21.0" prefWidth="92.0" style="-fx-background-color: #043927;" text="Back" textFill="#d0f0c0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -63,9 +63,9 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <VBox layoutX="25.0" layoutY="143.0" prefHeight="335.0" prefWidth="400.0">
+      <VBox layoutX="25.0" layoutY="143.0" prefHeight="400.0" prefWidth="500.0">
          <children>
-            <TableView fx:id="tablePupuk" prefHeight="141.0" prefWidth="400.0">
+            <TableView fx:id="tablePupuk" prefHeight="200.0" prefWidth="500.0">
               <columns>
                 <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="colNamaPupuk" prefWidth="85.5" text="Nama Pupuk" />
@@ -81,7 +81,7 @@
                <children>
                   <Label prefHeight="25.0" prefWidth="40.0" text="Qty:" />
                   <TextField fx:id="Qty" prefHeight="25.0" prefWidth="41.0" />
-                  <Button fx:id="btnKeranjang" mnemonicParsing="false" onAction="#handleTambahKeranjang" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #043927;" text="Keranjang" textFill="#d0f0c0">
+                  <Button fx:id="btnKeranjang" mnemonicParsing="false" onAction="#handleTambahKeranjang" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #043927;" text="Keranjang" textFill="#d0f0c0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -94,7 +94,7 @@
                   <Insets bottom="4.0" top="4.0" />
                </padding>
             </HBox>
-            <TableView fx:id="tableKeranjang" prefHeight="155.0" prefWidth="485.0">
+            <TableView fx:id="tableKeranjang" prefHeight="200.0" prefWidth="485.0">
                <columns>
                   <TableColumn fx:id="colId2" prefWidth="54.00000190734863" text="ID" />
                   <TableColumn fx:id="colNamaPupuk2" prefWidth="85.99999237060547" text="Nama Pupuk" />
@@ -103,32 +103,11 @@
                   <TableColumn fx:id="colTotalHarga" prefWidth="115.0" text="Total Harga" />
                </columns>
             </TableView>
-            <HBox prefHeight="25.0" prefWidth="200.0">
-               <children>
-                  <Label prefHeight="17.0" prefWidth="112.0" text="Total Harga : ">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="total" prefHeight="25.0" prefWidth="85.0" />
-                  <Button fx:id="beli" mnemonicParsing="false" onAction="#handleCheckout" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #043927;" text="Beli" textFill="#d0f0c0">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="200.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </HBox>
          </children>
       </VBox>
-      <VBox layoutX="458.0" layoutY="186.0" prefHeight="230.0" prefWidth="100.0" style="-fx-background-color: #F8F8FF;">
+      <VBox layoutX="545.0" layoutY="169.0" prefHeight="300.0" prefWidth="180.0" style="-fx-background-color: #F8F8FF;">
          <children>
-            <ImageView fx:id="pict" fitHeight="111.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: 10;" styleClass="shadow">
+            <ImageView fx:id="pict" fitHeight="111.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: 10;" styleClass="shadow">
                <effect>
                   <Glow level="1.0" />
                </effect>
@@ -141,15 +120,44 @@
                   <Insets />
                </VBox.margin>
             </TextField>
-            <Label alignment="CENTER" prefHeight="17.0" prefWidth="132.0" text="Detail Spesifikasi:" />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="132.0" text="Detail Spesifikasi:">
+               <padding>
+                  <Insets left="40.0" />
+               </padding></Label>
             <TextArea fx:id="Spesifikasi" prefHeight="119.0" prefWidth="143.0" />
-            <Label fx:id="harga" alignment="CENTER" prefHeight="32.0" prefWidth="143.0" text="Harga" />
+            <Label fx:id="harga" alignment="CENTER" prefHeight="32.0" prefWidth="143.0" text="Harga">
+               <padding>
+                  <Insets left="40.0" />
+               </padding></Label>
          </children>
       </VBox>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="477.0" layoutY="414.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="150.0" layoutX="688.0" layoutY="478.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Pictures/Mascot2.png" />
          </image>
       </ImageView>
+      <HBox layoutX="28.0" layoutY="557.0" prefHeight="29.0" prefWidth="475.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="112.0" text="Total Harga : ">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="total" prefHeight="25.0" prefWidth="100.0" />
+            <Button fx:id="beli" mnemonicParsing="false" onAction="#handleCheckout" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #043927;" text="Beli" textFill="#d0f0c0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="200.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <Label layoutX="616.0" layoutY="490.0" text="WOW!!!">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
