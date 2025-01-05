@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RentToolUserController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RentToolUserController">
    <children>
-      <ImageView fitHeight="202.0" fitWidth="277.0" layoutX="409.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="202.0" fitWidth="277.0" layoutX="529.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Pictures/Sider.png" />
          </image>
@@ -50,9 +50,9 @@
             </Label>
          </children>
       </AnchorPane>
-      <VBox layoutX="28.0" layoutY="146.0" prefHeight="283.0" prefWidth="465.0">
+      <VBox layoutX="28.0" layoutY="146.0" prefHeight="400.0" prefWidth="465.0">
          <children>
-            <TableView fx:id="tableAlatTersedia" onMouseClicked="#handleTableClick" prefHeight="143.0" prefWidth="572.0">
+            <TableView fx:id="tableAlatTersedia" onMouseClicked="#handleTableClick" prefHeight="200.0" prefWidth="572.0">
               <columns>
                   <TableColumn fx:id="colIdAlat" prefWidth="60.66669023036957" text="ID" />
                 <TableColumn fx:id="colNamaAlat" prefWidth="100.66665267944336" text="Nama Alat" />
@@ -79,7 +79,7 @@
                   <Insets bottom="4.0" top="4.0" />
                </padding>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="200.0" prefWidth="200.0">
                <children>
                   <TableView fx:id="tableKeranjang" onMouseClicked="#handleTableClick" prefHeight="100.0" prefWidth="393.0">
                     <columns>
@@ -94,7 +94,7 @@
                      <children>
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #043927;" text="Update" textFill="#d0f0c0">
                            <VBox.margin>
-                              <Insets left="7.0" top="15.0" />
+                              <Insets left="7.0" top="40.0" />
                            </VBox.margin>
                            <font>
                               <Font name="System Bold" size="12.0" />
@@ -117,8 +117,8 @@
             </HBox>
          </children>
       </VBox>
-      <TextField fx:id="total" layoutX="210.0" layoutY="438.0" prefHeight="25.0" prefWidth="85.0" />
-      <Button fx:id="back" layoutX="581.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="21.0" prefWidth="92.0" style="-fx-background-color: #043927;" text="Back" textFill="#d0f0c0">
+      <TextField fx:id="total" layoutX="175.0" layoutY="565.0" prefHeight="25.0" prefWidth="100.0" />
+      <Button fx:id="back" layoutX="694.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="21.0" prefWidth="92.0" style="-fx-background-color: #043927;" text="Back" textFill="#d0f0c0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -128,13 +128,16 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="btnSewa" layoutX="299.0" layoutY="438.0" mnemonicParsing="false" onAction="#handleCheckout" style="-fx-background-color: #043927;" text="Sewa" textFill="#d0f0c0">
+      <Button fx:id="btnSewa" layoutX="288.0" layoutY="565.0" mnemonicParsing="false" onAction="#handleCheckout" prefWidth="60.0" style="-fx-background-color: #043927;" text="Sewa" textFill="#d0f0c0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Label layoutX="135.0" layoutY="442.0" prefHeight="17.0" prefWidth="69.0" text="Total Harga:" />
-      <VBox alignment="CENTER" layoutX="509.0" layoutY="146.0" prefHeight="283.0" prefWidth="111.0" style="-fx-background-color: #F8F8FF;">
+      <Label layoutX="83.0" layoutY="567.0" prefHeight="21.0" prefWidth="92.0" text="Total Harga:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <VBox alignment="CENTER" layoutX="529.0" layoutY="179.0" prefHeight="300.0" prefWidth="180.0" style="-fx-background-color: #F8F8FF;">
          <children>
             <ImageView fx:id="pict" fitHeight="114.0" fitWidth="143.0" nodeOrientation="INHERIT" pickOnBounds="true" style="-fx-image: 10;" styleClass="shadow" />
             <TextField fx:id="nama" editable="false" />
@@ -143,5 +146,15 @@
             <Label fx:id="harga" alignment="CENTER" prefHeight="32.0" prefWidth="143.0" text="Harga" />
          </children>
       </VBox>
+      <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="649.0" layoutY="490.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Downloads/Sabtinaman-Project-for-Object-Oriented-Programming-Learning-main%20(4)/Sabtinaman-Project-for-Object-Oriented-Programming-Learning-main/Pictures/Mascot2.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="576.0" layoutY="512.0" text="WOW!!!!">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
