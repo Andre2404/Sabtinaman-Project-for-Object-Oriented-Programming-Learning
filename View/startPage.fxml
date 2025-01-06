@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="pilihan" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartPageController">
+<AnchorPane id="AnchorPane" fx:id="pilihan" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartPageController">
    <children>
       <ImageView fitHeight="595.0" fitWidth="892.0" focusTraversable="true" layoutX="1.0" opacity="0.58" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -52,5 +52,10 @@
             </Button>
          </children>
       </HBox>
+      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="335.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/Sabtinaman.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
