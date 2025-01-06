@@ -112,6 +112,47 @@ public class GroceriesComController{
         tableView.setItems(pupukObservableList);
     }
     
+    @FXML
+    private void handleAddButton(ActionEvent event) {
+    String nama = namaPupuk.getText();
+    String harga = hargaPupuk.getText();
+    String jenis = jenisPupuk.getValue(); // Ambil nilai dari ChoiceBox
+    // Pastikan imageHash sudah diisi dari pemilihan gambar
+    if (imageHash == null || imageHash.isEmpty()) {
+        showAlert("Validation Error", "Please choose an image file.", Alert.AlertType.WARNING);
+        return;
+    }
+    int stok = 0; // Misalkan stok awal adalah 0, Anda bisa menyesuaikannya
+    
+    if (nama.isEmpty() || harga.isEmpty() || jenis == null) {
+        showAlert("Validation Error", "Please fill out all fields.", Alert.AlertType.WARNING);
+        return;
+    }
+
+    try {
+        // Validasi input harga agar berupa angka
+        int hargaPerKg = Integer.parseInt(harga);
+        // Asumsikan perusahaan dengan ID = 1 sebagai default
+        Perusahaan perusahaan = perusahaanDAO.getPerusahaanById(1);
+        // Buat objek Pupuk
+        Pupuk pupuk = new Pupuk(0, nama, hargaPerKg, stok, jenis, perusahaan, imageHash);
+        // Gunakan PupukDAO untuk menambahkan data ke database
+        PupukDAO pupukDAO = new PupukDAO(connection);
+        pupukDAO.addPupuk(pupuk);
+        
+        // Tampilkan pesan sukses
+        showAlert("Success", "Pupuk added successfully.", Alert.AlertType.INFORMATION);
+        // Muat ulang data untuk memperbarui tampilan
+        loadPupuk();
+        
+    } catch (NumberFormatException e) {
+        showAlert("Validation Error", "Harga harus berupa angka.", Alert.AlertType.WARNING);
+    } catch (SQLException e) {
+        e.printStackTrace();
+        showAlert("Database Error", "Failed to add pupuk.", Alert.AlertType.ERROR);
+    }
+}
+    
     private void handleTableClick(MouseEvent event) {
     Pupuk selectedPupuk = tableView.getSelectionModel().getSelectedItem();
     if (selectedPupuk != null) {
@@ -122,7 +163,7 @@ public class GroceriesComController{
         // Anda bisa menambahkan field lain jika diperlukan
     }
 }
-    
+ 
     @FXML
 private void handleDeleteButton(ActionEvent event) {
     // Mendapatkan entri yang dipilih dari TableView
@@ -220,7 +261,7 @@ private void handleDeleteButton(ActionEvent event) {
         }
         
         // Buat objek Pupuk
-        Pupuk pupuk = new Pupuk(selectedPupuk.getIdPupuk(), nama, hargaPerKg, selectedPupuk.getStok(), jenis, selectedPupuk.getSpesifikasi(), perusahaan, selectedPupuk.getImageHash());
+        Pupuk pupuk = new Pupuk(selectedPupuk.getIdPupuk(), nama, hargaPerKg, selectedPupuk.getStok(), jenis, perusahaan, selectedPupuk.getImageHash());
         // Gunakan PupukDAO untuk memperbarui data di database
         PupukDAO pupukDAO = new PupukDAO(connection);
         pupukDAO.updatePupuk(pupuk); // Pastikan Anda memiliki metode updatePupuk di PupukDAO
@@ -237,7 +278,7 @@ private void handleDeleteButton(ActionEvent event) {
     } catch (NumberFormatException e) {
         showAlert("Validation Error", "Harga harus berupa angka.", Alert.AlertType.WARNING);
     } catch (SQLException e) {
-        showAlert("Database Error", "Failed to update pupuk ke database.", Alert.AlertType.ERROR);
+        showAlert("Database Error", "Failed to update pupuk to database.", Alert.AlertType.ERROR);
     }
 }
 
@@ -274,9 +315,5 @@ private void handleDeleteButton(ActionEvent event) {
     alert.setHeaderText(null);
     alert.setContentText(message);
     alert.showAndWait();
-}
-
-    @FXML
-    private void handleAddButton(ActionEvent event) {
     }
 }

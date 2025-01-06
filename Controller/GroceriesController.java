@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -160,8 +161,8 @@ public class GroceriesController{
     }
     
     private void setupKeranjangTable() {
-    colId2.setCellValueFactory(new PropertyValueFactory<>("idPupuk"));
-    colNamaPupuk2.setCellValueFactory(new PropertyValueFactory<>("namaPupuk"));
+colId2.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPupuk().getIdPupuk()).asObject());
+colNamaPupuk2.setCellValueFactory(new PropertyValueFactory<>("namaPupuk"));
     colJenispupuk2.setCellValueFactory(new PropertyValueFactory<>("jenisPupuk"));
     colKuantitas.setCellValueFactory(new PropertyValueFactory<>("jumlah"));
     colTotalHarga.setCellValueFactory(new PropertyValueFactory<>("totalHarga"));
@@ -189,7 +190,6 @@ public class GroceriesController{
     private void updateDetailView(Pupuk pupuk) {
     nama.setText(pupuk.getNamaPupuk());
     harga.setText("Rp. " + pupuk.getHargaPerKg());
-    Spesifikasi.setText(pupuk.getSpesifikasi());
 
     if (pupuk.getImageHash() != null && !pupuk.getImageHash().isEmpty()) {
         try {
@@ -230,7 +230,7 @@ public class GroceriesController{
     int totalHarga = (int) (selectedPupuk.getHargaPerKg() * kuantitas);
     Pupuk pupuk = pupukDAO.getPupukById(selectedPupuk.getIdPupuk());
     String jenisPupuk = selectedPupuk.getJenisPupuk(); // Pastikan metode ini ada di kelas Pupuk
-    Keranjang pupukKeranjang = new Keranjang(0, selectedPupuk.getIdPupuk(), selectedPupuk.getNamaPupuk(), jenisPupuk, pupuk, kuantitas, totalHarga);
+    Keranjang pupukKeranjang = new Keranjang(0, selectedPupuk.getNamaPupuk(), jenisPupuk, pupuk, kuantitas, totalHarga);
     keranjangObservableList.add(pupukKeranjang);
     Qty.clear();
     loadPupukTersedia();
@@ -257,7 +257,8 @@ private void handleCheckout() {
 
         // Bersihkan keranjang dan perbarui tampilan
         for (Keranjang item : keranjangObservableList) {
-            pupukDAO.updateStokPupuk(item.getIdPupuk(), item.getJumlah());
+            int updateStok = item.getPupuk().getStok()-item.getJumlah();
+            pupukDAO.updateStokPupuk(item.getPupuk().getIdPupuk(),updateStok);
         }
         keranjangObservableList.clear();
         loadPupukTersedia();
