@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InventoryComplainController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InventoryComplainController">
    <children>
       <AnchorPane layoutX="24.0" layoutY="20.0" prefHeight="55.0" prefWidth="58.0" style="-fx-background-color: #043927; -fx-background-radius: 10;">
          <children>
             <ImageView fitHeight="77.0" fitWidth="61.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Pictures/Sabtinaman.png" />
+                  <Image url="@../pictures/Complaint.png" />
                </image>
             </ImageView>
          </children>
@@ -27,34 +27,50 @@
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <ImageView fitHeight="202.0" fitWidth="277.0" layoutX="339.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="202.0" fitWidth="277.0" layoutX="529.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../java/Pictures/Sider.png" />
+            <Image url="@../pictures/Sider.png" />
          </image>
       </ImageView>
-      <Button fx:id="back" layoutX="492.0" layoutY="31.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="21.0" prefWidth="92.0" style="-fx-background-color: #043927;" text="Back" textFill="#d0f0c0">
+      <Button fx:id="back" layoutX="685.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="21.0" prefWidth="92.0" style="-fx-background-color: #043927;" text="Back" textFill="#d0f0c0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="btnLK" layoutX="423.0" layoutY="260.0" mnemonicParsing="false" onAction="#simpanTanggapan" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #043927;" text="DONE!" textFill="#d0f0c0">
+      <Button fx:id="btnLK" layoutX="570.0" layoutY="346.0" mnemonicParsing="false" onAction="#simpanTanggapan" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #043927;" text="DONE!" textFill="#d0f0c0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <ScrollPane layoutX="35.0" layoutY="101.0" prefHeight="160.0" prefWidth="319.0">
+      <ScrollPane layoutX="35.0" layoutY="101.0" prefHeight="250.0" prefWidth="450.0">
          <content>
-            <TableView fx:id="tableInventory" onMouseClicked="#handleTableClick" prefHeight="231.0" prefWidth="301.0">
+            <TableView fx:id="tableInventory" onMouseClicked="#handleTableClick" prefHeight="250.0" prefWidth="450.0">
               <columns>
-                  <TableColumn fx:id="colIdKeluhan" prefWidth="75.0" text="ID Keluhan" />
-                <TableColumn fx:id="colNamaAlat" prefWidth="97.33334481716156" text="Nama Alat" />
-                <TableColumn fx:id="colIdPengguna" prefWidth="159.33329010009766" text="ID Pengguna" />
+                  <TableColumn fx:id="colIdKeluhan" prefWidth="150.0" text="ID Keluhan" />
+                <TableColumn fx:id="colNamaAlat" prefWidth="150.0" text="Nama Alat" />
+                <TableColumn fx:id="colIdPengguna" prefWidth="150.0" text="ID Pengguna" />
               </columns>
             </TableView>
          </content>
       </ScrollPane>
-      <TextArea fx:id="detailKeluhan" layoutX="36.0" layoutY="285.0" prefHeight="97.0" prefWidth="319.0" />
-      <TextArea fx:id="tanggapan" layoutX="384.0" layoutY="118.0" prefHeight="129.0" prefWidth="200.0" />
-      <Label layoutX="41.0" layoutY="287.0" prefHeight="17.0" prefWidth="92.0" text="Detail Keluhan:" />
-      <Label layoutX="384.0" layoutY="95.0" prefHeight="17.0" prefWidth="83.0" text="Tanggapan" />
+      <TextArea fx:id="detailKeluhan" layoutX="35.0" layoutY="366.0" prefHeight="220.0" prefWidth="450.0" />
+      <TextArea fx:id="tanggapan" layoutX="531.0" layoutY="185.0" prefHeight="150.0" prefWidth="200.0" />
+      <Label layoutX="39.0" layoutY="371.0" prefHeight="17.0" prefWidth="92.0" text="Detail Keluhan:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="529.0" layoutY="158.0" prefHeight="21.0" prefWidth="92.0" text="Tanggapan :">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="604.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/Mascot6.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="546.0" layoutY="428.0" text="WOW!!!">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
