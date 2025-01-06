@@ -6,19 +6,17 @@ public class Pupuk {
     private int hargaPerKg;
     private int stok;
     private String jenisPupuk;
-    private String spesifikasi;
     private Perusahaan company;
     private String imageHash;
 
     // Constructor
-    public Pupuk(int idPupuk, String namaPupuk, int hargaPerKg,int stok, String jenisPupuk, String spesifikasi, Perusahaan company, String imageHash) {
+    public Pupuk(int idPupuk, String namaPupuk, int hargaPerKg,int stok, String jenisPupuk, Perusahaan company, String imageHash) {
         this.idPupuk = idPupuk;
         this.namaPupuk = namaPupuk;
         this.hargaPerKg = hargaPerKg;
         this.company = company;
         this.stok = stok;
         this.jenisPupuk = jenisPupuk;
-        this.spesifikasi = spesifikasi;
          this.imageHash = imageHash;       
     }
     
@@ -61,14 +59,6 @@ public class Pupuk {
 
     public void setJenisPupuk(String jenisPupuk) {
         this.jenisPupuk = jenisPupuk;
-    }
-
-    public String getSpesifikasi() {
-        return spesifikasi;
-    }
-
-    public void setSpesifikasi(String spesifikasi) {
-        this.spesifikasi = spesifikasi;
     }
     
     public Perusahaan getCompany() {

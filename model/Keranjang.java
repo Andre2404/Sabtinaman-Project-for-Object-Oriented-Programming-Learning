@@ -9,8 +9,6 @@ import java.time.LocalDate;
 public class Keranjang {
     private int idKeranjang;
     private int idTransaksi;
-    private int idAlat;
-    private int idPupuk;
     private String namaAlat;
     private String namaPupuk;
     private String jenisPupuk;
@@ -25,9 +23,8 @@ public class Keranjang {
     private Perusahaan perusahaan;
     private String tipeSaldo;
     
-    public Keranjang(int idKeranjang, int idAlat, String namaAlat, Alat alat, int jumlah, long durasi, int totalHarga, LocalDate tanggalPinjam, LocalDate tanggalKembali){
+    public Keranjang(int idKeranjang, String namaAlat, Alat alat, int jumlah, long durasi, int totalHarga, LocalDate tanggalPinjam, LocalDate tanggalKembali){
         this.idKeranjang=idKeranjang;
-        this.idAlat=idAlat;
         this.idTransaksi = idTransaksi;
         this.pengguna = pengguna;
         this.perusahaan = perusahaan;
@@ -41,9 +38,8 @@ public class Keranjang {
         this.tipeSaldo = tipeSaldo;
     }   
     
-    public Keranjang(int idKeranjang, int idPupuk, String namaPupuk,String jenisPupuk, Pupuk pupuk, int jumlah, int totalHarga){
+    public Keranjang(int idKeranjang, String namaPupuk,String jenisPupuk, Pupuk pupuk, int jumlah, int totalHarga){
         this.idKeranjang=idKeranjang;
-        this.idPupuk=idPupuk;
         this.idTransaksi = idTransaksi;
         this.pengguna = pengguna;
         this.perusahaan = perusahaan;
@@ -77,22 +73,6 @@ public class Keranjang {
 
     public void setIdKeranjang(int idKeranjang) {
         this.idKeranjang = idKeranjang;
-    }
-
-    public int getIdAlat() {
-        return idAlat;
-    }
-
-    public void setIdAlat(int idAlat) {
-        this.idAlat = idAlat;
-    }
-    
-    public int getIdPupuk() {
-        return idPupuk;
-    }
-
-    public void setIdPupuk(int idPupuk) {
-        this.idPupuk = idPupuk;
     }
 
     public String getNamaAlat() {
