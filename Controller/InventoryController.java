@@ -66,11 +66,11 @@ public class InventoryController {
         keluhanDAO = new KeluhanDAO(connection, penggunaDAO, alatDAO, transaksiSewaDAO, perusahaanDAO);
         transaksiSewaDAO = new TransaksiSewaDAO(connection, saldoDAO, penggunaDAO, alatDAO, perusahaanDAO);
         currentUserId = SessionManager.getCurrentUserId(); // Menyimpan ID pengguna sekali
-//       try {
-//           loadInventory();
-//       } catch (SQLException ex) {
-//           Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
-//       }
+       try {
+           loadInventory();
+       } catch (SQLException ex) {
+           Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
     
     @FXML
@@ -90,7 +90,7 @@ public class InventoryController {
     }
 
     @FXML
-    private void handleLaporkanKeluhan(int id_pengguna) {
+    private void handleLaporkanKeluhan() {
        try {
            Keranjang selectedItem = tableInventory.getSelectionModel().getSelectedItem();
            if (selectedItem == null) {
@@ -98,12 +98,11 @@ public class InventoryController {
                return;
            }
            
-           int idPengguna = currentUserId;
            
            int company = selectedItem.getAlat().getCompany().getIdPerusahaan();
            Perusahaan perusahaan = perusahaanDAO.getPerusahaanById(company);
            Keranjang user = selectedItem;
-           Pengguna pengguna = penggunaDAO.getPenggunaById(id_pengguna);
+           Pengguna pengguna = penggunaDAO.getPenggunaById(currentUserId);
            int idAlat = selectedItem.getAlat().getIdAlat();
            Alat alat = alatDAO.getAlatById(idAlat);
            int sewa = selectedItem.getIdTransaksi();
@@ -139,31 +138,32 @@ public class InventoryController {
     }
     
     private void loadInventory() throws SQLException {
-        List<TransaksiSewa> transaksiList = transaksiSewaDAO.getAlatDisewaByUser (currentUserId);
-        ObservableList<Keranjang> transaksiObservableList = FXCollections.observableArrayList();
+        List<Keranjang> inventoryList = transaksiSewaDAO.getAlatDisewaByUser (currentUserId);
+        ObservableList<Keranjang> transaksiObservableList = FXCollections.observableArrayList(inventoryList);
 
         colNamaAlat.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAlat().getNamaAlat()));
-        colTanggalSewa.setCellValueFactory(new PropertyValueFactory<>("tanggalSewa"));
+        colTanggalSewa.setCellValueFactory(new PropertyValueFactory<>("tanggalPinjam"));
         colTanggalKembali.setCellValueFactory(new PropertyValueFactory<>("tanggalKembali"));
-        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colStatus.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAlat().getCompany().getNama()));
 
         tableInventory.setItems(transaksiObservableList);
     }
     
-//        @FXML
-//    private void handlePengembalianAlat() {
-//        Keranjang selectedItem = tableInventory.getSelectionModel().getSelectedItem();
-//        if (selectedItem == null) {
-//            showAlert(Alert.AlertType.WARNING, "Warning", "Pilih alat yang ingin dikembalikan.");
-//            return;
-//        }
-//
-//        try {
-//            transaksiSewaDAO.kembalikanAlat(selectedItem.getIdTransaksi() ,selectedItem.getAlat().getIdAlat(), selectedItem.getJumlah() );
-//            loadInventory();
-//            showAlert(Alert.AlertType.INFORMATION, "Success", "Alat berhasil dikembalikan.");
-//        } catch (SQLException e) {
-//            showAlert(Alert.AlertType.ERROR, "Error", "Gagal mengembalikan alat: " + e.getMessage());
-//        }
-//    }
+        @FXML
+    private void handlePengembalianAlat() {
+        Keranjang selectedItem = tableInventory.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Pilih alat yang ingin dikembalikan.");
+            return;
+        }
+
+        try {
+            int stokUpdate = selectedItem.getAlat().getStok()-selectedItem.getJumlah();
+            transaksiSewaDAO.kembalikanAlat(selectedItem.getIdTransaksi() ,selectedItem.getAlat().getIdAlat(), stokUpdate );
+            loadInventory();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Alat berhasil dikembalikan.");
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Gagal mengembalikan alat: " + e.getMessage());
+        }
+    }
 }
