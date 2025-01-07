@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GroceriesComController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #D0F0C0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GroceriesComController">
    <children>
-      <ImageView fitHeight="174.0" fitWidth="217.0" layoutX="583.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="174.0" fitWidth="217.0" layoutX="481.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Pictures/Sider.png" />
          </image>
@@ -34,82 +34,77 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Label layoutX="28.0" layoutY="80.0" prefHeight="36.0" prefWidth="120.0" text="Nama Pupuk :">
+      <Label layoutX="28.0" layoutY="80.0" prefHeight="36.0" prefWidth="106.0" text="Nama Pupuk :">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="28.0" layoutY="338.0" prefHeight="259.0" prefWidth="700.0">
+      <ScrollPane layoutX="25.0" layoutY="330.0" prefHeight="244.0" prefWidth="649.0">
          <content>
-            <TableView fx:id="tableView" prefHeight="255.0" prefWidth="700.0">
+            <TableView fx:id="tableView" prefHeight="254.0" prefWidth="638.0">
               <columns>
-                <TableColumn fx:id="colNamaPupuk" prefWidth="140.0" text="Nama Pupuk" />
-                <TableColumn fx:id="colHargaPupuk" prefWidth="140.0" text="Harga/Kg" />
-                  <TableColumn fx:id="colNamaPerusahaan" prefWidth="140.0" text="Distributor" />
-                  <TableColumn fx:id="colStok" prefWidth="140.0" text="Stok" />
-                  <TableColumn fx:id="colJenis" prefWidth="140.0" text="Jenis Pupuk" />
+                <TableColumn fx:id="colNamaPupuk" prefWidth="136.66666162014008" text="Nama Pupuk" />
+                <TableColumn fx:id="colHargaPupuk" prefWidth="134.6666717529297" text="Harga/Kg" />
+                  <TableColumn fx:id="colNamaPerusahaan" prefWidth="126.0" text="Distributor" />
+                  <TableColumn fx:id="colStok" prefWidth="97.33331298828125" text="Stok" />
+                  <TableColumn fx:id="colJenis" prefWidth="140.66665649414062" text="Jenis Pupuk" />
               </columns>
             </TableView>
          </content>
       </ScrollPane>
-      <Button fx:id="back" layoutX="692.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="21.0" prefWidth="92.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Back" textFill="#d0f0c0">
+      <Button fx:id="back" layoutX="575.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="21.0" prefWidth="92.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Back" textFill="#d0f0c0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Label layoutX="28.0" layoutY="138.0" prefHeight="36.0" prefWidth="120.0" text="Harga/Kg : ">
+      <Label layoutX="28.0" layoutY="138.0" prefHeight="36.0" prefWidth="106.0" text="Harga/Kg : ">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="namaPupuk" layoutX="28.0" layoutY="114.0" prefHeight="25.0" prefWidth="200.0" />
-      <TextField fx:id="hargaPupuk" layoutX="28.0" layoutY="171.0" prefHeight="25.0" prefWidth="200.0" />
-      <Label layoutX="28.0" layoutY="250.0" prefHeight="36.0" prefWidth="120.0" text="Jenis Pupuk : ">
+      <TextField fx:id="namaPupuk" layoutX="28.0" layoutY="114.0" prefHeight="25.0" prefWidth="189.0" />
+      <TextField fx:id="hargaPupuk" layoutX="28.0" layoutY="171.0" prefHeight="25.0" prefWidth="189.0" />
+      <Label layoutX="28.0" layoutY="250.0" prefHeight="36.0" prefWidth="106.0" text="Jenis Pupuk : ">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="perbarui" layoutX="509.0" layoutY="185.0" mnemonicParsing="false" onAction="#handleUpdateButton" prefHeight="29.0" prefWidth="120.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Perbarui" textFill="#d0f0c0">
+      <Button fx:id="perbarui" layoutX="522.0" layoutY="179.0" mnemonicParsing="false" onAction="#handleUpdateButton" prefHeight="29.0" prefWidth="92.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Perbarui" textFill="#d0f0c0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="hapus" layoutX="509.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="29.0" prefWidth="120.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Hapus" textFill="#d0f0c0">
+      <Button fx:id="hapus" layoutX="522.0" layoutY="221.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="29.0" prefWidth="92.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Hapus" textFill="#d0f0c0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <VBox alignment="CENTER" layoutX="289.0" layoutY="99.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F8F8FF;">
+      <VBox alignment="CENTER" layoutX="263.0" layoutY="76.0" prefHeight="234.0" prefWidth="217.0">
          <children>
-            <Label alignment="TOP_CENTER" prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: #043927;" text="Preview" textFill="#d9ffb1">
+            <Label alignment="TOP_CENTER" prefHeight="21.0" prefWidth="223.0" style="-fx-background-color: #043927;" text="Preview" textFill="#d9ffb1">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <ImageView fx:id="preview" fitHeight="150.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="post2" mnemonicParsing="false" onAction="#handleChooseImage" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Tambahkan Gambar" textFill="#d0f0c0">
+            <ImageView fx:id="preview" fitHeight="184.0" fitWidth="214.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="post2" mnemonicParsing="false" onAction="#handleChooseImage" prefHeight="29.0" prefWidth="218.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Tambahkan Gambar" textFill="#d0f0c0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
          </children>
       </VBox>
-      <ChoiceBox fx:id="jenisPupuk" layoutX="28.0" layoutY="280.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #043927;" styleClass="button-hover" stylesheets="@hover.css" />
-      <Button fx:id="tambahkan" layoutX="509.0" layoutY="142.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="29.0" prefWidth="120.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Tambahkan" textFill="#d0f0c0">
+      <ChoiceBox fx:id="jenisPupuk" layoutX="28.0" layoutY="280.0" prefHeight="25.0" prefWidth="189.0" style="-fx-background-color: #043927;" styleClass="button-hover" stylesheets="@hover.css" />
+      <Button fx:id="tambahkan" layoutX="515.0" layoutY="138.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="29.0" prefWidth="106.0" style="-fx-background-color: #043927;" styleClass="shadow" stylesheets="@hover.css" text="Tambahkan" textFill="#d0f0c0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Label layoutX="28.0" layoutY="195.0" prefHeight="36.0" prefWidth="120.0" text="Stok :">
+      <Label layoutX="28.0" layoutY="195.0" prefHeight="36.0" prefWidth="106.0" text="Stok :">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="hargaPupuk1" layoutX="28.0" layoutY="225.0" prefHeight="25.0" prefWidth="200.0" />
-      <ImageView fitHeight="100.0" fitWidth="150.0" layoutX="653.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pictures/Mascot6.png" />
-         </image>
-      </ImageView>
+      <TextField fx:id="hargaPupuk1" layoutX="28.0" layoutY="225.0" prefHeight="25.0" prefWidth="189.0" />
    </children>
 </AnchorPane>
