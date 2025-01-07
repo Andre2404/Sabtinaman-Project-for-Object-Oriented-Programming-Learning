@@ -161,9 +161,9 @@ public class GroceriesController{
     }
     
     private void setupKeranjangTable() {
-colId2.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPupuk().getIdPupuk()).asObject());
-colNamaPupuk2.setCellValueFactory(new PropertyValueFactory<>("namaPupuk"));
-    colJenispupuk2.setCellValueFactory(new PropertyValueFactory<>("jenisPupuk"));
+    colId2.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPupuk().getIdPupuk()).asObject());
+    colNamaPupuk2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPupuk().getNamaPupuk()));
+    colJenispupuk2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPupuk().getJenisPupuk()));
     colKuantitas.setCellValueFactory(new PropertyValueFactory<>("jumlah"));
     colTotalHarga.setCellValueFactory(new PropertyValueFactory<>("totalHarga"));
     tableKeranjang.setItems(keranjangObservableList);
@@ -228,9 +228,11 @@ colNamaPupuk2.setCellValueFactory(new PropertyValueFactory<>("namaPupuk"));
     }
 
     int totalHarga = (int) (selectedPupuk.getHargaPerKg() * kuantitas);
+    Pengguna pengguna = penggunaDAO.getPenggunaById(currentUserId);
+    Perusahaan perusahaan = perusahaanDAO.getPerusahaanById(selectedPupuk.getCompany().getIdPerusahaan());
     Pupuk pupuk = pupukDAO.getPupukById(selectedPupuk.getIdPupuk());
     String jenisPupuk = selectedPupuk.getJenisPupuk(); // Pastikan metode ini ada di kelas Pupuk
-    Keranjang pupukKeranjang = new Keranjang(0, selectedPupuk.getNamaPupuk(), jenisPupuk, pupuk, kuantitas, totalHarga);
+    Keranjang pupukKeranjang = new Keranjang(pengguna, perusahaan, pupuk, kuantitas, totalHarga);
     keranjangObservableList.add(pupukKeranjang);
     Qty.clear();
     loadPupukTersedia();
@@ -253,7 +255,7 @@ private void handleCheckout() {
 
     try {
         // Panggil DAO untuk proses checkout
-        transaksiPupukDAO.checkout(currentUserId, "debit", keranjangObservableList);
+        transaksiPupukDAO.checkout(currentUserId, keranjangObservableList);
 
         // Bersihkan keranjang dan perbarui tampilan
         for (Keranjang item : keranjangObservableList) {

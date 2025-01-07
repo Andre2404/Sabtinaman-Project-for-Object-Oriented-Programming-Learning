@@ -64,11 +64,12 @@ public class HistoryTransaksiDAO {
             SELECT ts.id_transaksi AS id, 
                    ts.total_harga AS jumlah, 
                    'Sewa Alat' AS jenis, 
-                   a.nama_alat AS keterangan, 
-                   ts.tanggal_sewa AS tanggal,
-                   ts.tipe_saldo AS tipeSaldo
+                   p.nama AS keterangan, 
+                   ts.tanggal_transaksi AS tanggal,
+                   'Debit' AS tipeSaldo
             FROM transaksisewa ts
-            JOIN alat a ON ts.id_alat = a.id_alat
+            JOIN detail_transaksi dt ON ts.id_transaksi = dt.id_transaksisewa
+            JOIN pengguna p ON ts.id_pengguna = p.id_pengguna
             WHERE ts.id_pengguna = ?
         """;
         return executeQuery(query, userId);
@@ -80,11 +81,12 @@ public class HistoryTransaksiDAO {
             SELECT tp.id_transaksi AS id, 
                    tp.total_harga AS jumlah, 
                    'Beli Pupuk' AS jenis, 
-                   p.nama_pupuk AS keterangan, 
+                   p.nama AS keterangan, 
                    tp.tanggal_beli AS tanggal,
-                   tp.tipe_saldo AS tipeSaldo
+                   'Debit' AS tipeSaldo
             FROM transaksipupuk tp
-            JOIN pupuk p ON tp.id_pupuk = p.id_pupuk
+            JOIN detail_transaksi dt ON tp.id_transaksi = dt.id_transaksi
+            JOIN pengguna p ON tp.id_pengguna = p.id_pengguna
             WHERE tp.id_pengguna = ?
         """;
         return executeQuery(query, userId);

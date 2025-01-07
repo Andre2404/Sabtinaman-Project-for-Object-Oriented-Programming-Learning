@@ -24,17 +24,19 @@ public class PupukDAO {
         this.perusahaanDAO = perusahaanDAO;
     }
 
-    // Menambahkan pupuk baru ke database
-    public void addPupuk(Pupuk pupuk) throws SQLException {
-        String query = "INSERT INTO pupuk (nama_pupuk, harga_per_kg, id_perusahaan) VALUES (?, ?, ?)";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, pupuk.getNamaPupuk());
-            statement.setInt(2, pupuk.getHargaPerKg());
-            statement.setObject(3, pupuk.getCompany().getIdPerusahaan());
-            statement.executeUpdate();
-        }
+    /// Menambahkan pupuk baru ke database
+public void addPupuk(Pupuk pupuk) throws SQLException {
+    String query = "INSERT INTO pupuk (nama_pupuk, harga_per_kg, stok, jenis_pupuk, spesifikasi, id_perusahaan, imagehash) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    try (PreparedStatement statement = connection.prepareStatement(query)) {
+        statement.setString(1, pupuk.getNamaPupuk());
+        statement.setInt(2, pupuk.getHargaPerKg());
+        statement.setInt(3, pupuk.getStok()); // Menambahkan stok
+        statement.setString(4, pupuk.getJenisPupuk()); // Menambahkan jenis pupuk
+        statement.setInt(6, pupuk.getCompany().getIdPerusahaan()); // Menambahkan ID perusahaan
+        statement.setString(7, pupuk.getImageHash()); // Menambahkan imageHash
+        statement.executeUpdate();
     }
-
+}
     // Mengambil semua pupuk dari database
     
     public List<Pupuk> getAllPupuk() throws SQLException {
@@ -53,7 +55,6 @@ public class PupukDAO {
                 resultSet.getInt("harga_per_kg"), 
                 resultSet.getInt("stok"),
                 resultSet.getString("jenis_pupuk"),
-                resultSet.getString("spesifikasi"),
                 perusahaan,
                 resultSet.getString("imagehash") // Ambil imageHash dari ResultSet
             );
@@ -89,7 +90,6 @@ public class PupukDAO {
                 resultSet.getInt("harga_per_kg"), 
                 resultSet.getInt("stok"),
                 resultSet.getString("jenis_pupuk"),
-                resultSet.getString("spesifikasi"),
                 perusahaan,
                 resultSet.getString("imagehash") // Ambil imageHash dari ResultSet
             ));
@@ -105,7 +105,6 @@ public class PupukDAO {
         statement.setInt(2, pupuk.getHargaPerKg());
         statement.setInt(3, pupuk.getStok());
         statement.setString(4, pupuk.getJenisPupuk());
-        statement.setString(5, pupuk.getSpesifikasi());
         statement.setInt(6, pupuk.getCompany().getIdPerusahaan());
         statement.setString(7, pupuk.getImageHash());
         statement.setInt(8, pupuk.getIdPupuk()); // ID yang akan diperbarui
@@ -116,7 +115,7 @@ public class PupukDAO {
     
     // Method untuk menambah stok pupuk
     public void updateStokPupuk(int idPupuk, int tambahanStok) throws SQLException {
-    String query = "UPDATE pupuk SET stok = stok + ? WHERE id_pupuk = ?";
+    String query = "UPDATE pupuk SET stok = ? WHERE id_pupuk = ?";
     try (PreparedStatement statement = connection.prepareStatement(query)) {
         statement.setInt(1, tambahanStok); // Menambahkan stok
         statement.setInt(2, idPupuk); // ID pupuk yang akan diperbarui
@@ -152,7 +151,6 @@ public class PupukDAO {
                 resultSet.getInt("harga_per_kg"), 
                 resultSet.getInt("stok"),
                 resultSet.getString("jenis_pupuk"),
-                resultSet.getString("spesifikasi"),
                 perusahaan,
                 resultSet.getString("imagehash") // Ambil imageHash dari ResultSet
             );

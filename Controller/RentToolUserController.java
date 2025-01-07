@@ -29,6 +29,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ListChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -153,8 +155,8 @@ public class RentToolUserController {
     }
 
     private void setupKeranjangTable() {
-    colIdAlatSewa.setCellValueFactory(new PropertyValueFactory<>("idAlat"));
-    colKeranjangNamaAlat.setCellValueFactory(new PropertyValueFactory<>("namaAlat"));
+    colIdAlatSewa.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAlat().getIdAlat()).asObject());
+    colKeranjangNamaAlat.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAlat().getNamaAlat()));
     colKeranjangKuantitas.setCellValueFactory(new PropertyValueFactory<>("jumlah"));
     colKeranjangDurasi.setCellValueFactory(new PropertyValueFactory<>("durasi"));
     colKeranjangTotalHarga.setCellValueFactory(new PropertyValueFactory<>("totalHarga"));
@@ -231,8 +233,10 @@ private void updateDetailView(Alat alat) {
     }
 
     int totalHarga = (int) (selectedAlat.getHargaSewa() * kuantitas * durasi);
+    Pengguna pengguna = penggunaDAO.getPenggunaById(currentUserId);
+    Perusahaan perusahaan = perusahaanDAO.getPerusahaanById(selectedAlat.getCompany().getIdPerusahaan());
     Alat alat = alatDAO.getAlatById(selectedAlat.getIdAlat());
-    Keranjang alatKeranjang = new Keranjang(0,selectedAlat.getIdAlat(), selectedAlat.getNamaAlat(), alat, kuantitas, durasi, totalHarga, tanggalMulai, tanggalSelesai);
+    Keranjang alatKeranjang = new Keranjang(pengguna, perusahaan, alat, kuantitas, durasi, totalHarga, tanggalMulai, tanggalSelesai);
     keranjangObservableList.add(alatKeranjang);
     qty.clear();
     tanggalPinjam.setValue(null);
@@ -262,7 +266,8 @@ private void handleCheckout() {
 
         // Bersihkan keranjang dan perbarui tampilan
         for (Keranjang item : keranjangObservableList) {
-            alatDAO.updateStokAlat(item.getIdAlat(), item.getJumlah());
+            int updateStok = item.getAlat().getStok()-item.getJumlah();
+            alatDAO.updateStokAlat(item.getAlat().getIdAlat() ,updateStok);
         }
         keranjangObservableList.clear();
         loadAlatTersedia();

@@ -150,20 +150,20 @@ public class InventoryController {
         tableInventory.setItems(transaksiObservableList);
     }
     
-        @FXML
-    private void handlePengembalianAlat() {
-        Keranjang selectedItem = tableInventory.getSelectionModel().getSelectedItem();
-        if (selectedItem == null) {
-            showAlert(Alert.AlertType.WARNING, "Warning", "Pilih alat yang ingin dikembalikan.");
-            return;
-        }
-
-        try {
-            transaksiSewaDAO.kembalikanAlat(selectedItem.getIdTransaksi() ,selectedItem.getAlat().getIdAlat(), selectedItem.getJumlah() );
-            loadInventory();
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Alat berhasil dikembalikan.");
-        } catch (SQLException e) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Gagal mengembalikan alat: " + e.getMessage());
-        }
-    }
+//        @FXML
+//    private void handlePengembalianAlat() {
+//        Keranjang selectedItem = tableInventory.getSelectionModel().getSelectedItem();
+//        if (selectedItem == null) {
+//            showAlert(Alert.AlertType.WARNING, "Warning", "Pilih alat yang ingin dikembalikan.");
+//            return;
+//        }
+//
+//        try {
+//            transaksiSewaDAO.kembalikanAlat(selectedItem.getIdTransaksi() ,selectedItem.getAlat().getIdAlat(), selectedItem.getJumlah() );
+//            loadInventory();
+//            showAlert(Alert.AlertType.INFORMATION, "Success", "Alat berhasil dikembalikan.");
+//        } catch (SQLException e) {
+//            showAlert(Alert.AlertType.ERROR, "Error", "Gagal mengembalikan alat: " + e.getMessage());
+//        }
+//    }
 }

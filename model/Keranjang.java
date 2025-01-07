@@ -7,11 +7,9 @@ package model;
 import java.time.LocalDate;
 
 public class Keranjang {
+    
     private int idKeranjang;
     private int idTransaksi;
-    private String namaAlat;
-    private String namaPupuk;
-    private String jenisPupuk;
     private Alat alat;
     private Pupuk pupuk;
     private int jumlah;  // Kuantitas barang yang disewa
@@ -21,34 +19,46 @@ public class Keranjang {
     private LocalDate tanggalKembali;
     private Pengguna pengguna;
     private Perusahaan perusahaan;
-    private String tipeSaldo;
     
-    public Keranjang(int idKeranjang, String namaAlat, Alat alat, int jumlah, long durasi, int totalHarga, LocalDate tanggalPinjam, LocalDate tanggalKembali){
+    public Keranjang(int idKeranjang, int idTransaksi, Pengguna pengguna, Perusahaan perusahaan, Alat alat, int jumlah, long durasi, int totalHarga, LocalDate tanggalPinjam, LocalDate tanggalKembali){
         this.idKeranjang=idKeranjang;
         this.idTransaksi = idTransaksi;
         this.pengguna = pengguna;
         this.perusahaan = perusahaan;
-        this.namaAlat=namaAlat;
         this.alat=alat;
         this.jumlah=jumlah;
         this.durasi=durasi;
         this.totalHarga=totalHarga;
         this.tanggalPinjam=tanggalPinjam;
         this.tanggalKembali=tanggalKembali;
-        this.tipeSaldo = tipeSaldo;
     }   
     
-    public Keranjang(int idKeranjang, String namaPupuk,String jenisPupuk, Pupuk pupuk, int jumlah, int totalHarga){
+    public Keranjang(Pengguna pengguna, Perusahaan perusahaan, Alat alat, int jumlah, long durasi, int totalHarga, LocalDate tanggalPinjam, LocalDate tanggalKembali){
+        this.pengguna = pengguna;
+        this.perusahaan = perusahaan;
+        this.alat=alat;
+        this.jumlah=jumlah;
+        this.durasi=durasi;
+        this.totalHarga=totalHarga;
+        this.tanggalPinjam=tanggalPinjam;
+        this.tanggalKembali=tanggalKembali;
+    }   
+    
+    public Keranjang(int idKeranjang,  int idTransaksi, Pengguna pengguna, Perusahaan perusahaan, Pupuk pupuk, int jumlah, int totalHarga){
         this.idKeranjang=idKeranjang;
         this.idTransaksi = idTransaksi;
         this.pengguna = pengguna;
         this.perusahaan = perusahaan;
-        this.namaPupuk=namaPupuk;
-        this.jenisPupuk=jenisPupuk;
         this.pupuk=pupuk;
         this.jumlah=jumlah;
         this.totalHarga=totalHarga;
-        this.tipeSaldo = tipeSaldo;
+    }
+    public Keranjang(Pengguna pengguna, Perusahaan perusahaan, Pupuk pupuk, int jumlah, int totalHarga){
+        this.pengguna = pengguna;
+        this.perusahaan = perusahaan;
+        this.pupuk=pupuk;
+        this.jumlah=jumlah;
+        this.totalHarga=totalHarga;
     }   
 
     public Alat getAlat() {
@@ -75,29 +85,6 @@ public class Keranjang {
         this.idKeranjang = idKeranjang;
     }
 
-    public String getNamaAlat() {
-        return namaAlat;
-    }
-
-    public void setNamaAlat(String namaAlat) {
-        this.namaAlat = namaAlat;
-    }
-
-    public String getNamaPupuk() {
-        return namaPupuk;
-    }
-
-    public void setNamaPupuk(String namaPupuk) {
-        this.namaPupuk = namaPupuk;
-    }
-    
-    public String getJenisPupuk() {
-        return jenisPupuk;
-    }
-
-    public void setJenisPupuk(String jenisPupuk) {
-        this.jenisPupuk = jenisPupuk;
-    }
 
     public int getJumlah() {
         return jumlah;
