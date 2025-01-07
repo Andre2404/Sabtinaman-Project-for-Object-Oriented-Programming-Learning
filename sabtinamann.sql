@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2025 at 02:02 PM
+-- Generation Time: Jan 07, 2025 at 04:08 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -59,28 +59,26 @@ INSERT INTO `alat` (`id_alat`, `nama_alat`, `spesifikasi`, `harga_sewa`, `stok`,
 
 CREATE TABLE `detail_transaksi` (
   `id_keranjang` int(11) NOT NULL,
-  `id_transaksi` int(11) NOT NULL,
-  `id_alat` int(11) NOT NULL,
-  `id_pupuk` int(11) NOT NULL,
+  `id_transaksi` int(11) DEFAULT NULL,
+  `id_transaksisewa` int(11) DEFAULT NULL,
+  `id_alat` int(11) DEFAULT NULL,
+  `id_pupuk` int(11) DEFAULT NULL,
   `jumlah` int(11) NOT NULL,
-  `durasi` int(11) NOT NULL,
+  `durasi` int(11) DEFAULT NULL,
   `total_harga` int(11) NOT NULL,
-  `tanggal_pinjam` date NOT NULL,
-  `tanggal_kembali` date NOT NULL
+  `tanggal_pinjam` date DEFAULT NULL,
+  `tanggal_kembali` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `detail_transaksi`
 --
 
-INSERT INTO `detail_transaksi` (`id_keranjang`, `id_transaksi`, `id_alat`, `id_pupuk`, `jumlah`, `durasi`, `total_harga`, `tanggal_pinjam`, `tanggal_kembali`) VALUES
-(1, 12, 11, 4, 2, 1, 6000, '2024-12-30', '2024-12-31'),
-(2, 13, 11, 0, 2, 1, 6000, '2024-12-30', '2024-12-31'),
-(3, 13, 6, 0, 1, 1, 2000, '2024-12-30', '2024-12-31'),
-(4, 14, 6, 0, 1, 1, 2000, '2024-12-30', '2024-12-31'),
-(5, 14, 11, 0, 3, 1, 9000, '2024-12-30', '2024-12-31'),
-(6, 15, 6, 0, 1, 1, 2000, '2025-01-03', '2025-01-04'),
-(7, 15, 11, 0, 4, 1, 12000, '2025-01-02', '2025-01-03');
+INSERT INTO `detail_transaksi` (`id_keranjang`, `id_transaksi`, `id_transaksisewa`, `id_alat`, `id_pupuk`, `jumlah`, `durasi`, `total_harga`, `tanggal_pinjam`, `tanggal_kembali`) VALUES
+(1, 12, NULL, 11, 4, 2, 1, 6000, '2024-12-30', '2024-12-31'),
+(9, 32, NULL, NULL, 1, 1, NULL, 50, NULL, NULL),
+(10, 33, NULL, NULL, 1, 4, NULL, 200, NULL, NULL),
+(11, 34, NULL, NULL, 1, 2, NULL, 100, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -167,23 +165,17 @@ CREATE TABLE `pupuk` (
   `id_perusahaan` int(11) DEFAULT NULL,
   `stok` int(11) NOT NULL,
   `jenis_pupuk` enum('Organik','Anorganik') NOT NULL,
-  `spesifikasi` varchar(1000) NOT NULL
+  `imagehash` blob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pupuk`
 --
 
-INSERT INTO `pupuk` (`id_pupuk`, `nama_pupuk`, `harga_per_kg`, `status`, `id_perusahaan`, `stok`, `jenis_pupuk`, `spesifikasi`) VALUES
-(1, 'ija', 50.00, 'unavailable', 1, 5, 'Organik', 'ADA'),
-(2, 'toriq', 200.00, 'unavailable', 1, 0, 'Organik', 'ADA'),
-(3, 'sab', 230.00, 'available', 1, 0, 'Organik', 'ADA'),
-(4, 'awsPupuk', 2000.00, 'unavailable', 1, 0, 'Organik', 'ADA'),
-(5, 'alkoo', 1000.00, 'available', 1, 0, 'Organik', 'ADA'),
-(6, 'tes', 1000.00, 'unavailable', 1, 0, 'Organik', 'ADA'),
-(7, 'b1', 2000.00, 'unavailable', 2, 0, 'Organik', 'ADA'),
-(8, 'ass', 1000.00, 'available', 1, 0, 'Organik', 'ADA'),
-(9, 'adad', 3000.00, 'available', 1, 0, 'Organik', 'ADA');
+INSERT INTO `pupuk` (`id_pupuk`, `nama_pupuk`, `harga_per_kg`, `status`, `id_perusahaan`, `stok`, `jenis_pupuk`, `imagehash`) VALUES
+(1, 'ija', 50.00, 'unavailable', 1, 8, 'Organik', ''),
+(4, 'awsPupuk', 2000.00, 'unavailable', 1, 0, 'Organik', ''),
+(7, 'b1', 2000.00, 'unavailable', 2, 0, 'Organik', '');
 
 -- --------------------------------------------------------
 
@@ -257,12 +249,16 @@ INSERT INTO `transaksipupuk` (`id_transaksi`, `id_pengguna`, `id_perusahaan`, `i
 (14, NULL, 2, 7, 1.00, 2000, '2024-12-15 17:00:00', 'kredit'),
 (15, 1, NULL, 1, 2.00, 100, '2024-12-16 02:32:48', 'debit'),
 (16, NULL, 1, 1, 2.00, 100, '2024-12-16 02:32:48', 'kredit'),
-(17, 1, NULL, 2, 5.00, 1000, '2024-12-16 07:40:11', 'debit'),
-(18, NULL, 1, 2, 5.00, 1000, '2024-12-16 07:40:11', 'kredit'),
-(19, 7, NULL, 6, 4.00, 4000, '2024-12-18 02:48:10', 'debit'),
-(20, NULL, 1, 6, 4.00, 4000, '2024-12-18 02:48:10', 'kredit'),
 (25, 1, NULL, NULL, NULL, 50, '2025-01-05 02:17:50', 'debit'),
-(26, 1, NULL, NULL, NULL, 100, '2025-01-05 02:52:11', 'debit');
+(26, 1, NULL, NULL, NULL, 100, '2025-01-05 02:52:11', 'debit'),
+(27, 1, NULL, NULL, NULL, 50, '2025-01-06 10:27:19', 'debit'),
+(28, 1, NULL, NULL, NULL, 50, '2025-01-06 10:30:35', 'debit'),
+(29, 1, NULL, NULL, NULL, 50, '2025-01-06 11:32:23', 'debit'),
+(30, 1, NULL, NULL, NULL, 50, '2025-01-06 11:36:18', 'debit'),
+(31, 1, NULL, NULL, NULL, 50, '2025-01-06 11:37:04', 'debit'),
+(32, 1, NULL, NULL, NULL, 50, '2025-01-06 11:50:09', 'debit'),
+(33, 1, NULL, NULL, NULL, 200, '2025-01-06 11:50:22', 'debit'),
+(34, 1, NULL, NULL, NULL, 100, '2025-01-06 12:03:56', 'debit');
 
 -- --------------------------------------------------------
 
@@ -276,7 +272,7 @@ CREATE TABLE `transaksisewa` (
   `id_perusahaan` int(11) DEFAULT NULL,
   `tipe_saldo` enum('kredit','debit') DEFAULT NULL,
   `total_harga` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `tanggal_transaksi` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -284,7 +280,7 @@ CREATE TABLE `transaksisewa` (
 -- Dumping data for table `transaksisewa`
 --
 
-INSERT INTO `transaksisewa` (`id_transaksi`, `id_pengguna`, `id_perusahaan`, `tipe_saldo`, `total_harga`, `created_at`, `updated_at`) VALUES
+INSERT INTO `transaksisewa` (`id_transaksi`, `id_pengguna`, `id_perusahaan`, `tipe_saldo`, `total_harga`, `tanggal_transaksi`, `updated_at`) VALUES
 (9, 7, NULL, 'debit', 4000, '2024-12-18 02:47:29', '2024-12-18 02:47:29'),
 (10, NULL, 1, 'kredit', 4000, '2024-12-18 02:47:29', '2024-12-18 02:47:29'),
 (11, 1, NULL, 'debit', 3000, '2024-12-29 17:52:23', '2024-12-29 17:52:23'),
@@ -310,7 +306,9 @@ ALTER TABLE `alat`
 ALTER TABLE `detail_transaksi`
   ADD PRIMARY KEY (`id_keranjang`),
   ADD KEY `transaksisewa` (`id_transaksi`),
-  ADD KEY `alat` (`id_alat`);
+  ADD KEY `alat` (`id_alat`),
+  ADD KEY `detail_transaksi_ibfk_4` (`id_pupuk`),
+  ADD KEY `id_transaksisewa` (`id_transaksisewa`);
 
 --
 -- Indexes for table `keluhan`
@@ -382,7 +380,7 @@ ALTER TABLE `alat`
 -- AUTO_INCREMENT for table `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `keluhan`
@@ -418,13 +416,13 @@ ALTER TABLE `saldo`
 -- AUTO_INCREMENT for table `transaksipupuk`
 --
 ALTER TABLE `transaksipupuk`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `transaksisewa`
 --
 ALTER TABLE `transaksisewa`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
@@ -440,9 +438,10 @@ ALTER TABLE `alat`
 -- Constraints for table `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  ADD CONSTRAINT `detail_transaksi_ibfk_1` FOREIGN KEY (`id_alat`) REFERENCES `alat` (`id_alat`),
-  ADD CONSTRAINT `detail_transaksi_ibfk_2` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksipupuk` (`id_transaksi`),
-  ADD CONSTRAINT `detail_transaksi_ibfk_3` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksisewa` (`id_transaksi`);
+  ADD CONSTRAINT `detail_transaksi_ibfk_1` FOREIGN KEY (`id_alat`) REFERENCES `alat` (`id_alat`) ON DELETE CASCADE,
+  ADD CONSTRAINT `detail_transaksi_ibfk_2` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksipupuk` (`id_transaksi`) ON DELETE CASCADE,
+  ADD CONSTRAINT `detail_transaksi_ibfk_4` FOREIGN KEY (`id_pupuk`) REFERENCES `pupuk` (`id_pupuk`) ON DELETE CASCADE,
+  ADD CONSTRAINT `detail_transaksi_ibfk_5` FOREIGN KEY (`id_transaksisewa`) REFERENCES `transaksisewa` (`id_transaksi`);
 
 --
 -- Constraints for table `keluhan`
