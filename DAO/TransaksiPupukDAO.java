@@ -92,6 +92,8 @@ public class TransaksiPupukDAO {
                 psDetailTransaksi.setInt(4, item.getTotalHarga());
                 psDetailTransaksi.executeUpdate();
             }
+            connection.commit(); // Konfirmasi perubahan
+        System.out.println("Transaksi berhasil disimpan.");
         }
     }
 

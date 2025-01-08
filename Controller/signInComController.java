@@ -41,8 +41,6 @@ public class signInComController {
     public void initialize() {
        Connection connection = DatabaseConnection.getCon();
        perusahaanDAO = new PerusahaanDAO(connection);
-       Image img = new Image("file:C:\\Users\\User\\Documents\\NetBeansProjects\\Sabtinaman\\src\\main\\java\\Pictures\\Sabtinaman.png");
-       imageView.setImage(img);
     }
 
     @FXML

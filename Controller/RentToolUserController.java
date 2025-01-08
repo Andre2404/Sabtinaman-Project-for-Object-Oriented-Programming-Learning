@@ -25,7 +25,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Base64;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -154,6 +153,7 @@ public class RentToolUserController {
         tableAlatTersedia.setItems(alatObservableList);
     }
 
+    
     private void setupKeranjangTable() {
     colIdAlatSewa.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAlat().getIdAlat()).asObject());
     colKeranjangNamaAlat.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAlat().getNamaAlat()));
@@ -261,13 +261,32 @@ private void handleCheckout() {
     }
 
     try {
+        // Ambil saldo pengguna dari DAO
+        double saldoPengguna = penggunaDAO.getSaldoPengguna(currentUserId); // Pastikan ada metode ini di penggunaDAO
+
+        // Hitung total biaya dari semua item dalam keranjang
+        double totalBiaya = 0;
+        for (Keranjang item : keranjangObservableList) {
+            totalBiaya += item.getAlat().getHargaSewa() * item.getJumlah(); // Asumsikan ada metode getHargaSewa()
+        }
+
+        // Periksa apakah saldo mencukupi
+        if (saldoPengguna < totalBiaya) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Saldo pengguna tidak mencukupi untuk melakukan pembelian.");
+            return;
+        }
+
         // Panggil DAO untuk proses checkout
         transaksiSewaDAO.checkout(currentUserId, "debit", keranjangObservableList);
 
         // Bersihkan keranjang dan perbarui tampilan
         for (Keranjang item : keranjangObservableList) {
-            int updateStok = item.getAlat().getStok()-item.getJumlah();
-            alatDAO.updateStokAlat(item.getAlat().getIdAlat() ,updateStok);
+            int updateStok = item.getAlat().getStok() - item.getJumlah();
+            alatDAO.updateStokAlat(item.getAlat().getIdAlat(), updateStok);
+        }
+        for (Keranjang item : keranjangObservableList) {
+            int saldoUpdate = perusahaanDAO.getSaldoPerusahaan(item.getAlat().getCompany().getIdPerusahaan()) + item.getTotalHarga();
+            perusahaanDAO.updateSaldoPerusahaan(item.getAlat().getCompany().getIdPerusahaan(), saldoUpdate);
         }
         keranjangObservableList.clear();
         loadAlatTersedia();
@@ -419,5 +438,3 @@ private void updateTotalHarga() {
 //            showAlert(Alert.AlertType.ERROR, "Error", "Terjadi kesalahan dalam proses sewa alat: " + e.getMessage());
 //        }
 //    }
-
-    

@@ -43,17 +43,17 @@ public class KeluhanDAO {
     }
 
     public boolean updateTanggapan(int idKeluhan, String tanggapan) {
-        String query = "UPDATE keluhan SET tanggapan = ? WHERE id_keluhan = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, tanggapan);
-            stmt.setInt(2, idKeluhan);
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            Logger.getLogger(KeluhanDAO.class.getName()).log(Level.SEVERE, "Gagal memperbarui tanggapan", e);
-            return false;
-        }
+    String query = "UPDATE keluhan SET tanggapan = ?, status = ? WHERE id_keluhan = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        stmt.setString(1, tanggapan);
+        stmt.setString(2, "sudah ditangani"); // Set status menjadi "sudah ditangani"
+        stmt.setInt(3, idKeluhan);
+        return stmt.executeUpdate() > 0;
+    } catch (SQLException e) {
+        Logger.getLogger(KeluhanDAO.class.getName()).log(Level.SEVERE, "Gagal memperbarui tanggapan", e);
+        return false;
     }
-
+}
     public void laporkanKeluhan(Perusahaan perusahaan, Pengguna pengguna, Alat alat, TransaksiSewa transaksiSewa, String deskripsi) {
         try {
             Timestamp tanggalLaporan = new Timestamp(System.currentTimeMillis());

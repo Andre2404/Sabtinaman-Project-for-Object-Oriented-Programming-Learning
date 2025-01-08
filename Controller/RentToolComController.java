@@ -290,5 +290,4 @@ public class RentToolComController{
 private void logError(String message, Exception e) {
     logger.log(Level.SEVERE, message, e);
 }
-
 }

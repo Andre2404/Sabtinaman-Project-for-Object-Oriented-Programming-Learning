@@ -24,16 +24,16 @@ public class PupukDAO {
         this.perusahaanDAO = perusahaanDAO;
     }
 
-    /// Menambahkan pupuk baru ke database
+    // Menambahkan pupuk baru ke database
 public void addPupuk(Pupuk pupuk) throws SQLException {
-    String query = "INSERT INTO pupuk (nama_pupuk, harga_per_kg, stok, jenis_pupuk, spesifikasi, id_perusahaan, imagehash) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    String query = "INSERT INTO pupuk (nama_pupuk, harga_per_kg, stok, jenis_pupuk, id_perusahaan, imagehash) VALUES (?, ?, ?, ?, ?, ?)";
     try (PreparedStatement statement = connection.prepareStatement(query)) {
         statement.setString(1, pupuk.getNamaPupuk());
         statement.setInt(2, pupuk.getHargaPerKg());
         statement.setInt(3, pupuk.getStok()); // Menambahkan stok
         statement.setString(4, pupuk.getJenisPupuk()); // Menambahkan jenis pupuk
-        statement.setInt(6, pupuk.getCompany().getIdPerusahaan()); // Menambahkan ID perusahaan
-        statement.setString(7, pupuk.getImageHash()); // Menambahkan imageHash
+        statement.setInt(5, pupuk.getCompany().getIdPerusahaan()); // Menambahkan ID perusahaan
+        statement.setString(6, pupuk.getImageHash()); // Menambahkan imageHash
         statement.executeUpdate();
     }
 }
@@ -157,5 +157,5 @@ public void addPupuk(Pupuk pupuk) throws SQLException {
         }
     }
     return null; // Jika tidak ditemukan, kembalikan null
-}
+    }
 }

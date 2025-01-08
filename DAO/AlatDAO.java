@@ -72,7 +72,7 @@ public class AlatDAO {
     // Method untuk menambah stok alat
     
     public void updateStokAlat(int idAlat, int tambahanStok) throws SQLException {
-        String query = "UPDATE alat SET stok = stok - ? WHERE id_alat = ?";
+        String query = "UPDATE alat SET stok = ? WHERE id_alat = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, tambahanStok);
             statement.setInt(2, idAlat);

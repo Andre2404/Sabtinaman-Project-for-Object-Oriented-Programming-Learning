@@ -3,6 +3,7 @@ package Controller;
 import DAO.DatabaseConnection;
 import DAO.PerusahaanDAO;
 import DAO.PupukDAO;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -62,7 +63,9 @@ public class GroceriesComController{
     private TextField hargaPupuk;
     @FXML
     private ChoiceBox<String> jenisPupuk;
-    
+    @FXML
+    private TextField stokPupuk; // TextField untuk stok
+
     @FXML
     private TableView<Pupuk> tableView;
     @FXML
@@ -117,12 +120,12 @@ public class GroceriesComController{
     String nama = namaPupuk.getText();
     String harga = hargaPupuk.getText();
     String jenis = jenisPupuk.getValue(); // Ambil nilai dari ChoiceBox
+     String stok = stokPupuk.getText(); 
     // Pastikan imageHash sudah diisi dari pemilihan gambar
     if (imageHash == null || imageHash.isEmpty()) {
         showAlert("Validation Error", "Please choose an image file.", Alert.AlertType.WARNING);
         return;
-    }
-    int stok = 0; // Misalkan stok awal adalah 0, Anda bisa menyesuaikannya
+    } // Misalkan stok awal adalah 0, Anda bisa menyesuaikannya
     
     if (nama.isEmpty() || harga.isEmpty() || jenis == null) {
         showAlert("Validation Error", "Please fill out all fields.", Alert.AlertType.WARNING);
@@ -131,11 +134,13 @@ public class GroceriesComController{
 
     try {
         // Validasi input harga agar berupa angka
+        int stokValue = Integer.parseInt(stok);
+        
         int hargaPerKg = Integer.parseInt(harga);
         // Asumsikan perusahaan dengan ID = 1 sebagai default
         Perusahaan perusahaan = perusahaanDAO.getPerusahaanById(1);
         // Buat objek Pupuk
-        Pupuk pupuk = new Pupuk(0, nama, hargaPerKg, stok, jenis, perusahaan, imageHash);
+        Pupuk pupuk = new Pupuk(0, nama, hargaPerKg, stokValue, jenis, perusahaan, imageHash);
         // Gunakan PupukDAO untuk menambahkan data ke database
         PupukDAO pupukDAO = new PupukDAO(connection);
         pupukDAO.addPupuk(pupuk);
@@ -152,7 +157,7 @@ public class GroceriesComController{
         showAlert("Database Error", "Failed to add pupuk.", Alert.AlertType.ERROR);
     }
 }
-    
+    @FXML
     private void handleTableClick(MouseEvent event) {
     Pupuk selectedPupuk = tableView.getSelectionModel().getSelectedItem();
     if (selectedPupuk != null) {
@@ -160,8 +165,26 @@ public class GroceriesComController{
         namaPupuk.setText(selectedPupuk.getNamaPupuk());
         hargaPupuk.setText(String.valueOf(selectedPupuk.getHargaPerKg()));
         jenisPupuk.setValue(selectedPupuk.getJenisPupuk());
-        // Anda bisa menambahkan field lain jika diperlukan
+        stokPupuk.setText(String.valueOf(selectedPupuk.getStok())); // Mengisi stok
+
+        // Load and display the image if available
+            if (selectedPupuk.getImageHash() != null && !selectedPupuk.getImageHash().isEmpty()) {
+                try {
+                    // Decode Base64 to an image and show it in the ImageView
+                    Image image = decodeBase64ToImage(selectedPupuk.getImageHash());
+                    preview.setImage(image);
+                } catch (IOException e) {
+                    showAlert2(Alert.AlertType.ERROR, "Error", "Failed to load the image.");
+                }
+            } else {
+                preview.setImage(null); // Clear the preview if no image is available
+            }
+        }
     }
+    
+    private Image decodeBase64ToImage(String base64String) throws IOException {
+    byte[] imageBytes = Base64.getDecoder().decode(base64String);
+    return new Image(new ByteArrayInputStream(imageBytes));
 }
  
     @FXML
@@ -198,7 +221,7 @@ private void handleDeleteButton(ActionEvent event) {
     private void handleChooseImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+                new FileChooser.ExtensionFilter("Image Files", ".png", ".jpg", "*.jpeg")
         );
         File selectedFile = fileChooser.showOpenDialog(null);
 
@@ -281,27 +304,15 @@ private void handleDeleteButton(ActionEvent event) {
         showAlert("Database Error", "Failed to update pupuk to database.", Alert.AlertType.ERROR);
     }
 }
-
-// Gunakan PupukDAO untuk menambahkan data ke database
-//        PupukDAO pupukDAO = new PupukDAO(connection);
-//        pupukDAO.addPupuk(pupuk);
-//
-//        // Tampilkan pesan sukses
-//        showAlert("Success", "Data successfully added.", Alert.AlertType.INFORMATION);
-//
-//        // Clear input fields
-//        namaPupuk.clear();
-//        hargaPupuk.clear();
-//        loadPupuk();
-//        
-//    } catch (NumberFormatException e) {
-//        showAlert("Validation Error", "Price must be a valid number.", Alert.AlertType.WARNING);
-//    } catch (SQLException e) {
-//        e.printStackTrace();
-//        showAlert("Database Error", "Failed to insert data into the database.", Alert.AlertType.ERROR);
-//    }
-//}
-
+    private void resetForm() {
+    namaPupuk.clear();
+    hargaPupuk.clear();
+    stokPupuk.clear();
+    preview.setImage(null);
+    imageHash = null;
+    }   
+    private static final Logger logger = Logger.getLogger(GroceriesComController.class.getName());
+    
     private void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

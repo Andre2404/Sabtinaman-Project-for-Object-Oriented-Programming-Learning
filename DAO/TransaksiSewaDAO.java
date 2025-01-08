@@ -61,8 +61,9 @@ public class TransaksiSewaDAO {
         // Hitung total harga seluruh keranjang
         int totalHarga = keranjangList.stream().mapToInt(Keranjang::getTotalHarga).sum();
         int saldoPengguna = penggunaDAO.getSaldoPengguna(idPengguna);
-            if (saldoPengguna < totalHarga) {
-            throw new SQLException("Saldo pengguna tidak mencukupi untuk pembelian.");
+
+        if (saldoPengguna < totalHarga) {
+            throw new IllegalStateException("Saldo pengguna tidak mencukupi.");
         }
 
         connection.setAutoCommit(false); // Mulai transaksi
@@ -71,37 +72,55 @@ public class TransaksiSewaDAO {
         saldoDAO.updateSaldoPengguna(idPengguna, totalHarga);
         System.out.println("Saldo pengguna berhasil diperbarui.");
 
-//        // 2. Tambah saldo perusahaan
-//        saldoDAO.updateSaldoPerusahaan(perusahaan.getIdPerusahaan(), totalHarga);
-//        System.out.println("Saldo perusahaan berhasil diperbarui.");
+       
+        // 2. Tambah saldo perusahaan (opsional, pastikan ini dibutuhkan)
+        // saldoDAO.updateSaldoPerusahaan(perusahaan.getIdPerusahaan(), totalHarga);
+        // System.out.println("Saldo perusahaan berhasil diperbarui.");
 
         // Simpan transaksi utama
         psTransaksi.setInt(1, idPengguna);
         psTransaksi.setInt(2, totalHarga);
         psTransaksi.setString(3, tipeSaldo);
-        
         psTransaksi.executeUpdate();
 
         // Ambil ID transaksi yang baru dibuat
-        ResultSet rs = psTransaksi.getGeneratedKeys();
-        if (!rs.next()) {
-            throw new SQLException("Gagal mendapatkan ID transaksi.");
-        }
-        int idTransaksi = rs.getInt(1);
+        try (ResultSet rs = psTransaksi.getGeneratedKeys()) {
+            if (!rs.next()) {
+                throw new SQLException("Gagal mendapatkan ID transaksi.");
+            }
+            int idTransaksi = rs.getInt(1);
 
-        // Simpan detail transaksi untuk setiap item di keranjang
-        for (Keranjang item : keranjangList) {
-            psDetailTransaksi.setInt(1, idTransaksi);
-            psDetailTransaksi.setInt(2, item.getAlat().getIdAlat());
-            psDetailTransaksi.setInt(3, item.getJumlah());
-            psDetailTransaksi.setInt(4, item.getTotalHarga());
-            psDetailTransaksi.setDate(5, Date.valueOf(item.getTanggalPinjam()));
-            psDetailTransaksi.setDate(6, Date.valueOf(item.getTanggalKembali()));
-            psDetailTransaksi.setLong(7, item.getDurasi());
-            psDetailTransaksi.executeUpdate();
+            // Simpan detail transaksi untuk setiap item di keranjang
+            for (Keranjang item : keranjangList) {
+                psDetailTransaksi.setInt(1, idTransaksi);
+                psDetailTransaksi.setInt(2, item.getAlat().getIdAlat());
+                psDetailTransaksi.setInt(3, item.getJumlah());
+                psDetailTransaksi.setInt(4, item.getTotalHarga());
+                psDetailTransaksi.setDate(5, Date.valueOf(item.getTanggalPinjam()));
+                psDetailTransaksi.setDate(6, Date.valueOf(item.getTanggalKembali()));
+                psDetailTransaksi.setLong(7, item.getDurasi());
+                psDetailTransaksi.executeUpdate();
+            }
         }
+
+        connection.commit(); // Konfirmasi perubahan
+        System.out.println("Transaksi berhasil disimpan.");
+    } catch (SQLException e) {
+        if (connection != null) {
+            try {
+                connection.rollback(); // Kembalikan ke kondisi awal jika gagal
+                System.out.println("Transaksi dibatalkan.");
+            } catch (SQLException rollbackEx) {
+                rollbackEx.printStackTrace();
+            }
+        }
+        throw new SQLException("Gagal melakukan transaksi checkout.", e);
+    } finally {
+        connection.setAutoCommit(true); // Kembalikan ke mode auto-commit
     }
 }
+
+
   
 
     public void simpanDetailTransaksi(int idTransaksi, int idAlat, int jumlah, int totalHarga) throws SQLException {
@@ -135,6 +154,21 @@ public class TransaksiSewaDAO {
         return null;
     }
 
+    // Mengembalikan alat yang telah disewa
+    public void kembalikanAlat(int idTransaksi, int idAlat, int kuantitas) throws SQLException {
+        String query = "UPDATE transaksisewa SET tanggal_pengembalian = ? WHERE id_transaksi = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            Timestamp tanggalPengembalian = new Timestamp(System.currentTimeMillis());
+            stmt.setTimestamp(1, tanggalPengembalian);
+            stmt.setInt(2, idTransaksi);
+            stmt.executeUpdate();
+        }
+
+        // Ubah status alat menjadi "available" kembali
+        alatDAO.updateStokAlat(idAlat, kuantitas );
+        
+    }
+    
     // Mengambil semua transaksi
     public List<TransaksiSewa> getAllTransaksi() throws SQLException {
         String query = "SELECT * FROM transaksisewa";
@@ -231,57 +265,91 @@ public class TransaksiSewaDAO {
         }
         return transaksiList;
     }
-    public List<TransaksiSewa> getAlatDisewaByUser(int idPengguna) throws SQLException {
-    // SQL Query untuk mengambil semua transaksi sewa dengan status 'rented'
+   public List<Keranjang> getAlatDisewaByUser(int idPengguna) throws SQLException {
     String query = """
         SELECT 
             ts.id_transaksi, 
-            ts.id_pengguna, 
-            ts.tipe_saldo, 
+            ts.id_pengguna,
             ts.total_harga, 
-            a.id_alat, 
-            a.nama_alat 
+            dt.jumlah,
+            dt.*,   
+            dt.tanggal_pinjam,
+            dt.tanggal_kembali,
+            dt.id_keranjang,
+            dt.id_alat, 
+            a.nama_alat,
+            a.id_perusahaan,
+            pr.nama AS nama_perusahaan
         FROM 
             transaksisewa ts 
-        JOIN 
-            alat a ON ts.id_alat = a.id_alat 
+        JOIN detail_transaksi dt ON dt.id_transaksisewa = ts.id_transaksi
+        JOIN alat a ON dt.id_alat = a.id_alat
+        JOIN perusahaan pr ON a.id_perusahaan = pr.id_perusahaan
         WHERE 
-            ts.id_pengguna = ? 
-            AND ts.status = 'rented';
+            ts.id_pengguna = ?
     """;
 
-    // List untuk menampung daftar transaksi yang diambil dari database
-    List<TransaksiSewa> transaksiList = new ArrayList<>();
+    List<Keranjang> inventory = new ArrayList<>();
 
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
-        // Set parameter query dengan ID pengguna
-        stmt.setInt(1, idPengguna);
+    stmt.setInt(1, idPengguna);
 
-        // Eksekusi query dan ambil hasilnya
-        ResultSet rs = stmt.executeQuery();
+    ResultSet rs = stmt.executeQuery();
 
-        // Iterasi hasil query
-        while (rs.next()) {
-            // Ambil data pengguna dan alat
-            Pengguna pengguna = penggunaDAO.getPenggunaById(rs.getInt("id_pengguna"));
-            
-            // Buat objek TransaksiSewa dan masukkan ke dalam daftar
-            TransaksiSewa transaksi = new TransaksiSewa(
-                rs.getInt("id_transaksi"),
-                    pengguna,
-                    rs.getInt("total_harga"),
-                    rs.getDate("tanggal_transaksi").toLocalDate()
-                );
+    while (rs.next()) {
+        LocalDate tanggalPinjam = rs.getDate("tanggal_pinjam") != null
+                ? rs.getDate("tanggal_pinjam").toLocalDate()
+                : null;
 
-            // Tambahkan ke daftar transaksi
-            transaksiList.add(transaksi);
+        LocalDate tanggalKembali = rs.getDate("tanggal_kembali") != null
+                ? rs.getDate("tanggal_kembali").toLocalDate()
+                : null;
+
+        Pengguna pengguna = null;
+        try {
+            pengguna = penggunaDAO.getPenggunaById(rs.getInt("id_pengguna"));
+        } catch (SQLException e) {
+            System.err.println("Pengguna tidak ditemukan untuk ID: " + rs.getInt("id_pengguna"));
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        throw new SQLException("Gagal mengambil daftar alat yang disewa pengguna dengan ID: " + idPengguna, e);
-    }
 
-    return transaksiList;
+        Perusahaan perusahaan = null;
+        try {
+            perusahaan = perusahaanDAO.getPerusahaanById(rs.getInt("id_perusahaan"));
+        } catch (SQLException e) {
+            System.err.println("Perusahaan tidak ditemukan untuk ID: " + rs.getInt("id_perusahaan"));
+        }
+
+        Alat alat = null;
+        try {
+            alat = alatDAO.getAlatById(rs.getInt("id_alat"));
+        } catch (SQLException e) {
+            System.err.println("Alat tidak ditemukan untuk ID: " + rs.getInt("id_alat"));
+        }
+
+        if (pengguna != null && perusahaan != null && alat != null) {
+            Keranjang keranjang = new Keranjang(
+                rs.getInt("id_keranjang"),
+                rs.getInt("id_transaksi"),
+                pengguna,
+                perusahaan,
+                alat,
+                rs.getInt("jumlah"),
+                rs.getLong("durasi"),
+                rs.getInt("total_harga"),
+                tanggalPinjam,
+                tanggalKembali
+            );
+
+            inventory.add(keranjang);
+        }
+    }
+} catch (SQLException e) {
+    e.printStackTrace();
+    throw new SQLException("Gagal mengambil daftar alat yang disewa pengguna dengan ID: " + idPengguna, e);
+}
+
+
+    return inventory;
 }
 
     

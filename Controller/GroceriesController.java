@@ -66,8 +66,6 @@ public class GroceriesController{
     
     @FXML
     private TextField Qty;
-    @FXML
-    private TextArea Spesifikasi;
     
     @FXML
     private TableView<Pupuk> tablePupuk;
@@ -178,31 +176,48 @@ public class GroceriesController{
         }
     }
     
+    @FXML
     private void handleTableClick(MouseEvent event) {
-        if (event.getClickCount() == 1) {
-            Pupuk selectedPupuk = tablePupuk.getSelectionModel().getSelectedItem();
-            if (selectedPupuk != null) {
-                System.out.println("Selected Alat: " + selectedPupuk.getNamaPupuk());
+    if (event.getClickCount() == 1) {
+        Pupuk selectedPupuk = tablePupuk.getSelectionModel().getSelectedItem();
+        if (selectedPupuk != null) {
+            // Tampilkan informasi pupuk yang dipilih
+            nama.setText(selectedPupuk.getNamaPupuk());
+            harga.setText(String.valueOf(selectedPupuk.getHargaPerKg())); 
+            
+            // Tampilkan gambar pupuk
+            String imageHash = selectedPupuk.getImageHash(); // Ambil imageHash
+            if (imageHash != null && !imageHash.isEmpty()) {
+                try {
+                    Image image = decodeBase64ToImage(imageHash); // Dekode gambar dari Base64
+                    pict.setImage(image); // Tampilkan gambar
+                } catch (IOException e) {
+                    e.printStackTrace(); // Tangani kesalahan saat mendekode gambar
+                    pict.setImage(null); 
+                }
+            } else {
+                pict.setImage(null); // Kosongkan gambar jika tidak ada
             }
         }
     }
-    
-    private void updateDetailView(Pupuk pupuk) {
-    nama.setText(pupuk.getNamaPupuk());
-    harga.setText("Rp. " + pupuk.getHargaPerKg());
-
-    if (pupuk.getImageHash() != null && !pupuk.getImageHash().isEmpty()) {
-        try {
-            Image image = decodeBase64ToImage(pupuk.getImageHash());
-            pict.setImage(image);
-        } catch (IOException e) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the image.");
-            pict.setImage(null);
-        }
-    } else {
-        pict.setImage(null);
-    }
-}
+} 
+            
+//    private void updateDetailView(Pupuk pupuk) {
+//    nama.setText(pupuk.getNamaPupuk());
+//    harga.setText("Rp. " + pupuk.getHargaPerKg());
+//
+//    if (pupuk.getImageHash() != null && !pupuk.getImageHash().isEmpty()) {
+//        try {
+//            Image image = decodeBase64ToImage(pupuk.getImageHash());
+//            pict.setImage(image);
+//        } catch (IOException e) {
+//            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the image.");
+//            pict.setImage(null);
+//        }
+//    } else {
+//        pict.setImage(null);
+//    }
+//}
      private Image decodeBase64ToImage(String base64String) throws IOException {
     byte[] imageBytes = Base64.getDecoder().decode(base64String);
     return new Image(new ByteArrayInputStream(imageBytes));
@@ -237,8 +252,8 @@ public class GroceriesController{
     Qty.clear();
     loadPupukTersedia();
    }
-    
-    public void handleHapus() {
+    @FXML
+    public void handleDelete() {
     Keranjang selectedKeranjang = tableKeranjang.getSelectionModel().getSelectedItem();
     if (selectedKeranjang == null) {
         showAlert(Alert.AlertType.WARNING, "Warning", "Pilih alat terlebih dahulu.");
@@ -261,6 +276,10 @@ private void handleCheckout() {
         for (Keranjang item : keranjangObservableList) {
             int updateStok = item.getPupuk().getStok()-item.getJumlah();
             pupukDAO.updateStokPupuk(item.getPupuk().getIdPupuk(),updateStok);
+        }
+        for (Keranjang item : keranjangObservableList) {
+            int saldoUpdate = perusahaanDAO.getSaldoPerusahaan(item.getPupuk().getCompany().getIdPerusahaan()) + item.getTotalHarga();
+            perusahaanDAO.updateSaldoPerusahaan(item.getPupuk().getCompany().getIdPerusahaan(), saldoUpdate);
         }
         keranjangObservableList.clear();
         loadPupukTersedia();

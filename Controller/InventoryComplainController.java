@@ -1,6 +1,7 @@
 package Controller;
 
 import DAO.*;
+import java.io.ByteArrayInputStream;
 import model.Keluhan;
 import utils.SessionManager;
 
@@ -18,33 +19,36 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Base64;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import model.Alat;
 
 public class InventoryComplainController {
 
     @FXML
     private TableView<Keluhan> tableInventory;
-
-    @FXML
-    private TableColumn<Keluhan, Integer> colIdKeluhan;
-
     @FXML
     private TableColumn<Keluhan, String> colNamaAlat;
-
     @FXML
-    private TableColumn<Keluhan, Integer> colIdPengguna;
-
+    private TableColumn<Keluhan, String> colNamaPengguna;
     @FXML
-    private TextArea deskripsiField;
-
+    private TableColumn<Keluhan, Timestamp> colTanggal;
     @FXML
-    private TextField tanggapanField;
+    private TableColumn<Keluhan, String> colStatus;
+    
+    @FXML
+    private ImageView gambar;
 
     private Connection connection;
     private KeluhanDAO keluhanDAO;
@@ -54,7 +58,17 @@ public class InventoryComplainController {
     private SaldoDAO saldoDAO;
     private TransaksiSewaDAO transaksiSewaDAO;
     private Keluhan keluhanTerpilih;
+    private Keluhan selectedKeluhan; 
     private int currentUserId;
+    @FXML
+    private Button back;
+    @FXML
+    private Button btnLK;
+    @FXML
+    private TextArea detail;
+    @FXML
+    private TextArea tanggapan;
+    
 
     public void initialize() {
         try {
@@ -74,35 +88,74 @@ public class InventoryComplainController {
     }
 
     private void loadKeluhan() throws SQLException {
-        List<Keluhan> keluhanList = keluhanDAO.getKeluhanByCompanyId(1);
-        ObservableList<Keluhan> keluhanObservableList = FXCollections.observableArrayList(keluhanList);
+    // Ambil daftar keluhan dari keluhanDAO berdasarkan ID perusahaan
+    List<Keluhan> keluhanList = keluhanDAO.getKeluhanByCompanyId(1); // Ganti 1 dengan ID perusahaan yang sesuai
+    ObservableList<Keluhan> keluhanObservableList = FXCollections.observableArrayList(keluhanList);
 
-        // Set kolom tabel
-        colIdKeluhan.setCellValueFactory(new PropertyValueFactory<>("idKeluhan"));
-        colNamaAlat.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAlat().getNamaAlat()));
-        colIdPengguna.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getUser().getIdPengguna()).asObject());
-
-        tableInventory.setItems(keluhanObservableList);
-    }
+    // Set kolom tabel
+    colStatus.setCellValueFactory(new PropertyValueFactory<>("status")); // Mengambil status keluhan
+    colNamaAlat.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAlat().getNamaAlat())); // Mengambil nama alat
+    colNamaPengguna.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUser ().getNama())); // Mengambil nama pengguna
+    colTanggal.setCellValueFactory(cellData -> {
+    Timestamp timestamp = cellData.getValue().getTanggal(); // Mengambil Timestamp
+    return new SimpleObjectProperty<>(timestamp);
+});
+    // Set data ke TableView
+    tableInventory.setItems(keluhanObservableList);
+}
 
     @FXML
-    private void handleTableClick(MouseEvent event) {
-        if (event.getClickCount() == 1) {
-            Keluhan selectedItem = tableInventory.getSelectionModel().getSelectedItem();
-            if (selectedItem != null) {
-                keluhanTerpilih = selectedItem;
-                deskripsiField.setText(keluhanTerpilih.getDeskripsi());
-                tanggapanField.setText(keluhanTerpilih.getTanggapan());
+    private void handleTableClick(MouseEvent event) throws SQLException, IOException {
+    if (event.getClickCount() == 1) {
+        Keluhan selectedItem = tableInventory.getSelectionModel().getSelectedItem();
+        
+        if (selectedItem != null) {
+            keluhanTerpilih = selectedItem; // Simpan keluhan yang dipilih
+            detail.setText(keluhanTerpilih.getDeskripsi());
+            tanggapan.setText(keluhanTerpilih.getTanggapan());
+
+            // Ambil ID alat dari keluhan yang dipilih
+            int idAlat = keluhanTerpilih.getAlat().getIdAlat(); // Pastikan getAlat() mengembalikan objek Alat
+            Alat alatDetail = alatDAO.getAlatById(idAlat);
+           
+                if (alatDetail != null) {
+                    // Ambil imageHash dan tampilkan gambar
+                    String imageHash = alatDetail.getImageHash();
+                    if (imageHash != null && !imageHash.isEmpty()) {
+                    Image image = decodeBase64ToImage(imageHash);    
+                    
+                        // Tampilkan gambar di ImageView
+                        gambar.setImage(image);
+                    } else {
+                    // Jika alat tidak ditemukan, kosongkan gambar
+                    gambar.setImage(null);
+                }
+                }
+
+                // Tampilkan deskripsi masalah di TextArea
+                detail.setText(keluhanTerpilih.getDeskripsi());
+             // Kosongkan gambar jika terjadi kesalahan
             }
+        } else {
+            // Jika tidak ada keluhan yang dipilih, kosongkan semua fiel
+            tanggapan.setText("");
+            detail.setText("");
+            gambar.setImage(null); // Kosongkan gambar
         }
     }
 
+    private Image decodeBase64ToImage(String base64String) throws IOException {
+    byte[] imageBytes = Base64.getDecoder().decode(base64String);
+    InputStream inputStream = new ByteArrayInputStream(imageBytes);
+    return new Image(inputStream);
+}   
+    
     @FXML
     public void simpanTanggapan() {
-        if (keluhanTerpilih != null && !tanggapanField.getText().isEmpty()) {
-            boolean isUpdated = keluhanDAO.updateTanggapan(keluhanTerpilih.getIdKeluhan(), tanggapanField.getText());
+        if (keluhanTerpilih != null && !tanggapan.getText().isEmpty()) {
+            boolean isUpdated = keluhanDAO.updateTanggapan(keluhanTerpilih.getIdKeluhan(), tanggapan.getText());
             if (isUpdated) {
-                keluhanTerpilih.setTanggapan(tanggapanField.getText());
+                keluhanTerpilih.setTanggapan(tanggapan.getText());
                 tableInventory.refresh();
                 showAlert(Alert.AlertType.INFORMATION, "Tanggapan berhasil disimpan!");
             } else {
