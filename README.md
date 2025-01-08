@@ -3,6 +3,13 @@
 # Sabtinaman-Project-for-Object-Oriented-Programming-Learning
 SABTINAMAN adalah aplikasi yang dirancang untuk mengelola sistem inventaris alat pertanian secara komprehensif. Aplikasi ini menyediakan solusi terintegrasi untuk perusahaan penyewaan alat pertanian dan distributor pupuk, serta memfasilitasi petani dalam menyewa alat dan melakukan pembelian pupuk.
 
+# Developer:
+- Muhammad Thoriq Thoharoh https://www.linkedin.com/in/muhammad-thoriq-thoharoh-049a6b294/
+- Andre Saputra https://www.linkedin.com/in/andre-saputra-435707225/
+- Andhika Wahyu Adhyaksa https://www.linkedin.com/in/andhika-wahyu-adhyaksa-511254279/
+- Sabtina Arinda Inayah https://www.linkedin.com/in/sabtina-arinda-360a9a294/
+- Syahriza Ramadhani https://www.linkedin.com/in/syahriza-ramadhani-z-f-787504295/
+
 # Urgensi :
 Dengan berkembangnya kebutuhan akan alat pertanian yang efisien dan pupuk berkualitas, banyak petani menghadapi tantangan dalam mengelola inventaris alat dan sumber daya pertanian mereka. Perusahaan penyewaan alat pertanian memerlukan sistem yang dapat mengelola inventaris dengan baik, menerima pembayaran, dan mengatur distribusi pupuk. SABTINAMAN hadir untuk mengatasi kebutuhan ini dengan menyediakan platform yang mempermudah manajemen alat pertanian dan distribusi pupuk, serta memberikan kemudahan bagi petani dalam menyewa alat dan membeli pupuk.
 
@@ -61,11 +68,4 @@ Set Up a New Maven Project:
 - Choose Java with Maven as the project type.
 - Select FXML JavaFX Maven Archetype to include JavaFX support.
 then copy all the files that provided such as POM.xml, module-info, SessionManager, Resources, and MVC folder
-
-Our developer:
-- Muhammad Thoriq Thoharoh https://www.linkedin.com/in/muhammad-thoriq-thoharoh-049a6b294/
-- Andre Saputra https://www.linkedin.com/in/andre-saputra-435707225/
-- Andhika Wahyu Adhyaksa https://www.linkedin.com/in/andhika-wahyu-adhyaksa-511254279/
-- Sabtina Arinda Inayah https://www.linkedin.com/in/sabtina-arinda-360a9a294/
-- Syahriza Ramadhani https://www.linkedin.com/in/syahriza-ramadhani-z-f-787504295/
 
