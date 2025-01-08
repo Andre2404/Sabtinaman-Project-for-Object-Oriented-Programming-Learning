@@ -1,12 +1,12 @@
 # SABTINAMAN : Smart Agricultural Bio-Technology Integrated Network for Advanced Management and Nurturing
 
-https://github.com/Andre2404/Sabtinaman-Project-for-Object-Oriented-Programming-Learning/blob/6d11b750e261ef3730510a302acb478cafc414ca/sabtinamanPreview1.PNG
+![image alt] (https://github.com/Andre2404/Sabtinaman-Project-for-Object-Oriented-Programming-Learning/blob/6d11b750e261ef3730510a302acb478cafc414ca/sabtinamanPreview1.PNG)
 
-https://github.com/Andre2404/Sabtinaman-Project-for-Object-Oriented-Programming-Learning/blob/6d11b750e261ef3730510a302acb478cafc414ca/sabtinamanPreview2.PNG
+![image alt] (https://github.com/Andre2404/Sabtinaman-Project-for-Object-Oriented-Programming-Learning/blob/6d11b750e261ef3730510a302acb478cafc414ca/sabtinamanPreview2.PNG)
 
-https://github.com/Andre2404/Sabtinaman-Project-for-Object-Oriented-Programming-Learning/blob/6d11b750e261ef3730510a302acb478cafc414ca/sabtinamanPreview3.PNG
+![image alt] (https://github.com/Andre2404/Sabtinaman-Project-for-Object-Oriented-Programming-Learning/blob/6d11b750e261ef3730510a302acb478cafc414ca/sabtinamanPreview3.PNG)
 
-https://github.com/Andre2404/Sabtinaman-Project-for-Object-Oriented-Programming-Learning/blob/6d11b750e261ef3730510a302acb478cafc414ca/sabtinamanPreview4.PNG
+![image alt] (https://github.com/Andre2404/Sabtinaman-Project-for-Object-Oriented-Programming-Learning/blob/6d11b750e261ef3730510a302acb478cafc414ca/sabtinamanPreview4.PNG)
 
 # Sabtinaman-Project-for-Object-Oriented-Programming-Learning
 SABTINAMAN adalah aplikasi yang dirancang untuk mengelola sistem inventaris alat pertanian secara komprehensif. Aplikasi ini menyediakan solusi terintegrasi untuk perusahaan penyewaan alat pertanian dan distributor pupuk, serta memfasilitasi petani dalam menyewa alat dan melakukan pembelian pupuk.
